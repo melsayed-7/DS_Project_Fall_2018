@@ -1,0 +1,150 @@
+#pragma once
+#include <iostream>
+#include"Node.h"
+
+using namespace std;
+template <class T>
+
+
+/* I took this part from the lab fo the sake of visualization
+
+General Queue case:
+
+				 frontPtr										backPtr
+					\											   /
+					 \											  /
+					-------- 	--------	--------			--------
+					|	|nxt -->|	|nxt -->|	|nxt -->........|	|nxt -->NULL
+					--------	--------	--------			--------
+
+Empty Case:
+
+				 frontptr	 backptr
+						\	 /
+						 \	/
+					---- NULL ------
+
+
+Single Node Case:
+				 frontPtr	 backPtr
+					\		/
+					 \	   /
+					--------
+					|	|nxt -->NULL
+					--------
+
+*/
+
+class Queue
+{
+private:
+	int size;
+	Node<T>* frontptr;
+	Node<T>* backptr;
+
+
+public:
+	Queue()
+	{
+		size = 0;
+		frontptr = nullptr;
+		backptr = nullptr;
+	}
+
+	bool isEmpty() const
+	{
+		
+		if (frontptr == nullptr)
+			return true;
+		else
+			return false;
+	}
+
+
+	bool front(T& val) const
+	{
+		if (isEmpty())
+		{
+			return false;
+		}
+		val = frontptr->getitem();
+		return true;
+
+	}
+
+	bool push_to_front(T val)
+	{
+		Node <T> * newptr = new Node<T>(val);
+		if (isEmpty())
+		{
+			frontptr = newptr; // The queue is empty
+		}
+		else
+		{
+			newptr->setnext(frontptr);
+			frontptr = newptr; // New node is at back
+		}
+
+		size++;
+		return true;
+	}
+
+	int getsize()
+	{
+		return size;
+	}
+
+	bool enque(T val)
+	{
+		Node <T> * newptr = new Node<T>(val);
+		if (isEmpty())
+		{
+			frontptr = newptr; // The queue is empty
+		}
+		else
+		{
+			backptr->setnext(newptr); // The queue was not empty
+		}
+		backptr = newptr; // New node is at back
+		size++;
+		return true;
+
+	}
+
+	
+	bool deque(T & a)
+	{
+		if (size <= 0)return false;
+
+		Node<T>* tempnode = frontptr;
+		a = frontptr->getitem();
+		frontptr = frontptr->getnext();
+
+		// Queue is not empty; remove front
+		if (tempnode == backptr)	 // Special case: one node in queue
+			backptr = nullptr;
+
+		// Free memory reserved by the dequeued node
+		delete tempnode;
+		size--;
+
+		return true;
+	}
+
+	//void print_queue() const
+	//{
+	//	Node<T>* temp = frontptr;
+
+	//	while (temp != nullptr)//if you did not reach the back of the queue
+	//	{
+	//		cout << temp->getitem()<< "  ";
+	//		temp = temp->getnext();
+	//	}
+	//}
+
+	~Queue()
+	{
+
+	}
+};
+
