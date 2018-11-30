@@ -5,6 +5,7 @@
 #include "Freezer.h"
 #include "Castle\Castle.h"
 
+
 // it is the controller of the project
 class Battle
 {
@@ -29,7 +30,7 @@ public:
 	Castle * GetCastle();
 	void RunSimulation();
 
-	void Just_A_Demo();	//just to show a demo and should be removed in phase1 1 & 2
+	void phase1_simulation();	//just to show a demo and should be removed in phase1 1 & 2
 
 	//
 	// TODO: Add More Member Functions As Needed
