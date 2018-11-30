@@ -1,5 +1,5 @@
 #include "Battle.h"
-
+#include "File_IO.h"
 #include <iostream>
 
 Battle::Battle()
@@ -41,7 +41,16 @@ void Battle::RunSimulation()
 //It should be removed in phases 1&2
 void Battle::Just_A_Demo()
 {
-	
+	Queue<int*>*Data = new  Queue<int*>;
+
+	Data=get_file_2_queue();//enter the name of the file here;
+
+	int *dummyarr = Data->deque();//the first line has the twor data
+	double TH=dummyarr[0];//tower health
+	int max_enemies= dummyarr[1];//number of enemies attacked per second
+	double TP= dummyarr[2];//tower power
+
+
 	std::cout<<"\nWelcome to Castle Battle:\n";
 	std::cout<<"\nIn phase2, you will be asked to select game mode\n";
 	std::cout<<"\nFor now just press ENTER key to continue...";
