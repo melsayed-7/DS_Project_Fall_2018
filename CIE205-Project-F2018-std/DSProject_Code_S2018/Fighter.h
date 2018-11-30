@@ -8,7 +8,8 @@ private:
 	Tower* target;
 
 public:
-	Fighter(color r_c, REGION r_region, int d, int reload);
+	//Fighter(color r_c, REGION r_region, int d, int reload);
+	Fighter(color r_c, int id, int arraival_time, double health, double power, REGION r_region, int d, int reload);
 	~Fighter(void);
 	void Act();
 	virtual void Move();

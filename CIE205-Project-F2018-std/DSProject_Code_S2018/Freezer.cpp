@@ -6,6 +6,14 @@ Freezer::Freezer(color r_c, REGION r_region, int d, int reload):Enemy( r_c,  r_r
 	
 }
 
+Freezer::Freezer(color r_c, int id, int Arraival_Time, double health, double Power, REGION r_region, int d, int reload) : Enemy(r_c, r_region, d, reload)
+{
+	ID = id;
+	arraival_time = Arraival_Time;
+	Health = health;
+	power = Power;
+}
+
 
 Freezer::~Freezer(void)
 {

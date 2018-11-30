@@ -88,15 +88,15 @@ void Battle::Just_A_Demo()
 		switch (type)
 		{
 		case 1://fighter
-			fighter = new Fighter(FIGHTER_CLR, A_REG, 6, 3);
+			fighter = new Fighter(FIGHTER_CLR, enemy_id, arrival_time,health,pow, A_REG, 6, 3);
 			inactive_queue->enque(fighter);
 			break;
 		case 2://healer
-			healer = new Healer(HEALER_CLR, A_REG, 6, 3);
+			healer = new Healer(HEALER_CLR, enemy_id, arrival_time, health, pow, A_REG, 6, 3);
 			inactive_queue->enque(healer);
 			break;
 		case 3://freezer
-			freezer = new Freezer(FREEZER_CLR, A_REG, 6, 3);
+			freezer = new Freezer(FREEZER_CLR, enemy_id, arrival_time, health, pow, A_REG, 6, 3);
 			inactive_queue->enque(freezer);
 			break;
 		}
@@ -123,7 +123,7 @@ void Battle::Just_A_Demo()
 	// Declare some enemies and fill their data
 	// In the game, enemies should be loaded from an input file
 	// and should be dynamically allocated
-
+	/*
 	Fighter e1(DARKBLUE, A_REG, 6, 3);
 	Fighter e2(DARKBLUE, D_REG, 60, 3);
 	Fighter e3(DARKOLIVEGREEN, B_REG, 60, 3);
@@ -135,6 +135,7 @@ void Battle::Just_A_Demo()
 	Fighter e9(ORANGERED, A_REG, 30, 3);
 	Fighter e10(DARKBLUE, C_REG, 4, 3);
 	Healer e11(GREEN, A_REG, 20, 3);
+	
 
 	// Adding the enemies to the battle
 	AddEnemy(&e1);
@@ -148,6 +149,7 @@ void Battle::Just_A_Demo()
 	AddEnemy(&e9);
 	AddEnemy(&e10);
 	AddEnemy(&e11);
+	
 
 	// Drawing the battle
 	pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);
@@ -177,6 +179,6 @@ void Battle::Just_A_Demo()
 
 		pGUI->GetPointClicked(p);
 	}
-
+	*/
 	delete pGUI;
 }

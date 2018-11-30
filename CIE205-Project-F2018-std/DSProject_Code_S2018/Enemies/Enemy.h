@@ -30,6 +30,8 @@ protected:
 	bool frozen;
 	bool active;
 
+	int arraival_time;
+
 	//
 	// TODO: Add More Data Members As Needed
 	//
