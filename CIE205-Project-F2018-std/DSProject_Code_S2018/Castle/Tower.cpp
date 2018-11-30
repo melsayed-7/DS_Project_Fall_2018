@@ -12,6 +12,7 @@ Tower::Tower()
 }
 
 
+
 void Tower::SetHealth(double h)
 {
 	if(h > 0)

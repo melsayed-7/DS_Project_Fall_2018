@@ -8,7 +8,7 @@ private:
 	Tower* target;
 
 public:
-	Freezer(color r_c, REGION r_region, int d);
+	Freezer(color r_c, REGION r_region, int d,int reload);
 	~Freezer(void);
 	void Act();
 	void set_target(Tower* Tower);

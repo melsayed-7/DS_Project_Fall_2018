@@ -5,7 +5,7 @@ class Healer : 	public Enemy
 public:
 	Enemy* target;
 
-	Healer(color r_c, REGION r_region, int d);
+	Healer(color r_c, REGION r_region, int d, int reload);
 	~Healer(void);
 	virtual void Act();
 	virtual void Move();

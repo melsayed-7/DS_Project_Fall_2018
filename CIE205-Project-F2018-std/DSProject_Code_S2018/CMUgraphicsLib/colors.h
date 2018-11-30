@@ -103,6 +103,7 @@ const color CYAN = color(0, 255, 255);
 const color LIGHTCYAN = color(224, 255, 255);
 const color CADETBLUE = color(95, 158, 160);
 const color MEDIUMAQUAMARINE = color(102, 205, 170);
+const color ICEBLUE = color(0, 206, 250);
 const color AQUAMARINE = color(127, 255, 212);
 const color DARKGREEN = color(0, 100, 0);
 const color DARKOLIVEGREEN = color(85, 107, 47);

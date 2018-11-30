@@ -6,9 +6,10 @@
 
 //Enemies colors for next phases
 //You can choose whatever colors you like for your enemies
-const color FIGHTER_CLR = DARKBLUE;
-const color HEALER_CLR = ORANGERED;
-
+const color FIGHTER_CLR = DARKRED;
+const color HEALER_CLR = LIGHTGREEN;
+const color FREEZER_CLR = ICEBLUE;
+const color DEAD_CLR = GREY;
 
 // Enemy is the base class of each type of enemy
 // Enemy should be an abstract class in next phases
