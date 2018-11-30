@@ -9,8 +9,11 @@ Battle::Battle()
 
 void Battle::AddEnemy(Enemy* Ptr)
 {
-	if (EnemyCount < MaxEnemyCount) 
+	if (EnemyCount < MaxEnemyCount)
+	{
 		BEnemiesForDraw[EnemyCount++] = Ptr;
+	}
+		
 
 	// Note that this function doesn't allocate any enemy objects
 	// It only makes the first free pointer in the array

@@ -11,6 +11,15 @@ Tower::Tower()
 	
 }
 
+Tower::Tower(double health, int no_enemies, double TPower)
+{
+	Health = health;
+	max_enemies = no_enemies;
+	power = TPower;
+}
+
+
+
 
 
 void Tower::SetHealth(double h)
@@ -26,6 +35,23 @@ void Tower::SetHealth(double h)
 		killed = true;
 	}
 }
+
+void Tower::Setmax_enemies(int h)
+{
+	if (h > 0)
+		max_enemies = h;
+	else
+		max_enemies = 3;
+}
+
+void Tower::Set_power(double h)
+{
+	if (h > 0)
+		power = h;
+	else
+		power = 300;
+}
+
 
 double Tower::GetHealth() const
 {

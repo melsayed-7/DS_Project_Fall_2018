@@ -8,6 +8,7 @@
 
 class Castle
 {
+
 	Tower Towers[NoOfRegions];
 
 	//
@@ -17,6 +18,7 @@ class Castle
 public:
 
 	Castle();
+	//Castle(double TH, int no_enemies, double power);
 	void SetTowerHealth(REGION TowerRegion, double h);
 
 	//

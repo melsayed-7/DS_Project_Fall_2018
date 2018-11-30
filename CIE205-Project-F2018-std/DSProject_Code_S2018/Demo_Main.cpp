@@ -7,10 +7,9 @@
 int main()
 
 {
-
+	
 	// this is a test and demo for how to use the input function
 	Queue<int*> *enemy_queue = get_file_2_queue();
-
 	int*print_vector = new int[7];
 	int size = enemy_queue->getsize();
 
@@ -24,13 +23,12 @@ int main()
 		cout << endl;
 	}
 
-
-	/*Battle* pGameBattle = new Battle;
+	Battle* pGameBattle = new Battle;
 	pGameBattle->RunSimulation();
 	
 	delete pGameBattle;
 	
-	return 0;*/
+	return 0;
 }
 
 

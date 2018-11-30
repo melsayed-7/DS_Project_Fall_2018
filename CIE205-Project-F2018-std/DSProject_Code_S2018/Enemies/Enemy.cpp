@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy(color r_c, REGION r_region, int d)
+Enemy::Enemy(color r_c, REGION r_region, int d,int reload)
 {
 	Clr = r_c;
 	Region = r_region;
@@ -11,6 +11,7 @@ Enemy::Enemy(color r_c, REGION r_region, int d)
 	killed = false;
 	Health = fighter_health;
 	power = (1/4)*Health;
+	reload_period = reload;
 
 	
 }

@@ -1,9 +1,8 @@
 #include "Fighter.h"
 
 
-Fighter::Fighter(color r_c, REGION r_region, int d,int reload):Enemy( r_c,  r_region,d)
+Fighter::Fighter(color r_c, REGION r_region, int d,int reload):Enemy( r_c,  r_region,d, reload)
 {
-	reload_period= reload;
 }
 
 
@@ -16,6 +15,7 @@ void Fighter::Act()
 	
 	int k=0;
 	if(Health>fighter_health/2)  k=1;
+	
 	else   k=0.5;
 		
 	double healt_deducted =target->GetHealth() - (k / Distance)*get_power();
