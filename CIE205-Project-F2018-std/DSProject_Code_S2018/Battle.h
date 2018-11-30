@@ -29,6 +29,8 @@ public:
 	Castle * GetCastle();
 	void RunSimulation();
 
+	void set_initlailized_castle(double health,int no_enemies, double power);
+
 	void Just_A_Demo();	//just to show a demo and should be removed in phase1 1 & 2
 
 	//

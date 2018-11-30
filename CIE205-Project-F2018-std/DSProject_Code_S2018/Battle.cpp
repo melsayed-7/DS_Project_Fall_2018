@@ -28,7 +28,10 @@ Castle * Battle::GetCastle()
 }
 
 
-
+void Battle::set_initlailized_castle(double health, int no_enemies, double power)
+{
+	BCastle.set_all_towers(health, no_enemies, power);
+}
 
 
 
@@ -47,9 +50,14 @@ void Battle::Just_A_Demo()
 	Data = get_file_2_queue();//enter the name of the file here;
 
 	int *dummyarr = Data->deque();//the first line has the twor data
+
 	double TH = dummyarr[0];//tower health
 	int max_enemies = dummyarr[1];//number of enemies attacked per second
 	double TP = dummyarr[2];//tower power
+
+
+	set_initlailized_castle(TH, max_enemies, TP);
+
 
 	int enemy_id;
 	int type;
