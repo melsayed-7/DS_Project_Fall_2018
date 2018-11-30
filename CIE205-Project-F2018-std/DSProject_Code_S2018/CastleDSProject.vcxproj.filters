@@ -255,6 +255,7 @@
     <ClInclude Include="Healer.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="File_IO.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

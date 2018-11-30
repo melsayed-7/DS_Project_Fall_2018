@@ -60,17 +60,17 @@ void Battle::Just_A_Demo()
 	// In the game, enemies should be loaded from an input file
 	// and should be dynamically allocated
 	
-	Fighter e1(DARKBLUE, A_REG, 6);
-	Fighter e2(DARKBLUE, D_REG, 60);
-	Fighter e3(DARKOLIVEGREEN, B_REG, 60); 
-	Fighter e4(DARKOLIVEGREEN, A_REG, 4);
-	Fighter e5(ORANGERED, C_REG, 19); 
-	Fighter e6(ORANGERED, C_REG, 30); 
-	Fighter e7(ORANGERED, A_REG, 2);
-	Fighter e8(DARKOLIVEGREEN, C_REG, 7); 
-	Fighter e9(ORANGERED, A_REG, 30); 
-	Fighter e10(DARKBLUE, C_REG, 4);
-	Healer e11(GREEN, A_REG, 20);
+	Fighter e1(DARKBLUE, A_REG, 6,3);
+	Fighter e2(DARKBLUE, D_REG, 60, 3);
+	Fighter e3(DARKOLIVEGREEN, B_REG, 60, 3);
+	Fighter e4(DARKOLIVEGREEN, A_REG, 4, 3);
+	Fighter e5(ORANGERED, C_REG, 19, 3);
+	Fighter e6(ORANGERED, C_REG, 30, 3);
+	Fighter e7(ORANGERED, A_REG, 2, 3);
+	Fighter e8(DARKOLIVEGREEN, C_REG, 7, 3);
+	Fighter e9(ORANGERED, A_REG, 30, 3);
+	Fighter e10(DARKBLUE, C_REG, 4, 3);
+	Healer e11(GREEN, A_REG, 20, 3);
 
 	// Adding the enemies to the battle
 	AddEnemy(&e1);

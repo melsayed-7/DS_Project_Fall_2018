@@ -310,6 +310,7 @@
     <ClInclude Include="Defs.h" />
     <ClInclude Include="Enemies\Enemy.h" />
     <ClInclude Include="Fighter.h" />
+    <ClInclude Include="File_IO.h" />
     <ClInclude Include="Freezer.h" />
     <ClInclude Include="GUI\GUI.h" />
     <ClInclude Include="Healer.h" />

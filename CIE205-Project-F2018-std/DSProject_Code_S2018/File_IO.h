@@ -1,5 +1,10 @@
 #pragma once
+#include "Data_strutres_in_use/Queue/Queue.h"
+#include <iostream>
+#include <fstream>
+#include<string>
 
+using namespace std;
 Queue<int*>* get_file_2_queue(string str = "input_file.txt")// this function takes the input file and get the
 {
 	ifstream input_file(str.c_str());
