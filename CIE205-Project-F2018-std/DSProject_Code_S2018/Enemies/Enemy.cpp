@@ -1,8 +1,9 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy(color r_c, REGION r_region, int d,int reload)
+Enemy::Enemy( color r_c, REGION r_region, int d, int reload)
 {
+	
 	Clr = r_c;
 	Region = r_region;
 	SetDistance(d);

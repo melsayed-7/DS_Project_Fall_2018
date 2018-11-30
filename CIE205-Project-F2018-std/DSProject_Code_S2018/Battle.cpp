@@ -29,6 +29,13 @@ Castle * Battle::GetCastle()
 }
 
 
+void Battle::set_initlailized_castle(double health, int no_enemies, double power)
+{
+	BCastle.set_all_towers(health, no_enemies, power);
+}
+
+
+
 void Battle::RunSimulation()
 {
 	phase1_simulation();
@@ -52,6 +59,10 @@ void Battle::phase1_simulation()
 	int max_enemies = dummyarr[1];//number of enemies attacked per second
 	double TP = dummyarr[2];//tower power
 
+
+	set_initlailized_castle(TH, max_enemies, TP);
+
+
 	int enemy_id;
 	int type;
 	int arrival_time;
@@ -70,7 +81,7 @@ void Battle::phase1_simulation()
 
 	for (int i = 0; i < Data->getsize(); i++)
 	{
-		dummyarr = Data->deque();//the first line has the twor data	
+		dummyarr = Data->deque();//the first line has the twor data
 		enemy_id = dummyarr[0];
 		type = dummyarr[1];
 		arrival_time = dummyarr[2];
@@ -152,7 +163,7 @@ void Battle::phase1_simulation()
 
 	while (killed_enemies->getsize() < total_enemies)
 	{
-		
+
 	}
 	// Now a demo to move enemies some time steps
 	//// TimeStep is a normal integer that is incremented each time by 1

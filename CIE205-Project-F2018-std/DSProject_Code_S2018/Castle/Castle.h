@@ -20,6 +20,7 @@ public:
 	Castle();
 	//Castle(double TH, int no_enemies, double power);
 	void SetTowerHealth(REGION TowerRegion, double h);
+	void set_all_towers(double health, int no_enemies, int power);
 
 	//
 	// TODO: Add More Member Functions As Needed
