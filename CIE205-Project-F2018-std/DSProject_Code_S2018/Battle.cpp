@@ -1,7 +1,9 @@
 #include "Battle.h"
 #include "File_IO.h"
 #include "Data_strutres_in_use/Queue/Queue.h"
+#include"Castle\Castle.h"
 #include <iostream>
+
 
 Battle::Battle()
 {
@@ -14,7 +16,6 @@ void Battle::AddEnemy(Enemy* Ptr)
 	{
 		BEnemiesForDraw[EnemyCount++] = Ptr;
 	}
-
 
 	// Note that this function doesn't allocate any enemy objects
 	// It only makes the first free pointer in the array
@@ -37,19 +38,22 @@ void Battle::set_initlailized_castle(double health, int no_enemies, double power
 
 void Battle::RunSimulation()
 {
-	Just_A_Demo();
+	phase1_simulation();
 }
 
 
 //This is just a demo function for project introductory phase
 //It should be removed in phases 1&2
-void Battle::Just_A_Demo()
+void Battle::phase1_simulation()
 {
 	Queue<int*>*Data = new  Queue<int*>;
 
 	Data = get_file_2_queue();//enter the name of the file here;
 
+	int total_enemies = Data->getsize();
+
 	int *dummyarr = Data->deque();//the first line has the twor data
+
 
 	double TH = dummyarr[0];//tower health
 	int max_enemies = dummyarr[1];//number of enemies attacked per second
@@ -72,11 +76,12 @@ void Battle::Just_A_Demo()
 	Healer * healer;
 	Freezer * freezer;
 
-	Queue <Enemy*>*inactive_queue = new Queue <Enemy*>;//a queue that holds apointer to enemies
+	Queue <Enemy*>*inactive_enemies = new Queue <Enemy*>;//a queue that holds apointer to enemies
+	Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds apointer to enemies
 
 	for (int i = 0; i < Data->getsize(); i++)
 	{
-		dummyarr = Data->deque();//the first line has the twor data	
+		dummyarr = Data->deque();//the first line has the twor data
 		enemy_id = dummyarr[0];
 		type = dummyarr[1];
 		arrival_time = dummyarr[2];
@@ -84,7 +89,7 @@ void Battle::Just_A_Demo()
 		pow = dummyarr[4];
 		reload = dummyarr[5];
 		region = dummyarr[6];
-		
+
 		switch (type)
 		{
 		case 1://fighter
@@ -135,7 +140,7 @@ void Battle::Just_A_Demo()
 	Fighter e9(ORANGERED, A_REG, 30, 3);
 	Fighter e10(DARKBLUE, C_REG, 4, 3);
 	Healer e11(GREEN, A_REG, 20, 3);
-	
+
 
 	// Adding the enemies to the battle
 	AddEnemy(&e1);
@@ -149,7 +154,7 @@ void Battle::Just_A_Demo()
 	AddEnemy(&e9);
 	AddEnemy(&e10);
 	AddEnemy(&e11);
-	
+
 
 	// Drawing the battle
 	pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);
@@ -157,27 +162,10 @@ void Battle::Just_A_Demo()
 	Point p;
 	pGUI->GetPointClicked(p);
 
-	// Now a demo to move enemies some time steps
-	// TimeStep is a normal integer that is incremented each time by 1
-	for (int TimeStep = 1; TimeStep <= 30; TimeStep++)
+
+	while (killed_enemies->getsize() < total_enemies)
 	{
 
-		// Decrement the distance of each enemy. Just for the sake of demo
-		e1.DecrementDist();
-		e2.DecrementDist();
-		e3.DecrementDist();
-		e4.DecrementDist();
-		e5.DecrementDist();
-		e6.DecrementDist();
-		e7.DecrementDist();
-		e8.DecrementDist();
-		e9.DecrementDist();
-		e10.DecrementDist();
-
-		// Redraw the enemies
-		pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);
-
-		pGUI->GetPointClicked(p);
 	}
 	*/
 	delete pGUI;
