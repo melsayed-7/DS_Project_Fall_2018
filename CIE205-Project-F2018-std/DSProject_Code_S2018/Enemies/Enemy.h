@@ -57,7 +57,7 @@ public:
 	double get_power();
 
 	int get_type();
-	
+	bool is_killed();
 	// Virtual Functions: ----------------
 
 	virtual void Move() = 0;	//All enemies can move

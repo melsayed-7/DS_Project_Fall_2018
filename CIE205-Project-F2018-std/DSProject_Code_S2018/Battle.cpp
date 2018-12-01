@@ -204,10 +204,16 @@ void Battle::phase1_simulation()
 				current_enemy->Act();
 			}
 
+
+
 			for (int j = 0; j < max_enemies; j++)
 			{
 				current_enemy = to_be_filled_heap[i]->Dequeue();
 				BCastle.tower_act(i, current_enemy);
+				if (current_enemy->is_killed())
+				{
+					killed_enemies->enque(current_enemy);
+				}
 			}
 
 		}

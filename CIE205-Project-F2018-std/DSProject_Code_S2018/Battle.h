@@ -33,6 +33,7 @@ public:
 	void phase1_simulation();	//just to show a demo and should be removed in phase1 1 & 2
 	int compute_priority(Enemy* ptr);
 	
+	
 
 	
 	//
