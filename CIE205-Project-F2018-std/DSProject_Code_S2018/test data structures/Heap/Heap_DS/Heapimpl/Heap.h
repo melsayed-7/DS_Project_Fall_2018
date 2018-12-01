@@ -15,7 +15,7 @@ private:
 	
 	int get_left_ind(int i); //get the left child index of node i
 
-	int get_right_ind(int i);//get the right child index of node i
+	int get_right_ind(int i);//get the right child index of node i	
 
 
 public:
