@@ -192,9 +192,9 @@ void Battle::phase1_simulation()
 			}
 		}
 
-		for (int i = 0; i<4; i++)
+		for (int i = 0; i<4; i++)//one iteration per tower
 		{
-			for (int j = 0; j < max_enemies; j++)
+			for (int j = 0; j < current_heap[i]->getcurrent_number; j++)
 			{
 			
 			}
