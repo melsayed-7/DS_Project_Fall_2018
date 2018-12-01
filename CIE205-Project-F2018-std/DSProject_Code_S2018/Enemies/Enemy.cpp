@@ -1,6 +1,10 @@
 #include "Enemy.h"
 
 
+Enemy::Enemy()
+{
+}
+
 Enemy::Enemy( color r_c, REGION r_region, int d, int reload)
 {
 	
