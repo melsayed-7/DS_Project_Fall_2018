@@ -67,5 +67,5 @@ double Enemy::get_health()
 
 double Enemy::get_power()
 {
-	return Health / 4;
+	return power;
 }
