@@ -167,19 +167,30 @@ void Battle::phase1_simulation()
 
 	int region_index;
 	int enemey_priority;
+	bool activationflag = true;
 
-	while (killed_enemies->getsize() < total_enemies && total_tower_health != 0)// this loop takes out all the enemies that should enter the battle ni the curreent tick
+	while (killed_enemies->getsize() < total_enemies && total_tower_health != 0)//this loop will end when all the twoers are destroyed or all the enemies are killed
 	{
-		
+		activationflag = true;
+
+		while (activationflag) // this loop takes out all the enemies that should enter the battle ni the curreent tick
+		{
 			if (inactive_enemies->front()->get_arraival_time() == current_tick)
 			{
 				region_index = inactive_enemies->front()->GetRegion();
+
 				current_heap[region_index]->Enqueue(enemey_priority, inactive_enemies->deque());
 			}
 			else
 			{
+				activationflag = false;
 				current_tick++;
-			}	
+			}
+		}
+
+
+
+			
 	}
 
 
