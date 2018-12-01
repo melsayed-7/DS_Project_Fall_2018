@@ -11,6 +11,6 @@ public:
 	virtual void Act();
 	virtual void Move();
 	virtual bool is_frozen();
-	void set_target(Enemy* Target [MaxEnemyCount]);
+	void set_target(Tower* tower);
 };
 

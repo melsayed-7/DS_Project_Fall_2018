@@ -172,6 +172,7 @@ void Battle::phase1_simulation()
 	int region_index;
 	int enemey_priority;
 	bool activationflag = true;
+	Enemy* current_enemy;
 
 	while (killed_enemies->getsize() < total_enemies && total_tower_health != 0)//this loop will end when all the twoers are destroyed or all the enemies are killed
 	{
@@ -194,10 +195,21 @@ void Battle::phase1_simulation()
 
 		for (int i = 0; i<4; i++)//one iteration per tower
 		{
-			for (int j = 0; j < current_heap[i]->getcurrent_number; j++)
-			{
-			
+			for (int j = 0; j < current_heap[i]->getcurrent_number(); j++)
+			{	
+				current_enemy = current_heap[i]->Dequeue();
+				to_be_filled_heap[i]->Enqueue(compute_priority(current_enemy),current_enemy);
+
+				current_enemy->set_target(BCastle.get_tower(i));
+				current_enemy->Act();
 			}
+
+			for (int j = 0; j < max_enemies; j++)
+			{
+				current_enemy = to_be_filled_heap[i]->Dequeue();
+				BCastle.tower_act(i, current_enemy);
+			}
+
 		}
 
 			
