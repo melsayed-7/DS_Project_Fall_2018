@@ -81,3 +81,8 @@ int Enemy::get_type()
 {
 	return type;
 }
+
+bool Enemy::is_killed()
+{
+	return killed;
+}
