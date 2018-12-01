@@ -41,7 +41,7 @@ void Castle::tower_act(int tower_number, Enemy* enemy)
 	double health_deducted =(1.0/distance)*(tower_power)*(1/k);
 
 
-	enemy->set_health((enemy->get_health()) - health_deducted);   // deduct some health of the enemy;
+	enemy->set_health(enemy->get_health());   // deduct some health of the enemy;
 }
 
 

@@ -67,7 +67,7 @@ double Enemy::get_health()
 
 void Enemy::set_health(double health_deducted)
 {
-	Health = health_deducted;
+	Health = get_health()- health_deducted;
 	if (Health <= 0) killed = true;
 }
 
