@@ -24,6 +24,7 @@ public:
 	void increment_ice(double ice_added);
 	void Setmax_enemies(int h);
 	void Set_power(double h);
+	double get_power();
 	//
 	// TODO: Add More Member Functions As Needed
 	//

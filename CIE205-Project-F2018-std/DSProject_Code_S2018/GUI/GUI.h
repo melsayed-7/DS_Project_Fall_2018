@@ -3,7 +3,6 @@
 #include "..\CMUgraphicsLib\CMUgraphics.h"
 #include "..\Defs.h"
 #include "..\Enemies\Enemy.h"
-
 #include <string>
 using namespace std;
 

@@ -12,6 +12,7 @@ Freezer::Freezer(color r_c, int id, int Arraival_Time, double health, double Pow
 	arraival_time = Arraival_Time;
 	Health = health;
 	power = Power;
+	type = 3;
 }
 
 

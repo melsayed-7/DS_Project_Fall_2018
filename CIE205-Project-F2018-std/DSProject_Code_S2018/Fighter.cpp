@@ -11,6 +11,7 @@ Fighter::Fighter(color r_c, int id, int Arraival_Time, double health, double Pow
 	arraival_time = Arraival_Time;
 	Health = health;
 	power = Power;
+	type = 1;
 }
 
 
@@ -22,8 +23,8 @@ void Fighter::Act()
 {
 	
 	int k=0;
-	if(Health>fighter_health/2)  k=1;
-	
+
+	if (Health > fighter_health / 2)  k = 1;
 	else   k=0.5;
 		
 	double healt_deducted =target->GetHealth() - (k / Distance)*get_power();

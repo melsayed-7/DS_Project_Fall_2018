@@ -68,3 +68,9 @@ void Tower::increment_ice(double ice_added)
 		frozen = true;
 	}
 }
+
+
+double Tower::get_power()
+{
+	return power;
+}

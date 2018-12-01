@@ -25,6 +25,8 @@ protected:
 	double Health;	//Enemy health
 	double power;
 
+	int type;
+
 	int reload_period;
 	bool killed;
 	bool frozen;
@@ -49,10 +51,13 @@ public:
 	void SetDistance(int d);
 	int GetDistance() const;
 
+
 	double get_health();
+	void set_health(double health_deducted);
 	double get_power();
 
-
+	int get_type();
+	
 	// Virtual Functions: ----------------
 
 	virtual void Move() = 0;	//All enemies can move

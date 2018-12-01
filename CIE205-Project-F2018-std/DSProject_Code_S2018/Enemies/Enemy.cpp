@@ -65,7 +65,19 @@ double Enemy::get_health()
 	return Health;
 }
 
+void Enemy::set_health(double health_deducted)
+{
+	Health = health_deducted;
+	if (Health <= 0) killed = true;
+}
+
+
 double Enemy::get_power()
 {
 	return power;
+}
+
+int Enemy::get_type()
+{
+	return type;
 }
