@@ -15,7 +15,7 @@ void Battle::AddEnemy(Enemy* Ptr)
 {
 	if (EnemyCount < MaxEnemyCount)
 	{
-		BEnemiesForDraw[EnemyCount++] = Ptr;
+		if(Ptr== nullptr)	BEnemiesForDraw[EnemyCount++] = Ptr;
 	}
 
 	// Note that this function doesn't allocate any enemy objects
@@ -55,11 +55,14 @@ void Battle::RunSimulation()
 
 int Battle::compute_priority(Enemy* ptr)
 {
-	double health = ptr->get_health();
-	double power = ptr->get_power();
-	double distance = ptr->GetDistance();
-	
-	return (0.2*health + 0.1*power + 7/distance+3);
+	if (ptr != nullptr)
+	{
+		double health = ptr->get_health();
+		double power = ptr->get_power();
+		double distance = ptr->GetDistance();
+		return (0.2*health + 0.1*power + 7 / distance + 3);
+	}
+	else return 0;
 
 }
 
@@ -183,7 +186,7 @@ void Battle::phase1_simulation()
 	bool activationflag = true;
 	Enemy* current_enemy;
 
-	Enemy* *to_be_hit_enemies = new Enemy*[max_enemies];
+	Enemy** to_be_hit_enemies = new Enemy*[max_enemies];
 
 	while (killed_enemies->getsize() < total_enemies && total_tower_health != 0)//this loop will end when all the twoers are destroyed or all the enemies are killed
 	{
@@ -215,6 +218,9 @@ void Battle::phase1_simulation()
 
 				current_enemy->set_target(BCastle.get_tower(i));
 				current_enemy->Act();
+
+				AddEnemy(current_enemy);
+
 			}
 
 			for (int j = 0; j < max_enemies; j++)
@@ -223,12 +229,16 @@ void Battle::phase1_simulation()
 				to_be_hit_enemies[j]= to_be_filled_heap[i]->Dequeue();
 				BCastle.tower_act(i, current_enemy);
 
-				/*current_enemy = to_be_filled_heap[i]->Dequeue();
 				
 				if (current_enemy->is_killed())
 				{
 					killed_enemies->enque(current_enemy);
-				}*/
+					current_heap[i]->Enqueue(0,nullptr);
+				}
+				else 
+				{
+					current_heap[i]->Enqueue(compute_priority(current_enemy), current_enemy);
+				}
 			}
 
 		}
