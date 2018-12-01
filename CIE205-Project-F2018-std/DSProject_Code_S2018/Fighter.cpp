@@ -22,7 +22,7 @@ Fighter::~Fighter(void)
 void Fighter::Act()
 {
 	
-	int k=0;
+	double k=0;
 
 	if (Health > fighter_health / 2)  k = 1;
 	else   k=0.5;
