@@ -20,15 +20,14 @@ Fighter::~Fighter(void)
 }
 
 void Fighter::Act()
-{
-	
-	double k=0;
-
+{	
+	// defining the constant k of the equation depending on the health of the fighter
+	double k=0;					
 	if (Health > fighter_health / 2)  k = 1;
 	else   k=0.5;
 		
-	double healt_deducted =target->GetHealth()-(k / Distance)*get_power();
-	target->SetHealth(healt_deducted);
+	double healt_deducted =target->GetHealth()-(k / Distance)*get_power();    // this will be the new health of the tower
+	target->SetHealth(healt_deducted);			// calling set health function of the target tower
 	
 }
 
@@ -40,13 +39,14 @@ bool Fighter::is_frozen()
 
 void Fighter::Move()
 {
+	// decrementing the distance depending on the frozen state
 	if(!is_frozen())
 	{
 		DecrementDist(); // The frozern cannot shoot only but can move.
 	}
 }
 
-void Fighter::set_target(Tower* Tower)
+void Fighter::set_target(Tower* Tower) // defining the target tower
 {
 	target = Tower;
 }

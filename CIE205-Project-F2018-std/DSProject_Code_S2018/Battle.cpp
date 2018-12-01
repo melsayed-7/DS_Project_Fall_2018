@@ -100,6 +100,8 @@ Queue <Enemy*>* Battle::fill_inactivelist(Queue <int*>* Data)
 
 			REGION reg = A_REG;
 
+
+			// defining the regions as integers
 			switch (region)
 			{
 			case 0:
@@ -116,7 +118,7 @@ Queue <Enemy*>* Battle::fill_inactivelist(Queue <int*>* Data)
 				break;
 			}
 
-			switch (type)
+			switch (type)   // instansiating the enemies depending on their type
 			{
 			case 1://fighter
 				fighter = new Fighter(FIGHTER_CLR, enemy_id, arrival_time, health, pow, reg, 60, 3);
@@ -251,7 +253,7 @@ void Battle::phase1_simulation()
 						current_enemy->set_target(BCastle.get_tower(i));
 						current_enemy->Act();
 						AddEnemy(current_enemy);
-						//current_enemy->Move();
+						current_enemy->Move();
 					}
 
 

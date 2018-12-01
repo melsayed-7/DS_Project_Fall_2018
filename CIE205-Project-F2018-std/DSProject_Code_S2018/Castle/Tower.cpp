@@ -38,6 +38,7 @@ void Tower::SetHealth(double h)
 
 void Tower::Setmax_enemies(int h)
 {
+	// maximum of enemis to be targeted by the the tower
 	if (h > 0)
 		max_enemies = h;
 	else
@@ -60,6 +61,7 @@ double Tower::GetHealth() const
 
 void Tower::increment_ice(double ice_added)
 {
+	//ice to be added to freeze the tower
 	ice = ice + ice_added;
 	
 	if (ice >= ice_to_freeze)
