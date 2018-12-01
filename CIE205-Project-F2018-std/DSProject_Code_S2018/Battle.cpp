@@ -133,21 +133,25 @@ void Battle::phase1_simulation()
 	double total_tower_health = BCastle.get_total_tower_health();
 	GUI * pGUI = new GUI;
 
-	Heap <Enemy> Heap1(inactive_enemies->getsize())[4];
-	Heap <Enemy> Heap2(inactive_enemies->getsize())[4];
+	Heap<Enemy>** Heap1=new Heap<Enemy>*[4];
+	for(int i = 0; i < 4; i++)
+	{
+		Heap1[i] = new Heap<Enemy>(inactive_enemies->getsize());
+	}
+
 
 	pGUI->PrintMessage("this is phase one simulation");
 	int current_tick = 0;
 	while(killed_enemies->getsize() < total_enemies && total_tower_health!=0)
 	{
-			if (inactive_enemies->front()->get_arraival_time()== current_tick )
+		/*	if (inactive_enemies->front()->get_arraival_time() == current_tick )
 			{
 
-			}
+			}*/
 	}
 
 
-	delete pGUI;
+	//delete pGUI;
 }
 
 // Declare some enemies and fill their data
