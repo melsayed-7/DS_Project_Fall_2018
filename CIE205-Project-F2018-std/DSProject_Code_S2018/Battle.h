@@ -4,6 +4,7 @@
 #include "Healer.h"
 #include "Freezer.h"
 #include "Castle\Castle.h"
+#include "Data_strutres_in_use/Queue/Queue.h"
 
 
 // it is the controller of the project
@@ -27,14 +28,11 @@ public:
 
 	Battle();
 	void AddEnemy(Enemy* Ptr);
-	void ClearEnemy();
 	Castle * GetCastle();
 	void RunSimulation();
 	void set_initlailized_castle(double health,int no_enemies, double power);
 	void phase1_simulation();	//just to show a demo and should be removed in phase1 1 & 2
 	int compute_priority(Enemy* ptr);
-	
-	
 
 	
 	//

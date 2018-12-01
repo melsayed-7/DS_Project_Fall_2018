@@ -67,6 +67,9 @@ int Battle::compute_priority(Enemy* ptr)
 }
 
 
+
+
+
 //This is just a demo function for project introductory phase
 //It should be removed in phases 1&2
 void Battle::phase1_simulation()
@@ -75,81 +78,83 @@ void Battle::phase1_simulation()
 
 	Data = get_file_2_queue();//enter the name of the file here;
 
-	int *dummyarr = Data->deque();//the first line has the twor data
+	int *dummyarr = Data->deque();//the first line has the tower data
 
 	double TH = dummyarr[0];//tower health
 	int max_enemies = dummyarr[1];//number of enemies attacked per second
 	double TP = dummyarr[2];//tower power
 
-	Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds apointer to enemies
+	Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds pointer to enemies
 
-	set_initlailized_castle(TH, max_enemies, TP);
-
-	
+	set_initlailized_castle(TH, max_enemies, TP); //Intialize castle parameters using first line of input file
 
 
-	int total_enemies = Data->getsize();
+		int total_enemies = Data->getsize(); // Get The total number of Enemies to use later
 
-	int enemy_id;
-	int type;
-	int arrival_time;
-	int health;
-	int pow;
-	int reload;
-	int region;
+		int enemy_id;
+		int type;
+		int arrival_time;
+		int health;
+		int pow;
+		int reload;
+		int region;
 
+		// Accessing Enemey Classes
+		Fighter * fighter;
+		Healer * healer;
+		Freezer * freezer;
 
-	Fighter * fighter;
-	Healer * healer;
-	Freezer * freezer;
+		Queue <Enemy*>*inactive_enemies = new Queue <Enemy*>;//a queue that holds a pointer to enemies
 
-	Queue <Enemy*>*inactive_enemies = new Queue <Enemy*>;//a queue that holds a pointer to enemies
-	
-	for (int i = 0; i < Data->getsize(); i++)//fill inactive list
-	{
-		dummyarr = Data->deque();//the first line has the twor data
-		enemy_id = dummyarr[0];
-		type = dummyarr[1];
-		arrival_time = dummyarr[2];
-		health = dummyarr[3];
-		pow = dummyarr[4];
-		reload = dummyarr[5];
-		region = dummyarr[6]-1;
-		
-		REGION reg=A_REG;
-
-		switch (region)
+		for (int i = 0; i < Data->getsize(); i++)//fill inactive list
 		{
-		case 0:
-			reg = A_REG;
-			break;
-		case 1:
-			reg = B_REG;
-			break;
-		case 2:
-			reg = C_REG;
-			break;
-		case 3:
-			reg = D_REG;
-			break;
+			dummyarr = Data->deque();//the first line has the tower data
+			// Set the Tower parameters
+			enemy_id = dummyarr[0];
+			type = dummyarr[1];
+			arrival_time = dummyarr[2];
+			health = dummyarr[3];
+			pow = dummyarr[4];
+			reload = dummyarr[5];
+			region = dummyarr[6] - 1;
+
+			REGION reg = A_REG;
+
+			switch (region)
+			{
+			case 0:
+				reg = A_REG;
+				break;
+			case 1:
+				reg = B_REG;
+				break;
+			case 2:
+				reg = C_REG;
+				break;
+			case 3:
+				reg = D_REG;
+				break;
+			}
+
+			switch (type)
+			{
+			case 1://fighter
+				fighter = new Fighter(FIGHTER_CLR, enemy_id, arrival_time, health, pow, reg, 60, 3);
+				inactive_enemies->enque(fighter);
+				break;
+			case 2://healer
+				healer = new Healer(HEALER_CLR, enemy_id, arrival_time, health, pow, reg, 60, 3);
+				inactive_enemies->enque(healer);
+				break;
+			case 3://freezer
+				freezer = new Freezer(FREEZER_CLR, enemy_id, arrival_time, health, pow, reg, 60, 3);
+				inactive_enemies->enque(freezer);
+				break;
+			}
 		}
 
-		switch (type)
-		{
-		case 1://fighter
-			fighter = new Fighter(FIGHTER_CLR, enemy_id, arrival_time,health,pow,reg, 60, 3);
-			inactive_enemies->enque(fighter);
-			break;
-		case 2://healer
-			healer = new Healer(HEALER_CLR, enemy_id, arrival_time, health, pow, reg , 60, 3);
-			inactive_enemies->enque(healer);
-			break;
-		case 3://freezer
-			freezer = new Freezer(FREEZER_CLR, enemy_id, arrival_time, health, pow, reg , 60, 3);
-			inactive_enemies->enque(freezer);
-			break;
-		}
-	}
+
+	
 
 	std::cout << "\nWelcome to Castle Battle:\n";
 	std::cout << "\nIn phase2, you will be asked to select game mode\n";
