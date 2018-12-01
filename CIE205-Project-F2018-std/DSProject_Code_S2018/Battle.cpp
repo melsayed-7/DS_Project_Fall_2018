@@ -146,19 +146,7 @@ void Battle::phase1_simulation()
 
 	double total_tower_health = BCastle.get_total_tower_health();
 	GUI * pGUI = new GUI;
-//
-//	Heap <Enemy*> * heap1A = new Heap <Enemy*>(total_enemies);
-//	Heap <Enemy*> * heap2A = new Heap <Enemy*>(total_enemies);
-//
-//	Heap <Enemy*> * heap1A = new Heap <Enemy*>(total_enemies);
-//	Heap <Enemy*> * heap2A = new Heap <Enemy*>(total_enemies);
-//
-//	Heap <Enemy*> * heap1A = new Heap <Enemy*>(total_enemies);
-//	Heap <Enemy*> * heap2A = new Heap <Enemy*>(total_enemies);
-//
-//	Heap <Enemy*> * heap1A = new Heap <Enemy*>(total_enemies);
-//	Heap <Enemy*> * heap2A = new Heap <Enemy*>(total_enemies);
-//heap 
+
 
 	Heap<Enemy*>** Heap1 = new Heap<Enemy*>*[4];
 	Heap<Enemy*>** Heap2 = new Heap<Enemy*>*[4];
@@ -199,8 +187,13 @@ void Battle::phase1_simulation()
 				current_tick++;
 			}
 		}
-
-
+		for (int i = 0; i<4; i++)
+		{
+			for (int j = 0; j < max_enemies; j++)
+			{
+			
+			}
+		}
 
 			
 	}
