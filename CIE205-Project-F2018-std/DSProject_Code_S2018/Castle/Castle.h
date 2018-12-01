@@ -23,6 +23,7 @@ public:
 	double get_total_tower_health();
 	void set_all_towers(double health, int no_enemies, int power);
 	void tower_act(int tower_number, Enemy* enemy);
+	Tower* get_tower(int index);
 
 	//
 	// TODO: Add More Member Functions As Needed

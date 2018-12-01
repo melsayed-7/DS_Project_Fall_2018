@@ -157,7 +157,7 @@ T Heap<T>::Dequeue()
 	Heap_arr[Current_number - 1]= nullptr;
 	Current_number--; //decrease the size by 1
 	
-	if (Current_number == 0) return rootnode;//if the heap has only one element
+	if (Current_number == 0) return rootnode->getdata();//if the heap has only one element
 
 	int ind = 0;
 	int left = get_left_ind(ind);

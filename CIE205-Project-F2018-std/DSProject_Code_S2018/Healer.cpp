@@ -39,7 +39,7 @@ bool Healer::is_frozen()
 	return frozen;
 }
 
-void Healer::set_target(Enemy* Target[MaxEnemyCount])
+void Healer::set_target(Tower* tower)
 {
-
+	// until the next phase
 }
