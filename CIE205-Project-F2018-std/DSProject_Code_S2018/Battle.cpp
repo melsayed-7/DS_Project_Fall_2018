@@ -94,15 +94,15 @@ void Battle::phase1_simulation()
 		{
 		case 1://fighter
 			fighter = new Fighter(FIGHTER_CLR, enemy_id, arrival_time,health,pow, A_REG, 6, 3);
-			inactive_queue->enque(fighter);
+			inactive_enemies->enque(fighter);
 			break;
 		case 2://healer
 			healer = new Healer(HEALER_CLR, enemy_id, arrival_time, health, pow, A_REG, 6, 3);
-			inactive_queue->enque(healer);
+			inactive_enemies->enque(healer);
 			break;
 		case 3://freezer
 			freezer = new Freezer(FREEZER_CLR, enemy_id, arrival_time, health, pow, A_REG, 6, 3);
-			inactive_queue->enque(freezer);
+			inactive_enemies->enque(freezer);
 			break;
 		}
 	}
