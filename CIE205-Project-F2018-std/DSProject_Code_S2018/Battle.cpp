@@ -63,17 +63,18 @@ void Battle::phase1_simulation()
 
 	Data = get_file_2_queue();//enter the name of the file here;
 
-	
-
 	int *dummyarr = Data->deque();//the first line has the twor data
-
 
 	double TH = dummyarr[0];//tower health
 	int max_enemies = dummyarr[1];//number of enemies attacked per second
 	double TP = dummyarr[2];//tower power
 
+	Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds apointer to enemies
 
 	set_initlailized_castle(TH, max_enemies, TP);
+
+	
+
 
 	int total_enemies = Data->getsize();
 
@@ -90,9 +91,8 @@ void Battle::phase1_simulation()
 	Healer * healer;
 	Freezer * freezer;
 
-	Queue <Enemy*>*inactive_enemies = new Queue <Enemy*>;//a queue that holds apointer to enemies
-	Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds apointer to enemies
-
+	Queue <Enemy*>*inactive_enemies = new Queue <Enemy*>;//a queue that holds a pointer to enemies
+	
 	for (int i = 0; i < Data->getsize(); i++)//fill inactive list
 	{
 		dummyarr = Data->deque();//the first line has the twor data
@@ -103,23 +103,25 @@ void Battle::phase1_simulation()
 		pow = dummyarr[4];
 		reload = dummyarr[5];
 		region = dummyarr[6]-1;
+		
 		REGION reg=A_REG;
 
 		switch (region)
 		{
-		case 1:
+		case 0:
 			reg = A_REG;
 			break;
-		case 2:
+		case 1:
 			reg = B_REG;
 			break;
-		case 3:
+		case 2:
 			reg = C_REG;
 			break;
-		case 4:
+		case 3:
 			reg = D_REG;
 			break;
 		}
+
 		switch (type)
 		{
 		case 1://fighter
@@ -145,11 +147,13 @@ void Battle::phase1_simulation()
 	//std::cin.getline(tmp, 10);
 
 	double total_tower_health = BCastle.get_total_tower_health();
+	
 	GUI * pGUI = new GUI;
 
 
 	Heap<Enemy*>** Heap1 = new Heap<Enemy*>*[4];
 	Heap<Enemy*>** Heap2 = new Heap<Enemy*>*[4];
+
 	int a = inactive_enemies->getsize();
 
 	for (int i = 0; i < 4; i++)
@@ -187,6 +191,7 @@ void Battle::phase1_simulation()
 				current_tick++;
 			}
 		}
+
 		for (int i = 0; i<4; i++)
 		{
 			for (int j = 0; j < max_enemies; j++)

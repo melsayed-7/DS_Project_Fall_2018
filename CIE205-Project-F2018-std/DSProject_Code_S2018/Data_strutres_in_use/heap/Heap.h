@@ -25,7 +25,7 @@ public:
 	Heap(int len);                     
 	                     
 	bool Enqueue(int priority, T  data);			// Add an item to the  and return true if succeeded
-	QueueNode <T> *Dequeue();                       // Get item at the root
+	T Dequeue();                       // Get item at the root
 	
 	//void printAll();								// Print all the elements in the heap
 	int getcurrent_number()const ;                  // Return the currnet number of elements in the heap
@@ -144,7 +144,7 @@ bool Heap<T>::Enqueue(int priority, T data)
 
 
 template<typename T>
-QueueNode<T>* Heap<T>::Dequeue()
+T Heap<T>::Dequeue()
 {
 	if (Current_number == 0)
 	{
@@ -222,10 +222,10 @@ QueueNode<T>* Heap<T>::Dequeue()
 		}
 		else// you are in a leaf
 		{
-			return rootnode;
+			return rootnode->getdata();
 		}
 	}
 
-	return rootnode;
+	return rootnode->getdata();
 }
 
