@@ -43,6 +43,18 @@ void Battle::RunSimulation()
 }
 
 
+
+int Battle::compute_priority(Enemy* ptr)
+{
+	double health = ptr->get_health();
+	double power = ptr->get_power();
+	double distance = ptr->GetDistance();
+	
+	return (0.2*health + 0.1*power + 7/distance+3);
+
+}
+
+
 //This is just a demo function for project introductory phase
 //It should be removed in phases 1&2
 void Battle::phase1_simulation()
@@ -134,19 +146,7 @@ void Battle::phase1_simulation()
 
 	double total_tower_health = BCastle.get_total_tower_health();
 	GUI * pGUI = new GUI;
-//
-//	Heap <Enemy*> * heap1A = new Heap <Enemy*>(total_enemies);
-//	Heap <Enemy*> * heap2A = new Heap <Enemy*>(total_enemies);
-//
-//	Heap <Enemy*> * heap1A = new Heap <Enemy*>(total_enemies);
-//	Heap <Enemy*> * heap2A = new Heap <Enemy*>(total_enemies);
-//
-//	Heap <Enemy*> * heap1A = new Heap <Enemy*>(total_enemies);
-//	Heap <Enemy*> * heap2A = new Heap <Enemy*>(total_enemies);
-//
-//	Heap <Enemy*> * heap1A = new Heap <Enemy*>(total_enemies);
-//	Heap <Enemy*> * heap2A = new Heap <Enemy*>(total_enemies);
-//heap 
+
 
 	Heap<Enemy*>** Heap1 = new Heap<Enemy*>*[4];
 	Heap<Enemy*>** Heap2 = new Heap<Enemy*>*[4];
@@ -162,16 +162,40 @@ void Battle::phase1_simulation()
 
 	int current_tick = 0;
 
-	while(killed_enemies->getsize() < total_enemies && total_tower_health!=0)
+	Heap<Enemy*>** current_heap= Heap1;
+	Heap<Enemy*>** to_be_filled_heap= Heap2;
+
+	int region_index;
+	int enemey_priority;
+	bool activationflag = true;
+
+	while (killed_enemies->getsize() < total_enemies && total_tower_health != 0)//this loop will end when all the twoers are destroyed or all the enemies are killed
 	{
-			if (inactive_enemies->front()->get_arraival_time() == current_tick )
+		activationflag = true;
+
+		while (activationflag) // this loop takes out all the enemies that should enter the battle ni the curreent tick
+		{
+			if (inactive_enemies->front()->get_arraival_time() == current_tick)
 			{
-				
+				region_index = inactive_enemies->front()->GetRegion();
+				enemey_priority=compute_priority(inactive_enemies->front());
+				current_heap[region_index]->Enqueue(enemey_priority, inactive_enemies->deque());
 			}
 			else
 			{
+				activationflag = false;
 				current_tick++;
 			}
+		}
+		for (int i = 0; i<4; i++)
+		{
+			for (int j = 0; j < max_enemies; j++)
+			{
+			
+			}
+		}
+
+			
 	}
 
 
