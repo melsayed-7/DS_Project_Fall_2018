@@ -37,6 +37,11 @@ void Enemy::DecrementDist()
 		Distance--;
 }
 
+int Enemy::get_arraival_time()
+{
+	return arraival_time;
+}
+
 void Enemy::SetDistance(int d)
 {
 	if (d >= MinDistance && d <= MaxDistance)

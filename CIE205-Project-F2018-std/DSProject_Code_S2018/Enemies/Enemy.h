@@ -44,7 +44,7 @@ public:
 	REGION GetRegion() const;
 
 	void DecrementDist();
-
+	int get_arraival_time();
 	void SetDistance(int d);
 	int GetDistance() const;
 

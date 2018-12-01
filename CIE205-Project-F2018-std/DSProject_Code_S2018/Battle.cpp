@@ -2,6 +2,7 @@
 #include "File_IO.h"
 #include "Data_strutres_in_use/Queue/Queue.h"
 #include"Castle\Castle.h"
+#include "Data_strutres_in_use/heap/Heap.h"
 #include <iostream>
 
 
@@ -79,7 +80,7 @@ void Battle::phase1_simulation()
 	Queue <Enemy*>*inactive_enemies = new Queue <Enemy*>;//a queue that holds apointer to enemies
 	Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds apointer to enemies
 
-	for (int i = 0; i < Data->getsize(); i++)
+	for (int i = 0; i < Data->getsize(); i++)//fill inactive list
 	{
 		dummyarr = Data->deque();//the first line has the twor data
 		enemy_id = dummyarr[0];
@@ -88,85 +89,104 @@ void Battle::phase1_simulation()
 		health = dummyarr[3];
 		pow = dummyarr[4];
 		reload = dummyarr[5];
-		region = dummyarr[6];
-
+		region = dummyarr[6]-1;
+		REGION reg;
+		switch (region)
+		{
+		case 1:
+			reg = A_REG;
+			break;
+		case 2:
+			reg = B_REG;
+			break;
+		case 3:
+			reg = C_REG;
+			break;
+		case 4:
+			reg = D_REG;
+			break;
+		}
 		switch (type)
 		{
 		case 1://fighter
-			fighter = new Fighter(FIGHTER_CLR, enemy_id, arrival_time,health,pow, A_REG, 6, 3);
+			fighter = new Fighter(FIGHTER_CLR, enemy_id, arrival_time,health,pow,reg, 60, 3);
 			inactive_enemies->enque(fighter);
 			break;
 		case 2://healer
-			healer = new Healer(HEALER_CLR, enemy_id, arrival_time, health, pow, A_REG, 6, 3);
+			healer = new Healer(HEALER_CLR, enemy_id, arrival_time, health, pow, reg , 60, 3);
 			inactive_enemies->enque(healer);
 			break;
 		case 3://freezer
-			freezer = new Freezer(FREEZER_CLR, enemy_id, arrival_time, health, pow, A_REG, 6, 3);
+			freezer = new Freezer(FREEZER_CLR, enemy_id, arrival_time, health, pow, reg , 60, 3);
 			inactive_enemies->enque(freezer);
 			break;
 		}
 	}
 
-
 	std::cout << "\nWelcome to Castle Battle:\n";
 	std::cout << "\nIn phase2, you will be asked to select game mode\n";
 	std::cout << "\nFor now just press ENTER key to continue...";
 
-	char tmp[10];
-	std::cin.getline(tmp, 10);
-	//
-	// THIS IS JUST A DEMO
-	// IT SHOULD BE REMOVED IN PHASE 1 AND PHASE 2
-	//
+	//char tmp[10];
+	//std::cin.getline(tmp, 10);
 
+	double total_tower_health = BCastle.get_total_tower_health();
 	GUI * pGUI = new GUI;
 
-	pGUI->PrintMessage("This is Just a Demo. It should be changed ib phase1 & phase2. Click to move to next step");
+	Heap <Enemy> Heap1(inactive_enemies->getsize())[4];
+	Heap <Enemy> Heap2(inactive_enemies->getsize())[4];
 
-
-
-	// Declare some enemies and fill their data
-	// In the game, enemies should be loaded from an input file
-	// and should be dynamically allocated
-	/*
-	Fighter e1(DARKBLUE, A_REG, 6, 3);
-	Fighter e2(DARKBLUE, D_REG, 60, 3);
-	Fighter e3(DARKOLIVEGREEN, B_REG, 60, 3);
-	Fighter e4(DARKOLIVEGREEN, A_REG, 4, 3);
-	Fighter e5(ORANGERED, C_REG, 19, 3);
-	Fighter e6(ORANGERED, C_REG, 30, 3);
-	Fighter e7(ORANGERED, A_REG, 2, 3);
-	Fighter e8(DARKOLIVEGREEN, C_REG, 7, 3);
-	Fighter e9(ORANGERED, A_REG, 30, 3);
-	Fighter e10(DARKBLUE, C_REG, 4, 3);
-	Healer e11(GREEN, A_REG, 20, 3);
-
-
-	// Adding the enemies to the battle
-	AddEnemy(&e1);
-	AddEnemy(&e2);
-	AddEnemy(&e3);
-	AddEnemy(&e4);
-	AddEnemy(&e5);
-	AddEnemy(&e6);
-	AddEnemy(&e7);
-	AddEnemy(&e8);
-	AddEnemy(&e9);
-	AddEnemy(&e10);
-	AddEnemy(&e11);
-
-
-	// Drawing the battle
-	pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);
-
-	Point p;
-	pGUI->GetPointClicked(p);
-
-
-	while (killed_enemies->getsize() < total_enemies)
+	pGUI->PrintMessage("this is phase one simulation");
+	int current_tick = 0;
+	while(killed_enemies->getsize() < total_enemies && total_tower_health!=0)
 	{
+			if (inactive_enemies->front()->get_arraival_time()== current_tick )
+			{
 
+			}
 	}
-	*/
+
+
 	delete pGUI;
 }
+
+// Declare some enemies and fill their data
+// In the game, enemies should be loaded from an input file
+// and should be dynamically allocated
+/*
+Fighter e1(DARKBLUE, A_REG, 6, 3);
+Fighter e2(DARKBLUE, D_REG, 60, 3);
+Fighter e3(DARKOLIVEGREEN, B_REG, 60, 3);
+Fighter e4(DARKOLIVEGREEN, A_REG, 4, 3);
+Fighter e5(ORANGERED, C_REG, 19, 3);
+Fighter e6(ORANGERED, C_REG, 30, 3);
+Fighter e7(ORANGERED, A_REG, 2, 3);
+Fighter e8(DARKOLIVEGREEN, C_REG, 7, 3);
+Fighter e9(ORANGERED, A_REG, 30, 3);
+Fighter e10(DARKBLUE, C_REG, 4, 3);
+Healer e11(GREEN, A_REG, 20, 3);
+
+
+// Adding the enemies to the battle
+AddEnemy(&e1);
+AddEnemy(&e2);
+AddEnemy(&e3);
+AddEnemy(&e4);
+AddEnemy(&e5);
+AddEnemy(&e6);
+AddEnemy(&e7);
+AddEnemy(&e8);
+AddEnemy(&e9);
+AddEnemy(&e10);
+AddEnemy(&e11);
+
+
+// Drawing the battle
+pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);
+
+Point p;
+pGUI->GetPointClicked(p);
+
+
+
+*/
