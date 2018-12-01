@@ -148,7 +148,7 @@ T Heap<T>::Dequeue()
 {
 	if (Current_number == 0)
 	{
-		std ::cout << "the queue is empty";
+		std ::cout << "\nthe queue is empty";
 		return nullptr;
 	}
 	QueueNode<T>* rootnode = Heap_arr[0];

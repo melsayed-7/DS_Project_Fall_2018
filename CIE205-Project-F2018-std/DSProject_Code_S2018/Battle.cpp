@@ -15,7 +15,8 @@ void Battle::AddEnemy(Enemy* Ptr)
 {
 	if (EnemyCount < MaxEnemyCount)
 	{
-		if(Ptr== nullptr)	BEnemiesForDraw[EnemyCount++] = Ptr;
+		if(Ptr!= nullptr)
+			BEnemiesForDraw[EnemyCount++] = Ptr;
 	}
 
 	// Note that this function doesn't allocate any enemy objects
@@ -30,7 +31,7 @@ void Battle::ClearEnemy()
 	{
 		BEnemiesForDraw[EnemyCount] = nullptr;
 	}
-	
+	EnemyCount = 0;
 }
 
 Castle * Battle::GetCastle()
@@ -105,7 +106,7 @@ void Battle::phase1_simulation()
 		Freezer * freezer;
 
 		Queue <Enemy*>*inactive_enemies = new Queue <Enemy*>;//a queue that holds a pointer to enemies
-
+		int sum = Data->getsize();
 		for (int i = 0; i < Data->getsize(); i++)//fill inactive list
 		{
 			dummyarr = Data->deque();//the first line has the tower data
@@ -141,16 +142,20 @@ void Battle::phase1_simulation()
 			case 1://fighter
 				fighter = new Fighter(FIGHTER_CLR, enemy_id, arrival_time, health, pow, reg, 60, 3);
 				inactive_enemies->enque(fighter);
+				
 				break;
 			case 2://healer
 				healer = new Healer(HEALER_CLR, enemy_id, arrival_time, health, pow, reg, 60, 3);
 				inactive_enemies->enque(healer);
+				
 				break;
 			case 3://freezer
 				freezer = new Freezer(FREEZER_CLR, enemy_id, arrival_time, health, pow, reg, 60, 3);
 				inactive_enemies->enque(freezer);
+				
 				break;
 			}
+			
 		}
 
 
@@ -185,7 +190,7 @@ void Battle::phase1_simulation()
 
 	Heap<Enemy*>** current_heap= Heap1;
 	Heap<Enemy*>** to_be_filled_heap= Heap2;
-
+	Heap<Enemy*>** temp_heap;
 	int region_index;
 	int enemey_priority;
 	bool activationflag = true;
@@ -193,13 +198,17 @@ void Battle::phase1_simulation()
 
 	Enemy** to_be_hit_enemies = new Enemy*[max_enemies];
 
+	Point p;
+
+
+
 	while (killed_enemies->getsize() < total_enemies && total_tower_health != 0)//this loop will end when all the twoers are destroyed or all the enemies are killed
 	{
 		ClearEnemy();
 
 		activationflag = true;
 
-		while (activationflag) // this loop takes out all the enemies that should enter the battle ni the curreent tick
+		while (!inactive_enemies->isEmpty() && activationflag) // this loop takes out all the enemies that should enter the battle ni the curreent tick
 		{
 			if (inactive_enemies->front()->get_arraival_time() == current_tick)
 			{
@@ -214,45 +223,55 @@ void Battle::phase1_simulation()
 			}
 		}
 
+		
 		for (int i = 0; i<4; i++)//one iteration per tower
 		{
-			for (int j = 0; j < current_heap[i]->getcurrent_number(); j++)
-			{	
-				current_enemy = current_heap[i]->Dequeue();
-				to_be_filled_heap[i]->Enqueue(compute_priority(current_enemy),current_enemy);
-
-				current_enemy->set_target(BCastle.get_tower(i));
-				current_enemy->Act();
-
-				AddEnemy(current_enemy);
-
-			}
-
-			for (int j = 0; j < max_enemies; j++)
+			if (current_heap[i]->getcurrent_number() != 0)
 			{
-
-				to_be_hit_enemies[j]= to_be_filled_heap[i]->Dequeue();
-				BCastle.tower_act(i, current_enemy);
-
-				
-				if (current_enemy->is_killed())
+				for (int j = 0; j < current_heap[i]->getcurrent_number(); j++)
 				{
-					killed_enemies->enque(current_enemy);
-					current_heap[i]->Enqueue(0,nullptr);
+					current_enemy = current_heap[i]->Dequeue();
+					to_be_filled_heap[i]->Enqueue(compute_priority(current_enemy), current_enemy);
+
+					current_enemy->set_target(BCastle.get_tower(i));
+					current_enemy->Act();
+
+					AddEnemy(current_enemy);
+
 				}
-				else 
+
+				for (int j = 0; j < max_enemies; j++)
 				{
-					current_heap[i]->Enqueue(compute_priority(current_enemy), current_enemy);
+
+					to_be_hit_enemies[j] = to_be_filled_heap[i]->Dequeue();
+					BCastle.tower_act(i, to_be_hit_enemies[j]);
+
+
+					if (to_be_hit_enemies[j]->is_killed())
+					{
+						killed_enemies->enque(to_be_hit_enemies[j]);
+						//current_heap[i]->Enqueue(0,nullptr);
+					}
+					else
+					{
+						current_heap[i]->Enqueue(compute_priority(to_be_hit_enemies[j]), to_be_hit_enemies[j]);
+					}
 				}
 			}
-
 		}
 
+		pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);
+
+		pGUI->GetPointClicked(p);
+
+		temp_heap = current_heap;
+		current_heap = to_be_filled_heap;
+		to_be_filled_heap - temp_heap;
 			
 	}
 
 
-	//delete pGUI;
+	delete pGUI;
 }
 
 // Declare some enemies and fill their data

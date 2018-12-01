@@ -28,6 +28,7 @@ public:
 
 	Battle();
 	void AddEnemy(Enemy* Ptr);
+	void ClearEnemy();
 	Castle * GetCastle();
 	void RunSimulation();
 	void set_initlailized_castle(double health,int no_enemies, double power);
