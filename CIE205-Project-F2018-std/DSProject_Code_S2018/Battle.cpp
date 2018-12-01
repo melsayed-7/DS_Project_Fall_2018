@@ -29,7 +29,7 @@ void Battle::ClearEnemy()
 {
 	for (int i = 0; i < EnemyCount; i++)
 	{
-		BEnemiesForDraw[EnemyCount] = nullptr;
+		BEnemiesForDraw[EnemyCount-1] = nullptr;
 	}
 	EnemyCount = 0;
 }
@@ -227,7 +227,7 @@ void Battle::phase1_simulation()
 			current_heap_number=current_heap[i]->getcurrent_number();
 			if (current_heap_number != 0)
 			{
-				pGUI->GetPointClicked(p);
+				
 				for (int j = 0; j < current_heap[i]->getcurrent_number(); j++)
 				{
 					current_enemy = current_heap[i]->Dequeue();
@@ -263,7 +263,7 @@ void Battle::phase1_simulation()
 		pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);
 
 		
-
+		pGUI->GetPointClicked(p);
 		temp_heap = current_heap;
 		current_heap = to_be_filled_heap;
 		to_be_filled_heap - temp_heap;
