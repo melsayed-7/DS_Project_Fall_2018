@@ -49,8 +49,8 @@ int Battle::compute_priority(Enemy* ptr)
 	double health = ptr->get_health();
 	double power = ptr->get_power();
 	double distance = ptr->GetDistance();
-
-	return (0.2*health + 0.1*power + 7/distance);
+	
+	return (0.2*health + 0.1*power + 7/distance+3);
 
 }
 
@@ -190,7 +190,7 @@ void Battle::phase1_simulation()
 			if (inactive_enemies->front()->get_arraival_time() == current_tick)
 			{
 				region_index = inactive_enemies->front()->GetRegion();
-
+				enemey_priority=compute_priority(inactive_enemies->front());
 				current_heap[region_index]->Enqueue(enemey_priority, inactive_enemies->deque());
 			}
 			else
