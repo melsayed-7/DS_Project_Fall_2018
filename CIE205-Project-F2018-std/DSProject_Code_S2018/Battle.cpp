@@ -198,7 +198,7 @@ void Battle::phase1_simulation()
 
 	Point p;
 
-
+	int current_heap_number;
 
 	while (killed_enemies->getsize() < total_enemies && total_tower_health != 0)//this loop will end when all the twoers are destroyed or all the enemies are killed
 	{
@@ -224,8 +224,10 @@ void Battle::phase1_simulation()
 
 		for (int i = 0; i < 4; i++)//one iteration per tower
 		{
-			if (current_heap[i]->getcurrent_number() != 0)
+			current_heap_number=current_heap[i]->getcurrent_number();
+			if (current_heap_number != 0)
 			{
+				pGUI->GetPointClicked(p);
 				for (int j = 0; j < current_heap[i]->getcurrent_number(); j++)
 				{
 					current_enemy = current_heap[i]->Dequeue();
@@ -260,7 +262,7 @@ void Battle::phase1_simulation()
 
 		pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);
 
-		pGUI->GetPointClicked(p);
+		
 
 		temp_heap = current_heap;
 		current_heap = to_be_filled_heap;
@@ -271,44 +273,3 @@ void Battle::phase1_simulation()
 
 	delete pGUI;
 }
-
-// Declare some enemies and fill their data
-// In the game, enemies should be loaded from an input file
-// and should be dynamically allocated
-/*
-Fighter e1(DARKBLUE, A_REG, 6, 3);
-Fighter e2(DARKBLUE, D_REG, 60, 3);
-Fighter e3(DARKOLIVEGREEN, B_REG, 60, 3);
-Fighter e4(DARKOLIVEGREEN, A_REG, 4, 3);
-Fighter e5(ORANGERED, C_REG, 19, 3);
-Fighter e6(ORANGERED, C_REG, 30, 3);
-Fighter e7(ORANGERED, A_REG, 2, 3);
-Fighter e8(DARKOLIVEGREEN, C_REG, 7, 3);
-Fighter e9(ORANGERED, A_REG, 30, 3);
-Fighter e10(DARKBLUE, C_REG, 4, 3);
-Healer e11(GREEN, A_REG, 20, 3);
-
-
-// Adding the enemies to the battle
-AddEnemy(&e1);
-AddEnemy(&e2);
-AddEnemy(&e3);
-AddEnemy(&e4);
-AddEnemy(&e5);
-AddEnemy(&e6);
-AddEnemy(&e7);
-AddEnemy(&e8);
-AddEnemy(&e9);
-AddEnemy(&e10);
-AddEnemy(&e11);
-
-
-// Drawing the battle
-pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);
-
-Point p;
-pGUI->GetPointClicked(p);
-
-
-
-*/
