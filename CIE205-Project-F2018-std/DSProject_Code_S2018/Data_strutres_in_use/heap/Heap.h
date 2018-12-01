@@ -194,11 +194,6 @@ T Heap<T>::Dequeue()
 			cond = false;
 		}
 
-
-
-
-
-
 		if (Heap_arr[right]==nullptr || (Heap_arr[left]->getpriority() > Heap_arr[right]->getpriority()))
 		{
 			max = left;

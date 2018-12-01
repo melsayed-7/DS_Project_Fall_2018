@@ -61,7 +61,7 @@ public:
 	}
 
 
-	T front() const
+	T front() const//gets the element in the front 
 	{
 		if (isEmpty())
 		{
@@ -72,7 +72,7 @@ public:
 
 	}
 
-	bool push_to_front(T val)
+	bool push_to_front(T val)// put an element to the front of the queue (we didn't use it but in case we needed)
 	{
 		Node <T> * newptr = new Node<T>(val);
 		if (isEmpty())

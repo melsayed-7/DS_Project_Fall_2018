@@ -169,12 +169,12 @@ void Battle::phase1_simulation()
 	GUI * pGUI = new GUI;
 
 
-	Heap<Enemy*>** Heap1 = new Heap<Enemy*>*[4];
+	Heap<Enemy*>** Heap1 = new Heap<Enemy*>*[4];//this two heap arrays will contain all the active enemies that will alternate between each one
 	Heap<Enemy*>** Heap2 = new Heap<Enemy*>*[4];
 
 	int a = inactive_enemies->getsize();
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 4; i++)//intialinzing the two heaps
 	{
 		Heap1[i] = new Heap<Enemy*>(total_enemies);
 		Heap2[i] = new Heap<Enemy*>(total_enemies);
@@ -184,7 +184,7 @@ void Battle::phase1_simulation()
 
 	int current_tick = 0;
 
-	Heap<Enemy*>** current_heap = Heap1;
+	Heap<Enemy*>** current_heap = Heap1;//those variabel names are used for readability and to swap the two main heap arrays easily
 	Heap<Enemy*>** to_be_filled_heap = Heap2;
 	Heap<Enemy*>** temp_heap;
 
@@ -193,7 +193,7 @@ void Battle::phase1_simulation()
 	bool activationflag = true;
 	Enemy* current_enemy;
 
-	Enemy** to_be_hit_enemies = new Enemy*[max_enemies];
+	Enemy** to_be_hit_enemies = new Enemy*[max_enemies];//this array is made to have only the enemies that should be hit by the tower 
 
 	Point p;
 
@@ -201,12 +201,17 @@ void Battle::phase1_simulation()
 
 	while (killed_enemies->getsize() < total_enemies && total_tower_health != 0)//this loop will end when all the twoers are destroyed or all the enemies are killed
 	{
-		ClearEnemy();
+		ClearEnemy();//leans the drawing area to redraw agin in the currennt loop
 
 		activationflag = true;
 
 		while (!inactive_enemies->isEmpty() && activationflag) // this loop takes out all the enemies that should enter the battle ni the curreent tick
 		{
+			for (int j = 0; j < max_enemies; j++)
+			{
+				to_be_hit_enemies[j] = nullptr;
+			}
+
 			if (inactive_enemies->front()->get_arraival_time() == current_tick)
 			{
 				region_index = inactive_enemies->front()->GetRegion();
@@ -221,7 +226,7 @@ void Battle::phase1_simulation()
 		}
 
 
-		for (int i = 0; i < 4; i++)//one iteration per tower
+		for (int i = 0; i < 4; i++)//one iteration per tower, this loop is made to make the enemies act on the tower
 		{
 			current_heap_number = current_heap[i]->getcurrent_number();
 			if (current_heap_number != 0)
@@ -242,6 +247,8 @@ void Battle::phase1_simulation()
 					}
 
 				}
+
+
 				pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);//we draw in here because an enemy can exist and get killed in the same tick
 				for (int j = 0; j < max_enemies; j++)//this loop kills the enemies
 				{
