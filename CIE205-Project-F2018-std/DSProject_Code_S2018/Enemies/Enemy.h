@@ -45,13 +45,12 @@ public:
 
 	color GetColor() const;
 	REGION GetRegion() const;
-
+	
+	// some function used in fighting logic 
 	void DecrementDist();
 	int get_arraival_time();
 	void SetDistance(int d);
 	int GetDistance() const;
-
-
 	double get_health();
 	void set_health(double health_deducted);
 	double get_power();

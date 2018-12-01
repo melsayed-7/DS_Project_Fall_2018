@@ -180,7 +180,14 @@ void Battle::phase1_simulation()
 		Heap2[i] = new Heap<Enemy*>(total_enemies);
 	}
 
-	pGUI->PrintMessage("this is phase one simulation");
+	double tower_1_health = BCastle.get_tower(0)->GetHealth();
+	double tower_2_health = BCastle.get_tower(1)->GetHealth();
+	double tower_3_health = BCastle.get_tower(2)->GetHealth();
+	double tower_4_health = BCastle.get_tower(3)->GetHealth();
+
+	string messege = "tower1_health:" + to_string(tower_1_health) + "    tower2_health:" + to_string(tower_2_health) + "    tower3_health:" + to_string(tower_3_health) + "     tower4_health:" + to_string(tower_4_health);
+
+	pGUI->PrintMessage(messege);
 
 	int current_tick = 0;
 
@@ -239,9 +246,19 @@ void Battle::phase1_simulation()
 						current_enemy->set_target(BCastle.get_tower(i));
 						current_enemy->Act();
 						AddEnemy(current_enemy);
+						//current_enemy->Move();
 					}
 
+
+					// Printing the tower data
+					tower_1_health = BCastle.get_tower(0)->GetHealth();
+					tower_2_health = BCastle.get_tower(1)->GetHealth();
+					tower_3_health = BCastle.get_tower(2)->GetHealth();
+					tower_4_health = BCastle.get_tower(3)->GetHealth();
+					messege = "tower1_health:" + to_string(tower_1_health) + "    tower2_health:" + to_string(tower_2_health) + "    tower3_health:" + to_string(tower_3_health) + "     tower4_health:" + to_string(tower_4_health);
+					pGUI->PrintMessage(messege);
 				}
+
 				pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);//we draw in here because an enemy can exist and get killed in the same tick
 				for (int j = 0; j < max_enemies; j++)//this loop kills the enemies
 				{

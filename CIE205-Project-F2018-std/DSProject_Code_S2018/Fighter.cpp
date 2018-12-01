@@ -27,7 +27,7 @@ void Fighter::Act()
 	if (Health > fighter_health / 2)  k = 1;
 	else   k=0.5;
 		
-	double healt_deducted =target->GetHealth() - (k / Distance)*get_power();
+	double healt_deducted =target->GetHealth()-(k / Distance)*get_power();
 	target->SetHealth(healt_deducted);
 	
 }
