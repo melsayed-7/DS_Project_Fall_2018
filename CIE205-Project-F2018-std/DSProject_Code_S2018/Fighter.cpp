@@ -50,3 +50,4 @@ void Fighter::set_target(Tower* Tower)
 {
 	target = Tower;
 }
+

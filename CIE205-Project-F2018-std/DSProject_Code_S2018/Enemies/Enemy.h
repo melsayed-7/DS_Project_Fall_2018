@@ -63,6 +63,7 @@ public:
 	virtual void Move() = 0;	//All enemies can move
 	virtual void Act() = 0;		//Acting means fighting or healing
 	virtual bool is_frozen() = 0;
+	virtual void set_target(Tower* tower) = 0;
 
 	//
 	// TODO: Add More Member Functions As Needed

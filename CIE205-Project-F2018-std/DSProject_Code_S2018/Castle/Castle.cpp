@@ -45,3 +45,7 @@ void Castle::tower_act(int tower_number, Enemy* enemy)
 }
 
 
+Tower* Castle::get_tower(int index)
+{
+	return &Towers[index];
+}
