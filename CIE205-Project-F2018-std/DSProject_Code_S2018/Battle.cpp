@@ -28,7 +28,7 @@ void Battle::ClearEnemy()
 {
 	for (int i = 0; i < EnemyCount; i++)
 	{
-		BEnemiesForDraw[EnemyCount-1] = nullptr;
+		BEnemiesForDraw[EnemyCount - 1] = nullptr;
 	}
 	EnemyCount = 0;
 }
@@ -223,16 +223,16 @@ void Battle::phase1_simulation()
 
 		for (int i = 0; i < 4; i++)//one iteration per tower
 		{
-			current_heap_number=current_heap[i]->getcurrent_number();
+			current_heap_number = current_heap[i]->getcurrent_number();
 			if (current_heap_number != 0)
 			{
-				
+
 				for (int j = 0; j < current_heap[i]->getcurrent_number(); j++)
 				{
 					current_enemy = current_heap[i]->Dequeue();
 
 					if (current_enemy != nullptr)
-					to_be_filled_heap[i]->Enqueue(compute_priority(current_enemy), current_enemy);
+						to_be_filled_heap[i]->Enqueue(compute_priority(current_enemy), current_enemy);
 
 					if (current_enemy != nullptr)
 					{
@@ -240,37 +240,39 @@ void Battle::phase1_simulation()
 						current_enemy->Act();
 						AddEnemy(current_enemy);
 					}
-					
+
 				}
-
-				for (int j = 0; j < max_enemies; j++)
+				pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);//we draw in here because an enemy can exist and get killed in the same tick
+				for (int j = 0; j < max_enemies; j++)//this loop kills the enemies
 				{
-
-					to_be_hit_enemies[j] = to_be_filled_heap[i]->Dequeue();
-
-					if (to_be_hit_enemies[j]!=nullptr)
-					BCastle.tower_act(i, to_be_hit_enemies[j]);
-
-					if (to_be_hit_enemies[j] != nullptr)
+					if (to_be_filled_heap[i]->getcurrent_number() > 0)
 					{
-						if (to_be_hit_enemies[j]->is_killed())
+						to_be_hit_enemies[j] = to_be_filled_heap[i]->Dequeue();
+
+						if (to_be_hit_enemies[j] != nullptr)
+							BCastle.tower_act(i, to_be_hit_enemies[j]);
+
+						if (to_be_hit_enemies[j] != nullptr)
 						{
-							killed_enemies->enque(to_be_hit_enemies[j]);
-							to_be_hit_enemies[j] = nullptr;
-							//current_heap[i]->Enqueue(0,nullptr);
-						}
-						else
-						{
-							current_heap[i]->Enqueue(compute_priority(to_be_hit_enemies[j]), to_be_hit_enemies[j]);
+							if (to_be_hit_enemies[j]->is_killed())
+							{
+								killed_enemies->enque(to_be_hit_enemies[j]);
+								to_be_hit_enemies[j] = nullptr;
+								//current_heap[i]->Enqueue(0,nullptr);
+							}
+							else
+							{
+								current_heap[i]->Enqueue(compute_priority(to_be_hit_enemies[j]), to_be_hit_enemies[j]);
+							}
 						}
 					}
 				}
 			}
 		}
 
-		pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);
 
-		
+
+
 		pGUI->GetPointClicked(p);
 		temp_heap = current_heap;
 		current_heap = to_be_filled_heap;
