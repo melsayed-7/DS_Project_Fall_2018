@@ -24,6 +24,15 @@ void Battle::AddEnemy(Enemy* Ptr)
 }
 
 
+void Battle::ClearEnemy()
+{
+	for (int i = 0; i < EnemyCount; i++)
+	{
+		BEnemiesForDraw[EnemyCount] = nullptr;
+	}
+	
+}
+
 Castle * Battle::GetCastle()
 {
 	return &BCastle;
@@ -174,8 +183,12 @@ void Battle::phase1_simulation()
 	bool activationflag = true;
 	Enemy* current_enemy;
 
+	Enemy* *to_be_hit_enemies = new Enemy*[max_enemies];
+
 	while (killed_enemies->getsize() < total_enemies && total_tower_health != 0)//this loop will end when all the twoers are destroyed or all the enemies are killed
 	{
+		ClearEnemy();
+
 		activationflag = true;
 
 		while (activationflag) // this loop takes out all the enemies that should enter the battle ni the curreent tick
@@ -204,16 +217,18 @@ void Battle::phase1_simulation()
 				current_enemy->Act();
 			}
 
-
-
 			for (int j = 0; j < max_enemies; j++)
 			{
-				current_enemy = to_be_filled_heap[i]->Dequeue();
+
+				to_be_hit_enemies[j]= to_be_filled_heap[i]->Dequeue();
 				BCastle.tower_act(i, current_enemy);
+
+				/*current_enemy = to_be_filled_heap[i]->Dequeue();
+				
 				if (current_enemy->is_killed())
 				{
 					killed_enemies->enque(current_enemy);
-				}
+				}*/
 			}
 
 		}
