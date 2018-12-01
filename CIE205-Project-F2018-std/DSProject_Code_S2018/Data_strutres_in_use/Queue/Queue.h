@@ -61,14 +61,14 @@ public:
 	}
 
 
-	bool front(T& val) const
+	T front() const
 	{
 		if (isEmpty())
 		{
 			return false;
 		}
-		val = frontptr->getitem();
-		return true;
+		T val = frontptr->getitem();
+		return val;
 
 	}
 
