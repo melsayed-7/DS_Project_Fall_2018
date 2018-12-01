@@ -41,7 +41,7 @@ void Fighter::Move()
 {
 	if(!is_frozen())
 	{
-		DecrementDist();
+		DecrementDist(); // The frozern cannot shoot only but can move.
 	}
 }
 
