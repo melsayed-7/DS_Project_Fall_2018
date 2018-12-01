@@ -174,16 +174,24 @@ void Battle::phase1_simulation()
 
 	int current_tick = 0;
 
-	while(killed_enemies->getsize() < total_enemies && total_tower_health!=0)
+	Heap<Enemy*>** current_heap= Heap1;
+	Heap<Enemy*>** to_be_filled_heap= Heap2;
+
+	int region_index;
+	int enemey_priority;
+
+	while (killed_enemies->getsize() < total_enemies && total_tower_health != 0)// this loop takes out all the enemies that should enter the battle ni the curreent tick
 	{
-			if (inactive_enemies->front()->get_arraival_time() == current_tick )
+		
+			if (inactive_enemies->front()->get_arraival_time() == current_tick)
 			{
-				
+				region_index = inactive_enemies->front()->GetRegion();
+				current_heap[region_index]->Enqueue(enemey_priority, inactive_enemies->deque());
 			}
 			else
 			{
 				current_tick++;
-			}
+			}	
 	}
 
 
