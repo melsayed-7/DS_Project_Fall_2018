@@ -43,6 +43,18 @@ void Battle::RunSimulation()
 }
 
 
+
+int Battle::compute_priority(Enemy* ptr)
+{
+	double health = ptr->get_health();
+	double power = ptr->get_power();
+	double distance = ptr->GetDistance();
+
+	return (0.2*health + 0.1*power + 7/distance);
+
+}
+
+
 //This is just a demo function for project introductory phase
 //It should be removed in phases 1&2
 void Battle::phase1_simulation()

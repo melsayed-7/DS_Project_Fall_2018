@@ -29,9 +29,9 @@ public:
 	void AddEnemy(Enemy* Ptr);
 	Castle * GetCastle();
 	void RunSimulation();
-
 	void set_initlailized_castle(double health,int no_enemies, double power);
-void phase1_simulation();	//just to show a demo and should be removed in phase1 1 & 2
+	void phase1_simulation();	//just to show a demo and should be removed in phase1 1 & 2
+	int compute_priority(Enemy* ptr);
 
 
 	//
