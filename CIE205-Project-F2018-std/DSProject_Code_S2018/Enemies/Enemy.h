@@ -25,7 +25,7 @@ protected:
 	double Health;	//Enemy health
 	double power;
 
-	int type;
+	int type;		
 
 	int reload_period;
 	bool killed;
