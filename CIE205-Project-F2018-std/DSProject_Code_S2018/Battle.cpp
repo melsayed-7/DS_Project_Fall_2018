@@ -4,7 +4,8 @@
 #include"Castle\Castle.h"
 #include "Data_strutres_in_use/heap/Heap.h"
 #include <iostream>
-
+#include "Melter.h"
+#include "Vanisher.h"
 
 Battle::Battle()
 {
@@ -82,6 +83,10 @@ Queue <Enemy*>* Battle::fill_inactivelist(Queue <int*>* Data)
 	Fighter * fighter;
 	Healer * healer;
 	Freezer * freezer;
+	Melter * melter;
+	Vanisher * vanisher;
+	
+	
 
 	Queue <Enemy*>*inactive_enemies = new Queue <Enemy*>;//a queue that holds a pointer to enemies
 	{
@@ -133,6 +138,16 @@ Queue <Enemy*>* Battle::fill_inactivelist(Queue <int*>* Data)
 			case 3://freezer
 				freezer = new Freezer(FREEZER_CLR, enemy_id, arrival_time, health, pow, reg, 60, 3);
 				inactive_enemies->enque(freezer);
+
+				break;
+			case 4: //melter
+				melter = new Melter(MELTER_CLR, enemy_id, arrival_time, health, pow, reg, 60, 3);
+				inactive_enemies->enque(melter);
+
+				break;
+			case 5://vanisher
+				vanisher = new Vanisher(VANISHER_CLR, enemy_id, arrival_time, health, pow, reg, 60, 3);
+				inactive_enemies->enque(vanisher);
 
 				break;
 			}
@@ -190,7 +205,7 @@ void Battle::phase1_simulation()
 	
 
 	int current_tick = 0;
-	BCastle.reconstruct_towers();
+
 
 	Heap<Enemy*>** current_heap = Heap1;//those variabel names are used for readability and to swap the two main heap arrays easily
 	Heap<Enemy*>** to_be_filled_heap = Heap2;
@@ -219,11 +234,12 @@ void Battle::phase1_simulation()
 
 	pGUI->PrintMessage(messege);
 
-	while (killed_enemies->getsize() < total_enemies && total_tower_health != 0)//this loop will end when all the twoers are destroyed or all the enemies are killed
+	while (killed_enemies->getsize() < total_enemies && total_tower_health != 0)//this loop will end when all the towers are destroyed or all the enemies are killed
 	{
 		ClearEnemy();//leans the drawing area to redraw agin in the currennt loop
 
 		activationflag = true;
+	
 
 		while (!inactive_enemies->isEmpty() && activationflag) // this loop takes out all the enemies that should enter the battle ni the curreent tick
 		{
@@ -321,14 +337,16 @@ void Battle::phase1_simulation()
 		}
 
 
-
+		BCastle.reconstruct_towers();
 
 		//pGUI->GetPointClicked(p);
 		Sleep(200);
 		temp_heap = current_heap;
 		current_heap = to_be_filled_heap;
-		to_be_filled_heap - temp_heap;
+		to_be_filled_heap = temp_heap;
 
+		
+	
 	}
 
 

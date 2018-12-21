@@ -11,7 +11,7 @@ Vanisher::Vanisher(color r_c, int id, int Arraival_Time, double health, double P
 	arraival_time = Arraival_Time;
 	Health = health;
 	power = Power;
-	type = 6;
+	type = 5;
 }
 
 

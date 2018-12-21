@@ -91,10 +91,13 @@ Tower* Castle::get_tower(int index)
 void Castle::reconstruct_towers()
 {
 	double health_after_reconstruction = get_total_tower_health() / 4;
-	for (int i = 0; i < 4; i++) {
+	
 		if (Towers[0].GetHealth() == 0 || Towers[1].GetHealth() == 0 || Towers[2].GetHealth() == 0 || Towers[3].GetHealth() == 0)
 		{
-			Towers[i].SetHealth(health_after_reconstruction / 4);
-		}
+			for (int i = 0; i < 4; i++) {
+
+			Towers[i].SetHealth(health_after_reconstruction);
+		}	
 	}
 }
+

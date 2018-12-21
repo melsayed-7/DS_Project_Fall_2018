@@ -12,7 +12,7 @@ Melter::Melter(color r_c, int id, int Arraival_Time, double health, double Power
 	arraival_time = Arraival_Time;
 	Health = health;
 	power = Power;
-	type = 5;
+	type = 4;
 }
 
 Melter::~Melter(void)

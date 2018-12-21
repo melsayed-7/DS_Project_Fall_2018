@@ -11,6 +11,7 @@ const color FIGHTER_CLR = DARKRED;
 const color HEALER_CLR = LIGHTGREEN;
 const color FREEZER_CLR = ICEBLUE;
 const color MELTER_CLR = ORCHID;
+const color VANISHER_CLR = LIGHTCYAN;
 const color DEAD_CLR = GREY;
 
 // Enemy is the base class of each type of enemy
