@@ -23,7 +23,7 @@ Freezer::~Freezer(void)
 
 void Freezer::Act()
 {
-	
+	target->increment_ice(2);
 }
 
 void Freezer::Move()
