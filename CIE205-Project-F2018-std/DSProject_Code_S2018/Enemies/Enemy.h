@@ -10,6 +10,7 @@
 const color FIGHTER_CLR = DARKRED;
 const color HEALER_CLR = LIGHTGREEN;
 const color FREEZER_CLR = ICEBLUE;
+const color MELTER_CLR = ORCHID;
 const color DEAD_CLR = GREY;
 
 // Enemy is the base class of each type of enemy
@@ -72,6 +73,7 @@ public:
 	virtual bool is_frozen() = 0;
 	virtual void set_target(Tower* tower) = 0;
 	int compute_priority(Enemy* ptr);
+	void set_frozen(bool frozen_bool);
 
 	//
 	// TODO: Add More Member Functions As Needed
