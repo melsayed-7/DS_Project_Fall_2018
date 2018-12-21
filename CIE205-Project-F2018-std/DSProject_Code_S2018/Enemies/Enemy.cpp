@@ -86,3 +86,22 @@ bool Enemy::is_killed()
 {
 	return killed;
 }
+
+void Enemy::take_heap(Heap<Enemy*>* enemy_heap)
+{
+	my_heap = enemy_heap;
+}
+
+
+int Enemy::compute_priority(Enemy* ptr)
+{
+	if (ptr != nullptr)
+	{
+		double health = ptr->get_health();
+		double power = ptr->get_power();
+		double distance = ptr->GetDistance();
+		return (0.2*health + 0.1*power + 7 / distance + 3);
+	}
+	else return 0;
+
+}
