@@ -60,4 +60,10 @@ void Vanisher::set_target(Tower* Tower) // defining the target tower
 	target = Tower;
 }
 
+void Vanisher::set_visible(bool visible_bool) {
+	visible = visible_bool;
+}
 
+bool Vanisher::get_visible() {
+	return visible;
+}

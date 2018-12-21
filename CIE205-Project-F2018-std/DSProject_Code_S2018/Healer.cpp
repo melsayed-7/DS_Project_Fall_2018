@@ -77,3 +77,11 @@ void Healer::set_target(Tower* tower)
 {
 	// until the next phase
 }
+
+void Healer::set_visible(bool visible_bool) {
+	visible = visible_bool;
+}
+
+bool Healer::get_visible() {
+	return visible;
+}

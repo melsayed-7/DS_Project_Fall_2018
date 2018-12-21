@@ -54,3 +54,11 @@ void Freezer::set_target(Tower* Tower)
 {
 	target = Tower;
 }
+
+void Freezer::set_visible(bool visible_bool) {
+	visible = visible_bool;
+}
+
+bool Freezer::get_visible() {
+	return visible;
+}
