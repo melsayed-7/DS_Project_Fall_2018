@@ -190,6 +190,7 @@ void Battle::phase1_simulation()
 	
 
 	int current_tick = 0;
+	BCastle.reconstruct_towers();
 
 	Heap<Enemy*>** current_heap = Heap1;//those variabel names are used for readability and to swap the two main heap arrays easily
 	Heap<Enemy*>** to_be_filled_heap = Heap2;
