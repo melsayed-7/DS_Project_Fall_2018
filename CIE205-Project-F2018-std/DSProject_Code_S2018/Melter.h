@@ -12,5 +12,7 @@ public:
 	virtual void Move();
 	virtual bool is_frozen();
 	void set_target(Tower* tower);
+	virtual void set_visible(bool visible_bool);
+	virtual bool get_visible();
 };
 

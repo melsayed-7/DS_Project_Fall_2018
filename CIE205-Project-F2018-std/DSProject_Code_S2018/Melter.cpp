@@ -61,3 +61,11 @@ void Melter::set_target(Tower* tower)
 {
 	// until the next phase
 }
+
+void Melter::set_visible(bool visible_bool) {
+	visible = visible_bool;
+}
+
+bool Melter::get_visible() {
+	return visible;
+}

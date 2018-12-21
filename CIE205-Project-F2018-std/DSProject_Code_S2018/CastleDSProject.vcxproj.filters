@@ -158,6 +158,9 @@
     <ClCompile Include="Melter.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Vanisher.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -260,6 +263,9 @@
     </ClInclude>
     <ClInclude Include="File_IO.h" />
     <ClInclude Include="Melter.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Vanisher.h">
       <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>

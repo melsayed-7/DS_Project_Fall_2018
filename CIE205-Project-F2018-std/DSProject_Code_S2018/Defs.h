@@ -7,10 +7,12 @@
 		                        // if they are in the same region and same distance
 								// (will be drawn vertical to each other)
 #define MaxEnemyCount 300       // the maximum number of enemies the application can work on
+#define vanishier_period 5       // the period through which the vanisher becomes invsible.
 #define TowerInitHealth 200
 #define fighter_health 30
 #define freezer_health 30
 #define healer_health 30
+#define vanisher_health 30
 
 //The four regions: A, B, C , and D
 enum REGION 
