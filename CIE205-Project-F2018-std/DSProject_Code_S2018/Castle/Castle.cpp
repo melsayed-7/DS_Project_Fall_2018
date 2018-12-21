@@ -36,7 +36,7 @@ void Castle::set_all_towers(double health, int no_enemies, int power)
 void Castle::tower_act(int tower_number, Enemy* enemy, int current_tick)
 {
 	// the tower attacking the enemies and deducting health
-	if (1)  //enemy->get_visible()
+	if (enemy->get_visible())  //enemy->get_visible()
 	{
 
 		int index = tower_number - 1;
