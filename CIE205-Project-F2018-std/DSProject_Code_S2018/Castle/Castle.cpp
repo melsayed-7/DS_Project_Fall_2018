@@ -65,7 +65,13 @@ void Castle::tower_act(int tower_number, Enemy* enemy,int current_tick)
 
 		double health_deducted = (1.0 / distance)*(tower_power)*(1 / k);
 
-		enemy->set_health(health_deducted);   // deduct some health of the enemy;
+		if (!Towers[index].is_frozen())
+		{
+			enemy->set_health(health_deducted);   // deduct some health of the enemy;
+			Towers[index].set_frozen(false);
+		}
+
+
 	}
 }
 

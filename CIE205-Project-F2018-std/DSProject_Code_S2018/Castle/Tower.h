@@ -25,6 +25,9 @@ public:
 	void Setmax_enemies(int h);
 	void Set_power(double h);
 	double get_power();
+	bool is_frozen();
+	void set_frozen(bool x);
+
 	//
 	// TODO: Add More Member Functions As Needed
 	//

@@ -23,7 +23,7 @@ Freezer::~Freezer(void)
 
 void Freezer::Act()
 {
-		
+	
 }
 
 void Freezer::Move()

@@ -30,19 +30,24 @@ void Healer::Act()
 	array[i] = my_heap->Dequeue();
 	}
 
-	for (int i = 0; i < size; i++)
-	{
-		  my_heap->Enqueue(compute_priority(array[i]),array[i]);
-	}
+	
 
 
 	for (int i = 0; i < size; i++)
 	{
-		if (abs(array[i]->GetDistance() - Distance)<=2)
+		if (abs(array[i]->GetDistance() - Distance)<=2 && array[i]!=this)
 		{
 			array[i]->set_health(-5);
 		}
 	}
+
+
+	for (int i = 0; i < size; i++)
+	{
+		my_heap->Enqueue(compute_priority(array[i]), array[i]);
+	}
+
+
 }
 
 void Healer::Move()

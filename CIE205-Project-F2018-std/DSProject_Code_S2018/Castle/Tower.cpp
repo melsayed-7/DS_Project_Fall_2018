@@ -1,6 +1,5 @@
 #include "Tower.h"
 
-
 Tower::Tower()
 {
 	SetHealth(TowerInitHealth);
@@ -17,8 +16,6 @@ Tower::Tower(double health, int no_enemies, double TPower)
 	max_enemies = no_enemies;
 	power = TPower;
 }
-
-
 
 
 
@@ -75,4 +72,14 @@ void Tower::increment_ice(double ice_added)
 double Tower::get_power()
 {
 	return power;
+}
+
+bool Tower::is_frozen()
+{
+	return frozen;
+}
+
+void Tower::set_frozen(bool x)
+{
+	frozen = x;
 }

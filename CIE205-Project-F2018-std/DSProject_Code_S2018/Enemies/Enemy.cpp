@@ -164,3 +164,7 @@ int Enemy::compute_priority(Enemy* ptr)
 	else return 0;
 
 }
+
+void Enemy::set_frozen(bool frozen_bool) {
+	frozen = frozen_bool;
+}
