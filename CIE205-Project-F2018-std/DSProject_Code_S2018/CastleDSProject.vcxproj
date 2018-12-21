@@ -278,6 +278,7 @@
     <ClCompile Include="GUI\GUI.cpp" />
     <ClCompile Include="Healer.cpp" />
     <ClCompile Include="Melter.cpp" />
+    <ClCompile Include="Vanisher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battle.h" />
@@ -316,6 +317,7 @@
     <ClInclude Include="GUI\GUI.h" />
     <ClInclude Include="Healer.h" />
     <ClInclude Include="Melter.h" />
+    <ClInclude Include="Vanisher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

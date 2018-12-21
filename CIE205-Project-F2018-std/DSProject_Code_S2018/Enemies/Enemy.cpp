@@ -19,7 +19,6 @@ Enemy::Enemy( color r_c, REGION r_region, int d, int reload)
 	reload_period = reload;
 	freeze_period = 0;
 
-
 }
 
 Enemy::~Enemy()

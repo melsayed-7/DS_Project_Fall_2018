@@ -36,36 +36,38 @@ void Castle::set_all_towers(double health, int no_enemies, int power)
 void Castle::tower_act(int tower_number, Enemy* enemy)
 {
 	// the tower attacking the enemies and deducting health 
+	if (enemy->get_visible) {
 
-	int index = tower_number - 1;
-	int distance = enemy->GetDistance();
-	double tower_power = Towers[index].get_power();
-	int type = enemy->get_type();
+		int index = tower_number - 1;
+		int distance = enemy->GetDistance();
+		double tower_power = Towers[index].get_power();
+		int type = enemy->get_type();
 
-	int random = rand() % 100;
+		int random = rand() % 100;
 
-	if (random < 20 && !enemy->is_frozen()) // if the perscentage was 20% (freeze) and the enemy is not already frozen
-	{
-		enemy->Freeze();
-		
-	}
-
-	else
-	{
-		// defining the constant k in the equation of the effect of the tower on the enemy
-		double k = 0;
-		if (type == 1 || type == 3) k = 1;
-		else k = 0.5;
-
-		double health_deducted = (1.0 / distance)*(tower_power)*(1 / k);
-
-		if (!Towers[index].is_frozen())
+		if (random < 20 && !enemy->is_frozen()) // if the perscentage was 20% (freeze) and the enemy is not already frozen
 		{
-			enemy->set_health(health_deducted);   // deduct some health of the enemy;
-			Towers[index].set_frozen(false);
+			enemy->Freeze();
+
 		}
 
+		else
+		{
+			// defining the constant k in the equation of the effect of the tower on the enemy
+			double k = 0;
+			if (type == 1 || type == 3) k = 1;
+			else k = 0.5;
 
+			double health_deducted = (1.0 / distance)*(tower_power)*(1 / k);
+
+			if (!Towers[index].is_frozen())
+			{
+				enemy->set_health(health_deducted);   // deduct some health of the enemy;
+				Towers[index].set_frozen(false);
+			}
+
+
+		}
 	}
 }
 

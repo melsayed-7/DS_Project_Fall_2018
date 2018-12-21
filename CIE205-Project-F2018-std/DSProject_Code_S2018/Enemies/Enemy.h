@@ -40,6 +40,8 @@ protected:
 
 	Heap<Enemy*>* my_heap;
 
+	bool visible=1;
+
 	//
 	// TODO: Add More Data Members As Needed
 	//
@@ -61,6 +63,7 @@ public:
 	void set_health(double health_deducted);
 	double get_power();
 	void take_heap(Heap<Enemy*>* enemy_heap);
+	
 
 
 	int get_type();
@@ -70,6 +73,8 @@ public:
 
 	virtual void Move() = 0;	//All enemies can move
 	virtual void Act() = 0;		//Acting means fighting or healing
+	virtual void set_visible( bool visible_bool) = 0;
+	virtual bool get_visible ()= 0;
 	virtual bool is_frozen() = 0;
 	virtual void set_target(Tower* tower) = 0;
 	int compute_priority(Enemy* ptr);
