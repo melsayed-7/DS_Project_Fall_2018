@@ -78,3 +78,8 @@ bool Tower::is_frozen()
 {
 	return frozen;
 }
+
+void Tower::set_frozen(bool x)
+{
+	frozen = x;
+}
