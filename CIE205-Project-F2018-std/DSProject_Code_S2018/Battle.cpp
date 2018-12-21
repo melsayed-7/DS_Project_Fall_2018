@@ -241,10 +241,10 @@ void Battle::phase1_simulation()
 			else
 			{
 				activationflag = false;
-				current_tick++;
 			}
 		}
 
+		current_tick++;
 
 		for (int i = 0; i < 4; i++)//one iteration per tower, this loop is made to make the enemies act on the tower
 		{
@@ -275,15 +275,15 @@ void Battle::phase1_simulation()
 					tower_3_health = BCastle.get_tower(2)->GetHealth();
 					tower_4_health = BCastle.get_tower(3)->GetHealth();
 
-					/*
-					string messege = "tower1_health:" + to_string(tower_1_health) + "    tower2_health:" + to_string(tower_2_health) + "    tower3_health:" + to_string(tower_3_health) + "     tower4_health:" + to_string(tower_4_health);
-					string messege2 = "\n tower1_enemies: " + to_string(to_be_filled_heap[0]->getcurrent_number()) + " tower2_enemies: " + to_string(to_be_filled_heap[1]->getcurrent_number()) + " tower3_enemies: " + to_string(to_be_filled_heap[2]->getcurrent_number()) + " tower4_enemies: " + to_string(to_be_filled_heap[3]->getcurrent_number());
-					string messege3 = "tower1_killed:" + to_string(no_killed_enemies[0]) + "    tower2_killed:" + to_string(no_killed_enemies[1]) + "    tower3_killed:" + to_string(no_killed_enemies[2]) + "     tower4_killed:" + to_string(no_killed_enemies[3]);
-					string messege4 = to_string(current_tick);
-					messege = messege3 + messege + messege2;
+					
+					string messege = " TH1 " + to_string(tower_1_health) + " TH2 :" + to_string(tower_2_health) + " TH3:" + to_string(tower_3_health) + " TH3:" + to_string(tower_4_health);
+					string messege2 = " TE1 " + to_string(to_be_filled_heap[0]->getcurrent_number()) + "TE2 " + to_string(to_be_filled_heap[1]->getcurrent_number()) + " TE3 " + to_string(to_be_filled_heap[2]->getcurrent_number()) + " TE4 " + to_string(to_be_filled_heap[3]->getcurrent_number());
+					string messege3 = " TK1 " + to_string(no_killed_enemies[0]) + " TK2 " + to_string(no_killed_enemies[1]) + " TK3 " + to_string(no_killed_enemies[2]) + " TK4 " + to_string(no_killed_enemies[3]);
+					string messege4 = " CT " + to_string(current_tick-1);
+					messege = messege +"	"+ messege2 + "		" + messege3 + "	" + messege4;
 
 					pGUI->PrintMessage(messege);
-					*/
+					
 				}
 
 				pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);//we draw in here because an enemy can exist and get killed in the same tick
@@ -301,6 +301,9 @@ void Battle::phase1_simulation()
 							if (to_be_hit_enemies[j]->is_killed())
 							{
 								to_be_hit_enemies[j]->set_KTS(current_tick-1);
+								to_be_hit_enemies[j]->set_KD((current_tick - 1- to_be_hit_enemies[j]->get_tfirst_shot()));
+								to_be_hit_enemies[j]->set_LT();
+
 								killed_enemies->enque(to_be_hit_enemies[j]);
 								to_be_hit_enemies[j] = nullptr;
 								no_killed_enemies[j]++;
@@ -319,7 +322,8 @@ void Battle::phase1_simulation()
 
 
 
-		pGUI->GetPointClicked(p);
+		//pGUI->GetPointClicked(p);
+		Sleep(200);
 		temp_heap = current_heap;
 		current_heap = to_be_filled_heap;
 		to_be_filled_heap - temp_heap;

@@ -42,6 +42,7 @@ protected:
 	int FD; // first shot delay
 	int KD;//killed delay
 	int LT;//lifetime
+	int tfirst_shot;
 	bool shot_before;
 
 
@@ -74,12 +75,13 @@ public:
 	void set_KD(int d);
 	void set_KTS(int d);
 	void set_LT();
+	void set_tfirst_shot(int d);
 
 	int get_FD();
 	int get_KD();
 	int get_KTS();
 	int get_LT();
-
+	int get_tfirst_shot();
 	bool is_shot_before();
 	void set_shot_before();
 

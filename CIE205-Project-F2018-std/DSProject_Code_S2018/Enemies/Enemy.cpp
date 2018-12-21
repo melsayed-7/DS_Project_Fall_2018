@@ -121,6 +121,11 @@ void Enemy::set_LT()
 	KD + FD;
 }
 
+void Enemy::set_tfirst_shot(int d)
+{
+	tfirst_shot = d;
+}
+
 int Enemy::get_FD()
 {
 	return FD;
@@ -139,6 +144,11 @@ int Enemy::get_KTS()
 int Enemy::get_LT()
 {
 	return LT;
+}
+
+int Enemy::get_tfirst_shot()
+{
+	return tfirst_shot;
 }
 
 bool Enemy::is_shot_before()
