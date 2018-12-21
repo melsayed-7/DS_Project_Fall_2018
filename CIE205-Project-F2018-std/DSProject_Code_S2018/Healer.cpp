@@ -1,4 +1,5 @@
 #include "Healer.h"
+#include <math.h>
 
 
 Healer::Healer(color r_c, REGION r_region, int d, int reload):Enemy( r_c,  r_region,d, reload)
@@ -21,10 +22,28 @@ Healer::~Healer(void)
 
 void Healer::Act()
 {
-	// here we will refill some health for nearby enemies
+	int size = my_heap->get_size();
+	Enemy** array = new Enemy*[size];
 
+	for (int i = 0; i < size; i++)
+	{
+	array[i] = my_heap->Dequeue();
+	}
+
+	for (int i = 0; i < size; i++)
+	{
+		  my_heap->Enqueue(compute_priority(array[i]),array[i]);
+	}
+
+
+	for (int i = 0; i < size; i++)
+	{
+		if (abs(array[i]->GetDistance() - Distance)<=2)
+		{
+			array[i]->set_health(-5);
+		}
+	}
 }
-
 
 void Healer::Move()
 {

@@ -261,6 +261,7 @@ void Battle::phase1_simulation()
 					if (current_enemy != nullptr)
 					{
 						current_enemy->set_target(BCastle.get_tower(i));
+						current_enemy->take_heap(current_heap[i]);
 						current_enemy->Act();
 						AddEnemy(current_enemy);
 						current_enemy->Move();

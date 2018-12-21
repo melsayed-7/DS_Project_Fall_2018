@@ -3,6 +3,7 @@
 #include "..\Defs.h"
 #include "..\CMUgraphicsLib\CMUgraphics.h"
 #include "..\Castle\Tower.h"
+#include "..\Data_strutres_in_use\heap\Heap.h"
 
 //Enemies colors for next phases
 //You can choose whatever colors you like for your enemies
@@ -34,6 +35,9 @@ protected:
 
 	int arraival_time;
 
+
+	Heap<Enemy*>* my_heap;
+
 	//
 	// TODO: Add More Data Members As Needed
 	//
@@ -54,6 +58,8 @@ public:
 	double get_health();
 	void set_health(double health_deducted);
 	double get_power();
+	void take_heap(Heap<Enemy*>* enemy_heap);
+
 
 	int get_type();
 	bool is_killed();
@@ -63,6 +69,7 @@ public:
 	virtual void Act() = 0;		//Acting means fighting or healing
 	virtual bool is_frozen() = 0;
 	virtual void set_target(Tower* tower) = 0;
+	int compute_priority(Enemy* ptr);
 
 	//
 	// TODO: Add More Member Functions As Needed
