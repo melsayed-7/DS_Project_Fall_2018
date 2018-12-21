@@ -143,7 +143,7 @@ int Enemy::get_LT()
 
 bool Enemy::is_shot_before()
 {
-	return is_shot_before;
+	return shot_before;
 }
 
 void Enemy::set_shot_before()
