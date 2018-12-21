@@ -73,3 +73,8 @@ double Tower::get_power()
 {
 	return power;
 }
+
+bool Tower::is_frozen()
+{
+	return frozen;
+}
