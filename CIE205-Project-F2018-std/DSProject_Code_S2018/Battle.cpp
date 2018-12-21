@@ -233,6 +233,7 @@ void Battle::phase1_simulation()
 
 			if (inactive_enemies->front()->get_arraival_time() == current_tick)
 			{
+				inactive_enemies->front()->set_FD(current_tick);
 				region_index = inactive_enemies->front()->GetRegion();
 				enemey_priority = compute_priority(inactive_enemies->front());
 				current_heap[region_index]->Enqueue(enemey_priority, inactive_enemies->deque());
@@ -275,10 +276,10 @@ void Battle::phase1_simulation()
 					tower_4_health = BCastle.get_tower(3)->GetHealth();
 
 					/*
-					string messege3 = "tower1_killed:" + to_string(no_killed_enemies[0]) + "    tower2_killed:" + to_string(no_killed_enemies[1]) + "    tower3_killed:" + to_string(no_killed_enemies[2]) + "     tower4_killed:" + to_string(no_killed_enemies[3]);
 					string messege = "tower1_health:" + to_string(tower_1_health) + "    tower2_health:" + to_string(tower_2_health) + "    tower3_health:" + to_string(tower_3_health) + "     tower4_health:" + to_string(tower_4_health);
 					string messege2 = "\n tower1_enemies: " + to_string(to_be_filled_heap[0]->getcurrent_number()) + " tower2_enemies: " + to_string(to_be_filled_heap[1]->getcurrent_number()) + " tower3_enemies: " + to_string(to_be_filled_heap[2]->getcurrent_number()) + " tower4_enemies: " + to_string(to_be_filled_heap[3]->getcurrent_number());
-
+					string messege3 = "tower1_killed:" + to_string(no_killed_enemies[0]) + "    tower2_killed:" + to_string(no_killed_enemies[1]) + "    tower3_killed:" + to_string(no_killed_enemies[2]) + "     tower4_killed:" + to_string(no_killed_enemies[3]);
+					string messege4 = to_string(current_tick);
 					messege = messege3 + messege + messege2;
 
 					pGUI->PrintMessage(messege);
@@ -293,12 +294,13 @@ void Battle::phase1_simulation()
 						to_be_hit_enemies[j] = to_be_filled_heap[i]->Dequeue();
 
 						if (to_be_hit_enemies[j] != nullptr)
-							BCastle.tower_act(i, to_be_hit_enemies[j]);
+							BCastle.tower_act(i, to_be_hit_enemies[j], current_tick);
 
 						if (to_be_hit_enemies[j] != nullptr)
 						{
 							if (to_be_hit_enemies[j]->is_killed())
 							{
+								to_be_hit_enemies[j]->set_KTS(current_tick-1);
 								killed_enemies->enque(to_be_hit_enemies[j]);
 								to_be_hit_enemies[j] = nullptr;
 								no_killed_enemies[j]++;

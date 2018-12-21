@@ -18,6 +18,8 @@ Enemy::Enemy( color r_c, REGION r_region, int d, int reload)
 	power = (1/4)*Health;
 	reload_period = reload;
 	freeze_period = 0;
+	KD = 0;//temporarily
+	shot_before = false;
 
 }
 
@@ -97,6 +99,56 @@ void Enemy::Freeze()
 void Enemy::take_heap(Heap<Enemy*>* enemy_heap)
 {
 	my_heap = enemy_heap;
+}
+
+void Enemy::set_FD(int d)
+{
+	FD = d;
+}
+
+void Enemy::set_KD(int d)
+{
+	KD = d;
+}
+
+void Enemy::set_KTS(int d)
+{
+	KTS = d;
+}
+
+void Enemy::set_LT()
+{
+	KD + FD;
+}
+
+int Enemy::get_FD()
+{
+	return FD;
+}
+
+int Enemy::get_KD()
+{
+	return KD;
+}
+
+int Enemy::get_KTS()
+{
+	return KTS;
+}
+
+int Enemy::get_LT()
+{
+	return LT;
+}
+
+bool Enemy::is_shot_before()
+{
+	return shot_before;
+}
+
+void Enemy::set_shot_before()
+{
+	shot_before=true ;
 }
 
 

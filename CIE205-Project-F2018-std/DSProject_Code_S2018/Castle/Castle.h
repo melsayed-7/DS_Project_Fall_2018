@@ -22,7 +22,7 @@ public:
 	void SetTowerHealth(REGION TowerRegion, double h);		
 	double get_total_tower_health();
 	void set_all_towers(double health, int no_enemies, int power);
-	void tower_act(int tower_number, Enemy* enemy);
+	void tower_act(int tower_number, Enemy* enemy,int current_tick);
 	Tower* get_tower(int index);
 
 	void reconstruct_towers();
