@@ -233,6 +233,7 @@ void Battle::phase1_simulation()
 
 			if (inactive_enemies->front()->get_arraival_time() == current_tick)
 			{
+				inactive_enemies->front()->set_FD(current_tick);
 				region_index = inactive_enemies->front()->GetRegion();
 				enemey_priority = compute_priority(inactive_enemies->front());
 				current_heap[region_index]->Enqueue(enemey_priority, inactive_enemies->deque());
@@ -293,12 +294,13 @@ void Battle::phase1_simulation()
 						to_be_hit_enemies[j] = to_be_filled_heap[i]->Dequeue();
 
 						if (to_be_hit_enemies[j] != nullptr)
-							BCastle.tower_act(i, to_be_hit_enemies[j]);
+							BCastle.tower_act(i, to_be_hit_enemies[j], current_tick);
 
 						if (to_be_hit_enemies[j] != nullptr)
 						{
 							if (to_be_hit_enemies[j]->is_killed())
 							{
+								to_be_hit_enemies[j]->set_KTS(current_tick-1);
 								killed_enemies->enque(to_be_hit_enemies[j]);
 								to_be_hit_enemies[j] = nullptr;
 								no_killed_enemies[j]++;

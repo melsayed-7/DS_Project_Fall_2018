@@ -36,6 +36,14 @@ protected:
 
 	int arraival_time;
 
+	// statistics varible
+	int KTS;//killed time step
+	int FD; // first shot delay
+	int KD;//killed delay
+	int LT;//lifetime
+	bool shot_before;
+
+
 
 	Heap<Enemy*>* my_heap;
 
@@ -60,7 +68,19 @@ public:
 	void set_health(double health_deducted);
 	double get_power();
 	void take_heap(Heap<Enemy*>* enemy_heap);
+	
+	void set_FD(int d);
+	void set_KD(int d);
+	void set_KTS(int d);
+	void set_LT();
 
+	int get_FD();
+	int get_KD();
+	int get_KTS();
+	int get_LT();
+
+	bool is_shot_before();
+	void set_shot_before();
 
 	int get_type();
 	bool is_killed();

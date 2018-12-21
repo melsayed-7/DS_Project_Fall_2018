@@ -33,7 +33,7 @@ void Castle::set_all_towers(double health, int no_enemies, int power)
 }
 
 
-void Castle::tower_act(int tower_number, Enemy* enemy)
+void Castle::tower_act(int tower_number, Enemy* enemy,int current_tick)
 {
 	// the tower attacking the enemies and deducting health 
 
@@ -43,6 +43,12 @@ void Castle::tower_act(int tower_number, Enemy* enemy)
 	int type = enemy->get_type();
 
 	int random = rand() % 100;
+
+	if (enemy->is_shot_before())
+	{
+		enemy->set_shot_before();//record that he was already shoted
+		enemy->set_FD(current_tick);
+	}
 
 	if (random < 20 && !enemy->is_frozen()) // if the perscentage was 20% (freeze) and the enemy is not already frozen
 	{
