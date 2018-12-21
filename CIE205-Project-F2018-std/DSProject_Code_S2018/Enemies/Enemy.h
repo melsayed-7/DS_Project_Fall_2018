@@ -28,6 +28,7 @@ protected:
 	int type;		
 
 	int reload_period;
+	int freeze_period;
 	bool killed;
 	bool frozen;
 	bool active;
@@ -57,6 +58,7 @@ public:
 
 	int get_type();
 	bool is_killed();
+	void Freeze();
 	// Virtual Functions: ----------------
 
 	virtual void Move() = 0;	//All enemies can move
