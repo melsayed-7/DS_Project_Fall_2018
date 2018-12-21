@@ -1,6 +1,5 @@
 #include "Tower.h"
 
-
 Tower::Tower()
 {
 	SetHealth(TowerInitHealth);
@@ -17,8 +16,6 @@ Tower::Tower(double health, int no_enemies, double TPower)
 	max_enemies = no_enemies;
 	power = TPower;
 }
-
-
 
 
 
