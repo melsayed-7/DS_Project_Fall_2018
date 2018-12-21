@@ -1,19 +1,22 @@
 #include "Castle.h"
 #include "..\GUI\GUI.h"
-
+#include <math.h>
+#include <ctime>
+#include <cstdlib>
 Castle::Castle()
 {
+	srand(time(NULL));
 }
 
 void Castle::SetTowerHealth(REGION TowerRegion, double h)
 {
-		Towers[TowerRegion].SetHealth(h);	
+	Towers[TowerRegion].SetHealth(h);
 }
 
 double Castle::get_total_tower_health()
 {
 	// summing all the tower healthes to know when to close the simulation in case the ememy won
-	return Towers[0].GetHealth()+ Towers[1].GetHealth() + Towers[2].GetHealth() + Towers[3].GetHealth();
+	return Towers[0].GetHealth() + Towers[1].GetHealth() + Towers[2].GetHealth() + Towers[3].GetHealth();
 }
 
 
@@ -39,14 +42,25 @@ void Castle::tower_act(int tower_number, Enemy* enemy)
 	double tower_power = Towers[index].get_power();
 	int type = enemy->get_type();
 
-	// defining the constant k in the equation of the effect of the tower on the enemy
-	double k = 0;
-	if (type == 1 || type == 3) k = 1;
-	else k = 0.5;
-	
-	double health_deducted =(1.0/distance)*(tower_power)*(1/k);
+	int random = rand() % 100;
 
-	enemy->set_health(health_deducted);   // deduct some health of the enemy;
+	if (random < 20 && !enemy->is_frozen()) // if the perscentage was 20% (freeze) and the enemy is not already frozen
+	{
+		enemy->Freeze();
+		
+	}
+
+	else
+	{
+		// defining the constant k in the equation of the effect of the tower on the enemy
+		double k = 0;
+		if (type == 1 || type == 3) k = 1;
+		else k = 0.5;
+
+		double health_deducted = (1.0 / distance)*(tower_power)*(1 / k);
+
+		enemy->set_health(health_deducted);   // deduct some health of the enemy;
+	}
 }
 
 

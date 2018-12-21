@@ -47,9 +47,19 @@ void Healer::Act()
 
 void Healer::Move()
 {
-	if(!is_frozen())
+	if (freeze_period == 0)
 	{
-		DecrementDist();
+		frozen = false;
+	}
+
+	// decrementing the distance depending on the frozen state
+	if (!is_frozen())
+	{
+		DecrementDist(); // The frozern cannot shoot only but can move.
+	}
+	else // if it is frozen
+	{
+		freeze_period--;
 	}
 }
 

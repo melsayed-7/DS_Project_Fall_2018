@@ -7,7 +7,7 @@ Enemy::Enemy()
 
 Enemy::Enemy( color r_c, REGION r_region, int d, int reload)
 {
-	
+
 	Clr = r_c;
 	Region = r_region;
 	SetDistance(d);
@@ -17,8 +17,9 @@ Enemy::Enemy( color r_c, REGION r_region, int d, int reload)
 	Health = fighter_health;
 	power = (1/4)*Health;
 	reload_period = reload;
+	freeze_period = 0;
 
-	
+
 }
 
 Enemy::~Enemy()
@@ -85,6 +86,13 @@ int Enemy::get_type()
 bool Enemy::is_killed()
 {
 	return killed;
+}
+
+void Enemy::Freeze()
+{
+	freeze_period = 3;
+	frozen = true;
+
 }
 
 void Enemy::take_heap(Heap<Enemy*>* enemy_heap)
