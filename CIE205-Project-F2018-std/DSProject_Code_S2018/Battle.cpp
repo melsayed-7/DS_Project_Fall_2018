@@ -157,6 +157,11 @@ Queue <Enemy*>* Battle::fill_inactivelist(Queue <int*>* Data)
 	return inactive_enemies;
 }
 
+/*Queue<Enemy*>* Battle::get_killed_enemies()
+{
+	return killed_enemies;
+}*/
+
 //This is just a demo function for project introductory phase
 //It should be removed in phases 1&2
 void Battle::phase1_simulation()
@@ -175,7 +180,7 @@ void Battle::phase1_simulation()
 
 // intialize queues
 	Queue <Enemy*>*inactive_enemies = fill_inactivelist(Data);//a queue that holds a pointer to enemies
-	Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds pointer to enemies
+	//Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds pointer to enemies
 
 	std::cout << "\nWelcome to Castle Battle:\n";
 	std::cout << "\nIn phase2, you will be asked to select game mode\n";
@@ -340,15 +345,30 @@ void Battle::phase1_simulation()
 		BCastle.reconstruct_towers();
 
 		//pGUI->GetPointClicked(p);
-		Sleep(200);
+		//Sleep(200);
 		temp_heap = current_heap;
 		current_heap = to_be_filled_heap;
 		to_be_filled_heap = temp_heap;
 
-		
+		if (tower_1_health < 0.001) tower_1_health = 0;
+		if (tower_2_health < 0.001) tower_2_health = 0;
+		if (tower_3_health < 0.001) tower_3_health = 0;
+		if (tower_4_health < 0.001) tower_4_health = 0;
 	
 	}
 
 
 	//delete pGUI;
+
+	
+
+	// Generating the output file
+
+	ofstream myfile;
+	myfile.open("output_file.txt");
+	myfile << "Writing this to a file.\n";
+	myfile.close();
+
+
 }
+

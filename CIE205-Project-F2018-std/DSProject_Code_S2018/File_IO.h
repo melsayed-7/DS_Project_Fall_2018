@@ -5,7 +5,7 @@
 #include<string>
 
 using namespace std;
-Queue<int*>* get_file_2_queue(string str = "input_file.txt")// this function takes the input file and get the
+Queue<int*>* get_file_2_queue(string str = "input_file.txt")// this function takes the input file and get the data
 {
 	ifstream input_file(str.c_str());
 	if (!input_file)
@@ -47,4 +47,6 @@ Queue<int*>* get_file_2_queue(string str = "input_file.txt")// this function tak
 	input_file.close();
 	return enemy_queue;
 
+	
 }
+
