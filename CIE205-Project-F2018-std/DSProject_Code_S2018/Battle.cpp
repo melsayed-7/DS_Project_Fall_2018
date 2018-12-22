@@ -345,7 +345,7 @@ void Battle::phase1_simulation()
 		BCastle.reconstruct_towers();
 
 		//pGUI->GetPointClicked(p);
-		//Sleep(200);
+		Sleep(100);
 		temp_heap = current_heap;
 		current_heap = to_be_filled_heap;
 		to_be_filled_heap = temp_heap;
