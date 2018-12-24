@@ -351,12 +351,15 @@ void Battle::phase1_simulation()
 		temp_heap = current_heap;
 		current_heap = to_be_filled_heap;
 		to_be_filled_heap = temp_heap;
+		if (tower_1_health<1 && tower_2_health < 1 && tower_3_health < 1 && tower_4_health < 1)
+		{
+			BCastle.SetTowerHealth(A_REG, 0);
+			BCastle.SetTowerHealth(B_REG, 0);
+			BCastle.SetTowerHealth(C_REG, 0);
+			BCastle.SetTowerHealth(D_REG, 0);
 
-		if (tower_1_health < 0.001) tower_1_health = 0;
-		if (tower_2_health < 0.001) tower_2_health = 0;
-		if (tower_3_health < 0.001) tower_3_health = 0;
-		if (tower_4_health < 0.001) tower_4_health = 0;
-	
+		}
+		
 	}
 
 
