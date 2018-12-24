@@ -36,18 +36,20 @@ public:
 
 
 template<typename T>
+
 Heap <T>::Heap()
 {
-	Length = 300;
-	Heap_arr = new QueueNode <T>*[Length]; //Although the value is known before the use , but for the sake of consistancy we will dynamically allocate it
-	Current_number = 0;
+	//Length = 300;
+	//Heap_arr = new QueueNode <T>*[Length]; //Although the value is known before the use , but for the sake of consistancy we will dynamically allocate it
+	//Current_number = 0;
 
-	for (int i = 0; i < Length; i++)
-	{
-		Heap_arr[i] = nullptr;
-	}
+	//for (int i = 0; i < Length; i++)
+	//{
+	//	Heap_arr[i] = nullptr;
+	//}
 
 }
+
 
 template<typename T>
 Heap<T>::Heap(int len)
@@ -179,7 +181,7 @@ T Heap<T>::Dequeue()
 			x = Heap_arr[right];
 			//z = Heap_arr[right];
 
-			if (Heap_arr[left] != nullptr)
+			if (Heap_arr[left] != nullptr && left<Length)
 			{
 				if (Heap_arr[ind]->getpriority() < Heap_arr[left]->getpriority())
 				{
@@ -189,7 +191,7 @@ T Heap<T>::Dequeue()
 
 
 
-			if (Heap_arr[right] != nullptr)
+			if (Heap_arr[right] != nullptr && right<Length )
 			{
 				if (Heap_arr[ind]->getpriority() < Heap_arr[right]->getpriority())
 				{
@@ -205,30 +207,34 @@ T Heap<T>::Dequeue()
 			cond = false;
 		}
 
-		if (Heap_arr[right]==nullptr || (Heap_arr[left]->getpriority() > Heap_arr[right]->getpriority()))
-		{
-			max = left;
-		}
-		else
-		{
-			max = right;
-		}
 
-		if (Heap_arr[max] != nullptr)
+		if (left< Length && right<Length)
 		{
-			if (Heap_arr[ind]->getpriority() < Heap_arr[max]->getpriority())
+			if ((Heap_arr[right] == nullptr  || (Heap_arr[left]->getpriority() > Heap_arr[right]->getpriority())))
 			{
-				swap(Heap_arr[ind], Heap_arr[max]);//swap the current element with the left child
-
-				ind = max;//update the indices of the current elemnt and it;s children
-				left = get_left_ind(ind);
-				right = get_right_ind(ind);
-
+				max = left;
 			}
-		}
-		else// you are in a leaf
-		{
-			return rootnode->getdata();
+			else
+			{
+				max = right;
+			}
+
+			if (Heap_arr[max] != nullptr)
+			{
+				if (Heap_arr[ind]->getpriority() < Heap_arr[max]->getpriority())
+				{
+					swap(Heap_arr[ind], Heap_arr[max]);//swap the current element with the left child
+
+					ind = max;//update the indices of the current elemnt and it;s children
+					left = get_left_ind(ind);
+					right = get_right_ind(ind);
+
+				}
+			}
+			else// you are in a leaf
+			{
+				return rootnode->getdata();
+			}
 		}
 	}
 
