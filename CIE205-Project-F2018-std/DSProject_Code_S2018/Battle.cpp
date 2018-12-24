@@ -7,6 +7,8 @@
 #include "Melter.h"
 #include "Vanisher.h"
 
+const int MAX_ENEMIES = 300;
+
 Battle::Battle()
 {
 	EnemyCount = 0;
@@ -198,8 +200,8 @@ void Battle::phase1_simulation()
 
 	for (int i = 0; i < 4; i++)//intialinzing the two heaps
 	{
-		Heap1[i] = new Heap<Enemy*>(total_enemies);
-		Heap2[i] = new Heap<Enemy*>(total_enemies);
+		Heap1[i] = new Heap<Enemy*>(MAX_ENEMIES);
+		Heap2[i] = new Heap<Enemy*>(MAX_ENEMIES);
 	}
 
 	double tower_1_health = BCastle.get_tower(0)->GetHealth();
