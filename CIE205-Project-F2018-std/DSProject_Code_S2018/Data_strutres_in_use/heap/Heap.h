@@ -165,20 +165,19 @@ T Heap<T>::Dequeue()
 	int  max = 0;
 	bool cond = true;
 
+	QueueNode<T>* x, z;
+
 	while (cond)//loop until you get to the end of the heap or the current node is greater than or equal to it's chilren
 
 	{//always swap between the current node and it's biggest child
 	
+		
+
 		cond = false;
 		if (ind < Current_number)
 		{
-			if (Heap_arr[right] != nullptr)
-			{
-				if (Heap_arr[ind]->getpriority() < Heap_arr[right]->getpriority())
-				{
-					cond = true;
-				}
-			}
+			x = Heap_arr[right];
+			//z = Heap_arr[right];
 
 			if (Heap_arr[left] != nullptr)
 			{
@@ -187,6 +186,18 @@ T Heap<T>::Dequeue()
 					cond = true;
 				}
 			}
+
+
+
+			if (Heap_arr[right] != nullptr)
+			{
+				if (Heap_arr[ind]->getpriority() < Heap_arr[right]->getpriority())
+				{
+					cond = true;
+				}
+			}
+
+			
 		}
 		
 		else

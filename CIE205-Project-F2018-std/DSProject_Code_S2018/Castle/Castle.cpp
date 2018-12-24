@@ -46,14 +46,14 @@ void Castle::tower_act(int tower_number, Enemy* enemy, int current_tick)
 
 		int random = rand() % 100;
 
-	if (enemy->is_shot_before())
-	{
-		enemy->set_shot_before();//record that he was already shoted
-		enemy->set_FD(current_tick-1-(enemy->get_arraival_time()));
-		enemy->set_tfirst_shot(current_tick - 1);
-	}
+		if (enemy->is_shot_before())
+		{
+			enemy->set_shot_before();//record that he was already shoted
+			enemy->set_FD(current_tick - 1 - (enemy->get_arraival_time()));
+			enemy->set_tfirst_shot(current_tick - 1);
+		}
 
-	
+
 		if (random < 20 && !enemy->is_frozen()) // if the perscentage was 20% (freeze) and the enemy is not already frozen
 		{
 			enemy->Freeze();
@@ -78,7 +78,6 @@ void Castle::tower_act(int tower_number, Enemy* enemy, int current_tick)
 
 		}
 	}
-
 
 }
 
