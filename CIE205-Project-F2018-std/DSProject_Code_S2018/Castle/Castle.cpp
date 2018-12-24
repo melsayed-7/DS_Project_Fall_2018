@@ -38,8 +38,7 @@ void Castle::tower_act(int tower_number, Enemy* enemy, int current_tick)
 	// the tower attacking the enemies and deducting health
 	if (enemy->get_visible())  //enemy->get_visible()
 	{
-
-		int index = tower_number - 1;
+		int index = tower_number-1;
 		int distance = enemy->GetDistance();
 		double tower_power = Towers[index].get_power();
 		int type = enemy->get_type();

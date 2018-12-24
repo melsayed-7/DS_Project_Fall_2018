@@ -39,7 +39,7 @@ void Tower::Setmax_enemies(int h)
 	if (h > 0)
 		max_enemies = h;
 	else
-		max_enemies = 3;
+		max_enemies = 300;
 }
 
 void Tower::Set_power(double h)

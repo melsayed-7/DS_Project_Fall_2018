@@ -176,7 +176,7 @@ void Battle::phase1_simulation()
 	double TH = dummyarr[0];//tower health
 	int max_enemies = dummyarr[1];//number of enemies attacked per second
 	double TP = dummyarr[2];//tower power
-	int total_enemies = Data->getsize(); // Get The total number of Enemies to use later
+	int recieved_enemies = Data->getsize(); //Number of enemies in input file
 
 	set_initlailized_castle(TH, max_enemies, TP); //Intialize castle parameters using first line of input file
 
@@ -196,12 +196,12 @@ void Battle::phase1_simulation()
 	Heap<Enemy*>** Heap1 = new Heap<Enemy*>*[4];//this two heap arrays will contain all the active enemies that will alternate between each one
 	Heap<Enemy*>** Heap2 = new Heap<Enemy*>*[4];
 
-	int a = inactive_enemies->getsize();
+	//int a = inactive_enemies->getsize();
 
 	for (int i = 0; i < 4; i++)//intialinzing the two heaps
 	{
-		Heap1[i] = new Heap<Enemy*>(MAX_ENEMIES);
-		Heap2[i] = new Heap<Enemy*>(MAX_ENEMIES);
+		Heap1[i] = new Heap<Enemy*>(recieved_enemies);
+		Heap2[i] = new Heap<Enemy*>(recieved_enemies);
 	}
 
 	double tower_1_health = BCastle.get_tower(0)->GetHealth();
@@ -230,18 +230,9 @@ void Battle::phase1_simulation()
 	int current_heap_number;
 
 	int no_killed_enemies[4] = {0,0,0,0};
-/*
-	string messege3 = "tower1_killed:" + to_string(no_killed_enemies[0]) + "    tower2_killed:" + to_string(no_killed_enemies[1]) + "    tower3_killed:" + to_string(no_killed_enemies[2]) + "     tower4_killed:" + to_string(no_killed_enemies[3]);
-	string messege = "tower1_health:" + to_string(tower_1_health) + "    tower2_health:" + to_string(tower_2_health) + "    tower3_health:" + to_string(tower_3_health) + "     tower4_health:" + to_string(tower_4_health);
-*/
-	string messege = "\n tower1_enemies: " + to_string(to_be_filled_heap[0]->getcurrent_number()) + " tower2_enemies: " + to_string(to_be_filled_heap[1]->getcurrent_number()) + " tower3_enemies: " + to_string(to_be_filled_heap[2]->getcurrent_number()) + " tower4_enemies: " + to_string(to_be_filled_heap[3]->getcurrent_number());
-/*
-	messege = messege3 + messege + messege2;
-*/
 
-	pGUI->PrintMessage(messege);
 
-	while (killed_enemies->getsize() < total_enemies || total_tower_health != 0)//this loop will end when all the towers are destroyed or all the enemies are killed
+	while (killed_enemies->getsize() < recieved_enemies || total_tower_health != 0)//this loop will end when all the towers are destroyed or all the enemies are killed
 	{
 		ClearEnemy();//leans the drawing area to redraw agin in the currennt loop
 
