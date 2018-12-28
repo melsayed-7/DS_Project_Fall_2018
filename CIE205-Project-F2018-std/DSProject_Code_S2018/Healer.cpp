@@ -35,9 +35,12 @@ void Healer::Act()
 
 	for (int i = 0; i < size; i++)
 	{
-		if (abs(array[i]->GetDistance() - Distance)<=2 && array[i]!=this)
+		if (array[i] != nullptr)
 		{
-			array[i]->set_health(-5);
+			if (abs(array[i]->GetDistance() - Distance) <= 2 && array[i] != this)
+			{
+				array[i]->set_health(-5);
+			}
 		}
 	}
 

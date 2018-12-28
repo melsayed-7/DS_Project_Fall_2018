@@ -17,7 +17,7 @@ Enemy::Enemy( color r_c, REGION r_region, int d, int reload)
 	Health = fighter_health;
 	power = (1/4)*Health;
 	reload_period = reload;
-	freeze_period = 0;
+	freeze_period = 2;
 	KD = 0;//temporarily
 	shot_before = false;
 
