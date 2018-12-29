@@ -32,7 +32,7 @@ void Battle::ClearEnemy()
 {
 	for (int i = 0; i < EnemyCount; i++)
 	{
-		BEnemiesForDraw[i] = nullptr;
+		BEnemiesForDraw[EnemyCount - 1] = nullptr;
 	}
 	EnemyCount = 0;
 }
