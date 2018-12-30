@@ -231,6 +231,9 @@ void Battle::phase2_simulation()
 	int current_heap_number;
 
 	int no_killed_enemies[4] = { 0,0,0,0 };
+	int output = 0;
+
+
 
 
 	while (killed_enemies->getsize() < recieved_enemies || total_tower_health != 0)//this loop will end when all the towers are destroyed or all the enemies are killed
@@ -302,22 +305,23 @@ void Battle::phase2_simulation()
 				messege = messege + messege2 + messege3 + messege4;
 
 				pGUI->PrintMessage(messege);
-				// vanisher functions
-				int vanishing_time = current_enemy->get_vanishing_time();
-				if (current_enemy->get_type() == 5) {
-					current_enemy->increment_vanishing_time(); // counter
-					// From tick 0:4, vanisher is visible.
-					if (current_enemy->get_vanishing_time() == 5 + vanishing_time) // From tick 5:9, vanisher is visible.
-						current_enemy->set_visible(0);
-					if (current_enemy->get_vanishing_time() == 10 + vanishing_time) // repeat vanishing and appearing for next ticks.
-					{
-						current_enemy->set_visible(1);
-						current_enemy->set_vanishing_time(0);
-					}
+				//// vanisher functions
+				//int vanishing_time = current_enemy->get_vanishing_time();
+				//if (current_enemy->get_type() == 5) 
+				//{
+				//	current_enemy->increment_vanishing_time(); // counter
+				//	// From tick 0:4, vanisher is visible.
+				//	if (current_enemy->get_vanishing_time() == 5 + vanishing_time) // From tick 5:9, vanisher is visible.
+				//		current_enemy->set_visible(0);
+				//	if (current_enemy->get_vanishing_time() == 10 + vanishing_time) // repeat vanishing and appearing for next ticks.
+				//	{
+				//		current_enemy->set_visible(1);
+				//		current_enemy->set_vanishing_time(0);
+				//	}
 
-				}
+				//}
 
-				killed_enemies->enque(current_enemy);
+				 
 
 				pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);//we draw in here because an enemy can exist and get killed in the same tick
 				for (int j = 0; j < max_enemies; j++)//this loop kills the enemies
@@ -355,7 +359,7 @@ void Battle::phase2_simulation()
 		BCastle.reconstruct_towers();
 
 		//pGUI->GetPointClicked(p);
-		Sleep(1000);
+		Sleep(100);
 		temp_heap = current_heap;
 		current_heap = to_be_filled_heap;
 		to_be_filled_heap = temp_heap;
@@ -373,7 +377,7 @@ void Battle::phase2_simulation()
 		tower_3_health = BCastle.get_tower(2)->GetHealth();
 		tower_4_health = BCastle.get_tower(3)->GetHealth();
 
-		int output = 0;
+		
 
 		if (tower_1_health + tower_2_health + tower_3_health + tower_4_health == 0)
 		{
@@ -394,10 +398,10 @@ void Battle::phase2_simulation()
 			break;
 		}
 
-
+		
 	}
-
-
+	
+	
 	//delete pGUI;
 
 
