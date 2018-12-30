@@ -69,3 +69,16 @@ void Melter::set_visible(bool visible_bool) {
 bool Melter::get_visible() {
 	return visible;
 }
+
+void Melter::set_vanishing_time(int vt)
+{
+}
+
+void Melter::increment_vanishing_time()
+{
+}
+
+int Melter::get_vanishing_time()
+{
+	return 0;
+}

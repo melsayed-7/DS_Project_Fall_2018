@@ -67,3 +67,16 @@ void Fighter::set_visible(bool visible_bool) {
 bool Fighter::get_visible() {
 	return visible;
 }
+
+void Fighter::set_vanishing_time(int vt)
+{
+}
+
+void Fighter::increment_vanishing_time()
+{
+}
+
+int Fighter::get_vanishing_time()
+{
+	return 0;
+}

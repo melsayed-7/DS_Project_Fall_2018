@@ -101,6 +101,9 @@ public:
 	virtual void set_target(Tower* tower) = 0;
 	int compute_priority(Enemy* ptr);
 	void set_frozen(bool frozen_bool);
+	virtual void set_vanishing_time(int vt) = 0;
+	virtual void increment_vanishing_time() = 0;
+	virtual int get_vanishing_time() = 0;
 	
 
 	//

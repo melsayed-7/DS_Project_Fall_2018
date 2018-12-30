@@ -1,5 +1,6 @@
 #include "Battle.h"
 #include "GUI\GUI.h"
+#include <iostream>
 
 
 int main()
@@ -23,9 +24,10 @@ int main()
 
 	Battle* pGameBattle = new Battle;
 	pGameBattle->RunSimulation();
+	//delete pGameBattle;
 	
-	delete pGameBattle;
 	
+
 	return 0;
 }
 
