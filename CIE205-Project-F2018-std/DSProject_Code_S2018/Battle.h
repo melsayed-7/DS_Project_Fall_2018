@@ -32,7 +32,9 @@ public:
 	Castle * GetCastle();
 	void RunSimulation();
 	void set_initlailized_castle(double health,int no_enemies, double power);
-	void phase2_simulation();	//just to show a demo and should be removed in phase1 1 & 2
+	void phase2_simulation();	
+	void silent_mode();
+
 	int compute_priority(Enemy* ptr);
 	Queue <Enemy*>*fill_inactivelist(Queue <int*>* Data);	//the array that creates the objects based on the readnings of the file
 	//Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds pointer to enemies
