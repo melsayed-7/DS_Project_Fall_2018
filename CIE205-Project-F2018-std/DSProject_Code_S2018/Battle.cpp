@@ -414,10 +414,7 @@ void Battle::phase2_simulation()
 
 
 
-
-	}
-
-	// output file
+		// output file
 	ofstream myfile;
 	myfile.open("output_file.txt");
 	myfile << "KTS S FD KD LT\n";
@@ -430,4 +427,8 @@ void Battle::phase2_simulation()
 
 
 
-}
+	}
+
+
+
+
