@@ -1,10 +1,5 @@
 #include "Vanisher.h"
 
-
-
-
-
-
 Vanisher::Vanisher(color r_c, int id, int Arraival_Time, double health, double Power, REGION r_region, int d, int reload) : Enemy(r_c, r_region, d, reload)
 {
 	ID = id;

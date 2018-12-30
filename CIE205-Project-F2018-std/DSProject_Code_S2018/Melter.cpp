@@ -34,16 +34,23 @@ void Melter::Act()
 
 	for (int i = 0; i < size; i++)
 	{
-		if (abs(array[i]->GetDistance() - Distance) <= 2 && array[i] != this)
+		if (array[i] != nullptr)
 		{
-			array[i]->set_frozen(0);
+			if (abs(array[i]->GetDistance() - Distance) <= 2 && array[i] != this)
+			{
+				array[i]->set_frozen(0);
+			}
 		}
 	}
 
 	for (int i = 0; i < size; i++)
 	{
-		my_heap->Enqueue(compute_priority(array[i]), array[i]);
+		if (array[i] != nullptr)
+		{
+			my_heap->Enqueue(compute_priority(array[i]), array[i]);
+		}
 	}
+
 }
 
 void Melter::Move()
