@@ -172,7 +172,6 @@ void Battle::phase2_simulation()
 
 	Queue<int*>*Data = new  Queue<int*>;
 
-	Data = get_file_2_queue();//enter the name of the file here(optional);
 	Data = get_file_2_queue("input_file.txt");//enter the name of the file here(optional);
 
 	int *dummyarr = Data->deque();//remove the first line has the tower data
