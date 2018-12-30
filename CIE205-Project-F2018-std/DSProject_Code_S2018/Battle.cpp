@@ -235,11 +235,9 @@ void Battle::phase2_simulation()
 
 	while (killed_enemies->getsize() < recieved_enemies || total_tower_health != 0)//this loop will end when all the towers are destroyed or all the enemies are killed
 	{
-		current_tick++;
 		ClearEnemy();//leans the drawing area to redraw agin in the currennt loop
 
 		activationflag = true;
-
 
 		while (!inactive_enemies->isEmpty() && activationflag) // this loop takes out all the enemies that should enter the battle ni the curreent tick
 			// no two enemies enter the the same region at the same time
@@ -269,12 +267,11 @@ void Battle::phase2_simulation()
 			//====== =
 			current_tick++;
 
-
-
-
-		//>>>>>> > 934170096bb1e0f9d6a60ac4bd525eb535440725
-
-
+		for (int i = 0; i < 4; i++)//one iteration per tower, this loop is made to make the enemies act on the tower
+		{
+			current_heap_number = current_heap[i]->getcurrent_number();
+			if (current_heap_number != 0)
+			{
 
 
 			for (int i = 0; i < 4; i++)//one iteration per tower, this loop is made to make the enemies act on the tower
@@ -405,24 +402,24 @@ void Battle::phase2_simulation()
 
 		int output = 0;
 
-		if (tower_1_health + tower_2_health + tower_3_health + tower_4_health == 0)
-		{
-			if (killed_enemies->getsize() == recieved_enemies)//tie
-			{
-				output = 2;
-				break;
-			}
-			else //enemies win (towers died)
-			{
-				output = 3;
-				break;
-			}
-		}
-		else if (killed_enemies->getsize() == recieved_enemies)// all enemies killed
-		{
-			output = 1;
-			break;
-		}
+		//if (tower_1_health + tower_2_health + tower_3_health + tower_4_health == 0)
+		//{
+		//	if (killed_enemies->getsize() == recieved_enemies)//tie
+		//	{
+		//		output = 2;
+		//		break;
+		//	}
+		//	else //enemies win (towers died)
+		//	{
+		//		output = 3;
+		//		break;
+		//	}
+		//}
+		//else if (killed_enemies->getsize() == recieved_enemies)// all enemies killed
+		//{
+		//	output = 1;
+		//	break;
+		//}
 
 
 	}
@@ -433,16 +430,16 @@ void Battle::phase2_simulation()
 
 
 
-		// output file
-	ofstream myfile;
-	myfile.open("output_file.txt");
-	myfile << "KTS S FD KD LT\n";
-	for (int i = 0; i < killed_enemies->getsize(); i++)
-	{
-		Enemy* enemy = killed_enemies->deque();
-		myfile << enemy->get_KTS() << " " << i + 1 << enemy->get_FD() << enemy->get_KD() << enemy->get_LT();
-	}
-	myfile.close();
+	//	// output file
+	//ofstream myfile;
+	//myfile.open("output_file.txt");
+	//myfile << "KTS S FD KD LT\n";
+	//for (int i = 0; i < killed_enemies->getsize(); i++)
+	//{
+	//	Enemy* enemy = killed_enemies->deque();
+	//	myfile << enemy->get_KTS() << " " << i + 1 << enemy->get_FD() << enemy->get_KD() << enemy->get_LT();
+	//}
+	//myfile.close();
 
 
 	}
