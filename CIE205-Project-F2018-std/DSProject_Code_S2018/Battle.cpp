@@ -186,14 +186,18 @@ void Battle::phase2_simulation()
 	Queue <Enemy*>*inactive_enemies = fill_inactivelist(Data);//a queue that holds a pointer to enemies
 	Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds pointer to enemies
 
+// mode choice----------------------------------------------
 	std::cout << "\nWelcome to Castle Battle:\n";
-	std::cout << "\nIn phase2, you will be asked to select game mode\n";
-	std::cout << "\nFor now just press ENTER key to continue...";
+	std::cout << "\nplease, select game mode(1:normal - 2:silent mode)\n";
+	int mode = 1;
+	std::cin >> mode;
+// -----------------------------------------------------
 
 	double total_tower_health = BCastle.get_total_tower_health();
-
-	GUI * pGUI = new GUI;
-
+	
+		GUI * pGUI = new GUI;
+	
+	
 
 	Heap<Enemy*>** Heap1 = new Heap<Enemy*>*[4];//this two heap arrays will contain all the active enemies that will alternate between each one
 	Heap<Enemy*>** Heap2 = new Heap<Enemy*>*[4];
@@ -225,32 +229,34 @@ void Battle::phase2_simulation()
 	Enemy* current_enemy;
 
 	Enemy** to_be_hit_enemies = new Enemy*[max_enemies];//this array is made to have only the enemies that should be hit by the tower
-
-	Point p;
+	if (mode == 1)
+	{
+		Point p;
+	}
 
 	int current_heap_number;
 
 	int no_killed_enemies[4] = { 0,0,0,0 };
 	int output = 0;
 
+	bool battle_result = true;
 
 
-
-	while (killed_enemies->getsize() < recieved_enemies || total_tower_health != 0)//this loop will end when all the towers are destroyed or all the enemies are killed
+	while (battle_result)//this loop will end when all the towers are destroyed or all the enemies are killed
 	{
 		ClearEnemy();//leans the drawing area to redraw agin in the currennt loop
 
 		activationflag = true;
 
 		for (int j = 0; j < max_enemies; j++)
-			{
-				to_be_hit_enemies[j] = nullptr;
-			}
+		{
+			to_be_hit_enemies[j] = nullptr;
+		}
 
 		while (!inactive_enemies->isEmpty() && activationflag) // this loop takes out all the enemies that should enter the battle ni the curreent tick
 			// no two enemies enter the the same region at the same time
 		{
-			
+
 
 			if (inactive_enemies->front()->get_arraival_time() == current_tick)
 			{
@@ -296,15 +302,17 @@ void Battle::phase2_simulation()
 				tower_2_health = BCastle.get_tower(1)->GetHealth();
 				tower_3_health = BCastle.get_tower(2)->GetHealth();
 				tower_4_health = BCastle.get_tower(3)->GetHealth();
+				if (mode == 1)
+				{
+					string messege = " TH1:(" + to_string(tower_1_health) + ")TH2:(" + to_string(tower_2_health) + ")TH3:(" + to_string(tower_3_health) + ")TH4:(" + to_string(tower_4_health) + ")";
+					string messege2 = "TE1:(" + to_string(to_be_filled_heap[0]->getcurrent_number()) + ")TE2:(" + to_string(to_be_filled_heap[1]->getcurrent_number()) + ")TE3:(" + to_string(to_be_filled_heap[2]->getcurrent_number()) + ")TE4:(" + to_string(to_be_filled_heap[3]->getcurrent_number()) + ")";
+					string messege3 = "TK1:(" + to_string(no_killed_enemies[0]) + ")TK2:(" + to_string(no_killed_enemies[1]) + ")TK3:(" + to_string(no_killed_enemies[2]) + ")TK4:(" + to_string(no_killed_enemies[3]) + ")";
+					string messege4 = "----------------------CT " + to_string(current_tick - 1);
+					messege = messege + messege2 + messege3 + messege4;
 
-
-				string messege = " TH1:(" + to_string(tower_1_health) + ")TH2:(" + to_string(tower_2_health) + ")TH3:(" + to_string(tower_3_health) + ")TH4:(" + to_string(tower_4_health) + ")";
-				string messege2 = "TE1:(" + to_string(to_be_filled_heap[0]->getcurrent_number()) + ")TE2:(" + to_string(to_be_filled_heap[1]->getcurrent_number()) + ")TE3:(" + to_string(to_be_filled_heap[2]->getcurrent_number()) + ")TE4:(" + to_string(to_be_filled_heap[3]->getcurrent_number()) + ")";
-				string messege3 = "TK1:(" + to_string(no_killed_enemies[0]) + ")TK2:(" + to_string(no_killed_enemies[1]) + ")TK3:(" + to_string(no_killed_enemies[2]) + ")TK4:(" + to_string(no_killed_enemies[3]) + ")";
-				string messege4 = "----------------------CT " + to_string(current_tick - 1);
-				messege = messege + messege2 + messege3 + messege4;
-
-				pGUI->PrintMessage(messege);
+					pGUI->PrintMessage(messege);
+					pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);//we draw in here because an enemy can exist and get killed in the same tick
+				}
 				//// vanisher functions
 				//int vanishing_time = current_enemy->get_vanishing_time();
 				//if (current_enemy->get_type() == 5) 
@@ -321,9 +329,9 @@ void Battle::phase2_simulation()
 
 				//}
 
-				 
 
-				pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);//we draw in here because an enemy can exist and get killed in the same tick
+
+				
 				for (int j = 0; j < max_enemies; j++)//this loop kills the enemies
 				{
 					if (current_enemy != nullptr)
@@ -360,12 +368,16 @@ void Battle::phase2_simulation()
 
 
 		BCastle.reconstruct_towers();
+		if (mode == 1)
+		{
+			//pGUI->GetPointClicked(p);
+			Sleep(100);
+		}
 
-		//pGUI->GetPointClicked(p);
-		Sleep(100);
 		temp_heap = current_heap;
 		current_heap = to_be_filled_heap;
 		to_be_filled_heap = temp_heap;
+
 		if (tower_1_health < 1 && tower_2_health < 1 && tower_3_health < 1 && tower_4_health < 1)
 		{
 			BCastle.SetTowerHealth(A_REG, 0);
@@ -380,33 +392,37 @@ void Battle::phase2_simulation()
 		tower_3_health = BCastle.get_tower(2)->GetHealth();
 		tower_4_health = BCastle.get_tower(3)->GetHealth();
 
-		
+
 
 		if (tower_1_health + tower_2_health + tower_3_health + tower_4_health == 0)
 		{
 			if (killed_enemies->getsize() == recieved_enemies)//tie
 			{
 				output = 2;
-				break;
+				battle_result = false;
+				std::cout << "IT's a TIE !!!";
 			}
 			else //enemies win (towers died)
 			{
 				output = 3;
-				break;
+				battle_result = false;
+				std::cout << "enemies win (towers died)";
 			}
 		}
 		else if (killed_enemies->getsize() == recieved_enemies)// all enemies killed
 		{
 			output = 1;
-			break;
+			battle_result = false;
+			std::cout << "all enemies killed";
 		}
 
-		
-	}
-	
-	
-	//delete pGUI;
 
+	}
+
+	if (mode == 1)
+	{
+		delete pGUI;
+	}
 
 
 
@@ -422,4 +438,5 @@ void Battle::phase2_simulation()
 	//myfile.close();
 
 
-	}
+}
+
