@@ -5,7 +5,7 @@
 #include<string>
 
 using namespace std;
-Queue<int*>* get_file_2_queue(string str = "input_file_test.txt")// this function takes the input file and get the data
+Queue<int*>* get_file_2_queue(string str = "input_file.txt")// this function takes the input file and get the data
 {
 	ifstream input_file(str.c_str());
 	if (!input_file)

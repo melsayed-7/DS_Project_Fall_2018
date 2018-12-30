@@ -23,8 +23,22 @@ Freezer::~Freezer(void)
 
 void Freezer::Act()
 {
-	target->increment_ice(2);
+	if (freeze_period == 0)
+	{
+		frozen = false;
+	}
+	if (!frozen && reload_period == 0)
+	{
+		target->increment_ice(2);
+		reload_period = 3;
+	}
+	if (reload_period != 0)
+	{
+		reload_period--;
+	}
+	
 }
+
 
 void Freezer::Move()
 {
