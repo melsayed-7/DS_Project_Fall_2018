@@ -23,7 +23,7 @@ Freezer::~Freezer(void)
 
 void Freezer::Act()
 {
-	target->increment_ice(10);
+	target->increment_ice(2);
 }
 
 void Freezer::Move()
@@ -56,7 +56,7 @@ void Freezer::set_target(Tower* Tower)
 }
 
 void Freezer::set_visible(bool visible_bool) {
-	visible = visible_bool;
+	
 }
 
 bool Freezer::get_visible() {
