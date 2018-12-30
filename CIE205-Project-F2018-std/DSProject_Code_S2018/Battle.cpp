@@ -239,15 +239,15 @@ void Battle::phase2_simulation()
 
 		activationflag = true;
 
-		while (!inactive_enemies->isEmpty() && activationflag) // this loop takes out all the enemies that should enter the battle ni the curreent tick
-			// no two enemies enter the the same region at the same time
-		{
-			/*
-			for (int j = 0; j < max_enemies; j++)
+		for (int j = 0; j < max_enemies; j++)
 			{
 				to_be_hit_enemies[j] = nullptr;
 			}
-			*/
+
+		while (!inactive_enemies->isEmpty() && activationflag) // this loop takes out all the enemies that should enter the battle ni the curreent tick
+			// no two enemies enter the the same region at the same time
+		{
+			
 
 			if (inactive_enemies->front()->get_arraival_time() == current_tick)
 			{
@@ -271,9 +271,7 @@ void Battle::phase2_simulation()
 			if (current_heap_number != 0)
 			{
 
-				int current_heap_size = current_heap[i]->getcurrent_number();
-
-				for (int j = 0; j < current_heap_size; j++)
+				for (int j = 0; j < current_heap_number; j++)
 				{
 
 					current_enemy = current_heap[i]->Dequeue();
@@ -288,22 +286,22 @@ void Battle::phase2_simulation()
 					}
 
 
-					// Printing the tower data
-					tower_1_health = BCastle.get_tower(0)->GetHealth();
-					tower_2_health = BCastle.get_tower(1)->GetHealth();
-					tower_3_health = BCastle.get_tower(2)->GetHealth();
-					tower_4_health = BCastle.get_tower(3)->GetHealth();
-
-
-					string messege = " TH1:(" + to_string(tower_1_health) + ")TH2:(" + to_string(tower_2_health) + ")TH3:(" + to_string(tower_3_health) + ")TH4:(" + to_string(tower_4_health) + ")";
-					string messege2 = "TE1:(" + to_string(to_be_filled_heap[0]->getcurrent_number()) + ")TE2:(" + to_string(to_be_filled_heap[1]->getcurrent_number()) + ")TE3:(" + to_string(to_be_filled_heap[2]->getcurrent_number()) + ")TE4:(" + to_string(to_be_filled_heap[3]->getcurrent_number()) + ")";
-					string messege3 = "TK1:(" + to_string(no_killed_enemies[0]) + ")TK2:(" + to_string(no_killed_enemies[1]) + ")TK3:(" + to_string(no_killed_enemies[2]) + ")TK4:(" + to_string(no_killed_enemies[3]) + ")";
-					string messege4 = "----------------------CT " + to_string(current_tick -1);
-					messege = messege + messege2 + messege3 + messege4;
-
-					pGUI->PrintMessage(messege);
 				}
 
+				// Printing the tower data
+				tower_1_health = BCastle.get_tower(0)->GetHealth();
+				tower_2_health = BCastle.get_tower(1)->GetHealth();
+				tower_3_health = BCastle.get_tower(2)->GetHealth();
+				tower_4_health = BCastle.get_tower(3)->GetHealth();
+
+
+				string messege = " TH1:(" + to_string(tower_1_health) + ")TH2:(" + to_string(tower_2_health) + ")TH3:(" + to_string(tower_3_health) + ")TH4:(" + to_string(tower_4_health) + ")";
+				string messege2 = "TE1:(" + to_string(to_be_filled_heap[0]->getcurrent_number()) + ")TE2:(" + to_string(to_be_filled_heap[1]->getcurrent_number()) + ")TE3:(" + to_string(to_be_filled_heap[2]->getcurrent_number()) + ")TE4:(" + to_string(to_be_filled_heap[3]->getcurrent_number()) + ")";
+				string messege3 = "TK1:(" + to_string(no_killed_enemies[0]) + ")TK2:(" + to_string(no_killed_enemies[1]) + ")TK3:(" + to_string(no_killed_enemies[2]) + ")TK4:(" + to_string(no_killed_enemies[3]) + ")";
+				string messege4 = "----------------------CT " + to_string(current_tick - 1);
+				messege = messege + messege2 + messege3 + messege4;
+
+				pGUI->PrintMessage(messege);
 				// vanisher functions
 				int vanishing_time = current_enemy->get_vanishing_time();
 				if (current_enemy->get_type() == 5) {
@@ -329,10 +327,9 @@ void Battle::phase2_simulation()
 						to_be_hit_enemies[j] = to_be_filled_heap[i]->Dequeue();
 
 						if (to_be_hit_enemies[j] != nullptr)
+						{
 							BCastle.tower_act(i, to_be_hit_enemies[j], current_tick);
 
-						if (to_be_hit_enemies[j] != nullptr)
-						{
 							if (to_be_hit_enemies[j]->is_killed())
 							{
 								to_be_hit_enemies[j]->set_KTS(current_tick - 1);
@@ -340,7 +337,7 @@ void Battle::phase2_simulation()
 								to_be_hit_enemies[j]->set_LT();
 								killed_enemies->enque(to_be_hit_enemies[j]);
 								to_be_hit_enemies[j] = nullptr;
-								no_killed_enemies[j]++;
+								no_killed_enemies[i]++;
 								//current_heap[i]->Enqueue(0,nullptr);
 							}
 							else
@@ -353,11 +350,6 @@ void Battle::phase2_simulation()
 			}
 
 		}
-
-		int size_khaled = killed_enemies->getsize();
-
-
-
 
 
 		BCastle.reconstruct_towers();
@@ -383,24 +375,24 @@ void Battle::phase2_simulation()
 
 		int output = 0;
 
-		//if (tower_1_health + tower_2_health + tower_3_health + tower_4_health == 0)
-		//{
-		//	if (killed_enemies->getsize() == recieved_enemies)//tie
-		//	{
-		//		output = 2;
-		//		break;
-		//	}
-		//	else //enemies win (towers died)
-		//	{
-		//		output = 3;
-		//		break;
-		//	}
-		//}
-		//else if (killed_enemies->getsize() == recieved_enemies)// all enemies killed
-		//{
-		//	output = 1;
-		//	break;
-		//}
+		if (tower_1_health + tower_2_health + tower_3_health + tower_4_health == 0)
+		{
+			if (killed_enemies->getsize() == recieved_enemies)//tie
+			{
+				output = 2;
+				break;
+			}
+			else //enemies win (towers died)
+			{
+				output = 3;
+				break;
+			}
+		}
+		else if (killed_enemies->getsize() == recieved_enemies)// all enemies killed
+		{
+			output = 1;
+			break;
+		}
 
 
 	}
