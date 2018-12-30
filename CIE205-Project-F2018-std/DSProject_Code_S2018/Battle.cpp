@@ -32,7 +32,7 @@ void Battle::ClearEnemy()
 {
 	for (int i = 0; i < EnemyCount; i++)
 	{
-		BEnemiesForDraw[EnemyCount - 1] = nullptr;
+		BEnemiesForDraw[i] = nullptr;
 	}
 	EnemyCount = 0;
 }
@@ -214,7 +214,6 @@ void Battle::phase1_simulation()
 
 	int current_tick = 0;
 
-
 	Heap<Enemy*>** current_heap = Heap1;//those variabel names are used for readability and to swap the two main heap arrays easily
 	Heap<Enemy*>** to_be_filled_heap = Heap2;
 	Heap<Enemy*>** temp_heap;
@@ -242,11 +241,12 @@ void Battle::phase1_simulation()
 
 		while (!inactive_enemies->isEmpty() && activationflag) // this loop takes out all the enemies that should enter the battle ni the curreent tick
 		{
+			/*
 			for (int j = 0; j < max_enemies; j++)
 			{
 				to_be_hit_enemies[j] = nullptr;
 			}
-
+			*/
 			if (inactive_enemies->front()->get_arraival_time() == current_tick)
 			{
 				inactive_enemies->front()->set_FD(current_tick);
@@ -268,7 +268,9 @@ void Battle::phase1_simulation()
 			if (current_heap_number != 0)
 			{
 
-				for (int j = 0; j < current_heap[i]->getcurrent_number(); j++)
+				int current_heap_size = current_heap[i]->getcurrent_number();
+
+				for (int j = 0; j < current_heap_size; j++)
 				{
 					current_enemy = current_heap[i]->Dequeue();
 
@@ -302,9 +304,9 @@ void Battle::phase1_simulation()
 
 				}
 
-				pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);//we draw in here because an enemy can exist and get killed in the same tick
+				pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);			//we draw in here because an enemy can exist and get killed in the same tick
 				
-				for (int j = 0; j < max_enemies; j++)//this loop kills the enemies
+				for (int j = 0; j < max_enemies; j++)					//this loop kills the enemies
 				{
 					if (to_be_filled_heap[i]->getcurrent_number() > 0)
 					{
@@ -333,8 +335,11 @@ void Battle::phase1_simulation()
 					}
 				}
 			}
+			
 		}
-	
+
+
+
 
 
 		BCastle.reconstruct_towers();
@@ -353,6 +358,8 @@ void Battle::phase1_simulation()
 
 		}
 		
+
+
 	}
 
 
