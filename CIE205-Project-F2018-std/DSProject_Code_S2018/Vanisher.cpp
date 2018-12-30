@@ -37,13 +37,29 @@ void Vanisher::Act()
 	{
 		reload_period--;
 	}
+	if (vanishing_time != -3 )
+	{
+		vanishing_time--;
+	}
 	 
 	// managing visibility graphically
 
-	if (!visible)
+	if (vanishing_time > 0)
+	{
 		Clr = DARKGREY;
+		visible = true;
+	}
+
 	else
+	{
+		visible = false;
 		Clr = PURPLE;
+		if (vanishing_time == -2)
+		{
+			vanishing_time = 3;
+		}
+	}
+		
 
 }
 

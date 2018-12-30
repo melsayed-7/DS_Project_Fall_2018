@@ -55,10 +55,7 @@ void Melter::Act()
 
 void Melter::Move()
 {
-	if (!is_frozen())
-	{
-		DecrementDist();
-	}
+		DecrementDist();	
 }
 
 bool Melter::is_frozen()
