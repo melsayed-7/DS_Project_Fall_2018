@@ -413,11 +413,6 @@ void Battle::phase2_simulation()
 	//delete pGUI;
 
 
-
-		
-
-	}
-
 	// output file
 	ofstream myfile;
 	myfile.open("output_file.txt");
@@ -430,6 +425,8 @@ void Battle::phase2_simulation()
 	myfile.close();
 
 
+	}
 
-}
+	
+
 
