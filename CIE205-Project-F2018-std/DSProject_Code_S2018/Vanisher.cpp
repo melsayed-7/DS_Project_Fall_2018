@@ -12,7 +12,7 @@ Vanisher::Vanisher(color r_c, int id, int Arraival_Time, double health, double P
 	Health = health;
 	power = Power;
 	type = 5;
-	vanishing_time = arraival_time;
+	vanishing_time = 3;
 }
 
 
@@ -22,13 +22,26 @@ Vanisher::~Vanisher(void)
 
 void Vanisher::Act()
 {
-	// defining the constant k of the equation depending on the health of the Vanisher
-	double k = 0;
-	if (Health > vanisher_health / 2)  k = 1;
-	else   k = 0.5;
 
-	double healt_deducted = target->GetHealth() - (k / Distance)*get_power();    // this will be the new health of the tower
-	target->SetHealth(healt_deducted);			// calling set health function of the target tower
+	if (freeze_period == 0)
+	{
+		frozen = false;
+	}
+	if (!frozen && reload_period == 0)
+	{
+		// defining the constant k of the equation depending on the health of the Vanisher
+		double k = 0;
+		if (Health > fighter_health / 2)  k = 1;
+		else   k = 0.5;
+
+		double healt_deducted = target->GetHealth() - (k / Distance)*get_power();    // this will be the new health of the tower
+		target->SetHealth(healt_deducted);			// calling set health function of the target tower
+		reload_period = 3;
+	}
+	if (reload_period != 0)
+	{
+		reload_period--;
+	}
 	 
 	// managing visibility graphically
 
@@ -36,6 +49,7 @@ void Vanisher::Act()
 		Clr = DARKGREY;
 	else
 		Clr = PURPLE;
+
 }
 
 
@@ -67,7 +81,8 @@ void Vanisher::set_target(Tower* Tower) // defining the target tower
 	target = Tower;
 }
 
-void Vanisher::set_visible(bool visible_bool) {
+void Vanisher::set_visible(bool visible_bool) 
+{
 	visible = visible_bool;
 }
 
@@ -89,3 +104,5 @@ int Vanisher::get_vanishing_time()
 {
 	return vanishing_time;
 }
+
+

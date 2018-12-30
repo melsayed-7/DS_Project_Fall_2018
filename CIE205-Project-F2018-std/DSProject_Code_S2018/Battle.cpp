@@ -326,27 +326,30 @@ void Battle::phase2_simulation()
 				pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);//we draw in here because an enemy can exist and get killed in the same tick
 				for (int j = 0; j < max_enemies; j++)//this loop kills the enemies
 				{
-					if (to_be_filled_heap[i]->getcurrent_number() > 0 && current_enemy->get_visible() == 1)
+					if (current_enemy != nullptr)
 					{
-						to_be_hit_enemies[j] = to_be_filled_heap[i]->Dequeue();
-
-						if (to_be_hit_enemies[j] != nullptr)
+						if (to_be_filled_heap[i]->getcurrent_number() > 0 && current_enemy->get_visible() == 1)
 						{
-							BCastle.tower_act(i, to_be_hit_enemies[j], current_tick);
+							to_be_hit_enemies[j] = to_be_filled_heap[i]->Dequeue();
 
-							if (to_be_hit_enemies[j]->is_killed())
+							if (to_be_hit_enemies[j] != nullptr)
 							{
-								to_be_hit_enemies[j]->set_KTS(current_tick - 1);
-								to_be_hit_enemies[j]->set_KD((current_tick - 1 - to_be_hit_enemies[j]->get_tfirst_shot()));
-								to_be_hit_enemies[j]->set_LT();
-								killed_enemies->enque(to_be_hit_enemies[j]);
-								to_be_hit_enemies[j] = nullptr;
-								no_killed_enemies[i]++;
-								//current_heap[i]->Enqueue(0,nullptr);
-							}
-							else
-							{
-								current_heap[i]->Enqueue(compute_priority(to_be_hit_enemies[j]), to_be_hit_enemies[j]);
+								BCastle.tower_act(i, to_be_hit_enemies[j], current_tick);
+
+								if (to_be_hit_enemies[j]->is_killed())
+								{
+									to_be_hit_enemies[j]->set_KTS(current_tick - 1);
+									to_be_hit_enemies[j]->set_KD((current_tick - 1 - to_be_hit_enemies[j]->get_tfirst_shot()));
+									to_be_hit_enemies[j]->set_LT();
+									killed_enemies->enque(to_be_hit_enemies[j]);
+									to_be_hit_enemies[j] = nullptr;
+									no_killed_enemies[i]++;
+									//current_heap[i]->Enqueue(0,nullptr);
+								}
+								else
+								{
+									current_heap[i]->Enqueue(compute_priority(to_be_hit_enemies[j]), to_be_hit_enemies[j]);
+								}
 							}
 						}
 					}

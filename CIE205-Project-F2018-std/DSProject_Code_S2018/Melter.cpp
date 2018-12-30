@@ -13,6 +13,7 @@ Melter::Melter(color r_c, int id, int Arraival_Time, double health, double Power
 	Health = health;
 	power = Power;
 	type = 4;
+	visible = 1;
 }
 
 Melter::~Melter(void)
@@ -22,6 +23,7 @@ Melter::~Melter(void)
 
 void Melter::Act()
 {
+
 	int size = my_heap->get_size();
 	Enemy** array = new Enemy*[size];
 

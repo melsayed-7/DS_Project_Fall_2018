@@ -21,5 +21,6 @@ public:
 	virtual void set_vanishing_time(int vt);
 	virtual void increment_vanishing_time();
 	virtual int get_vanishing_time();
+
 };
 
