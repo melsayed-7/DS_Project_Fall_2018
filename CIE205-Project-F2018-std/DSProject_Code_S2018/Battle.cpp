@@ -247,6 +247,7 @@ void Battle::phase2_simulation()
 				to_be_hit_enemies[j] = nullptr;
 			}
 			*/
+
 			if (inactive_enemies->front()->get_arraival_time() == current_tick)
 			{
 				inactive_enemies->front()->set_FD(current_tick);
@@ -275,10 +276,8 @@ void Battle::phase2_simulation()
 					current_enemy = current_heap[i]->Dequeue();
 
 					if (current_enemy != nullptr)
-						to_be_filled_heap[i]->Enqueue(compute_priority(current_enemy), current_enemy);
-
-					if (current_enemy != nullptr)
 					{
+						to_be_filled_heap[i]->Enqueue(compute_priority(current_enemy), current_enemy);
 						current_enemy->set_target(BCastle.get_tower(i));
 						current_enemy->take_heap(current_heap[i]);
 						current_enemy->Act();
