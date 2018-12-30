@@ -169,7 +169,7 @@ Queue <Enemy*>* Battle::fill_inactivelist(Queue <int*>* Data)
 //It should be removed in phases 1&2
 void Battle::phase2_simulation()
 {
-	
+
 	Queue<int*>*Data = new  Queue<int*>;
 
 	Data = get_file_2_queue();//enter the name of the file here(optional);
@@ -211,7 +211,7 @@ void Battle::phase2_simulation()
 	double tower_3_health = BCastle.get_tower(2)->GetHealth();
 	double tower_4_health = BCastle.get_tower(3)->GetHealth();
 
-	
+
 
 	int current_tick = 0;
 
@@ -230,11 +230,12 @@ void Battle::phase2_simulation()
 
 	int current_heap_number;
 
-	int no_killed_enemies[4] = {0,0,0,0};
+	int no_killed_enemies[4] = { 0,0,0,0 };
 
 
 	while (killed_enemies->getsize() < recieved_enemies || total_tower_health != 0)//this loop will end when all the towers are destroyed or all the enemies are killed
 	{
+		current_tick++;
 		ClearEnemy();//leans the drawing area to redraw agin in the currennt loop
 
 		activationflag = true;
@@ -262,10 +263,10 @@ void Battle::phase2_simulation()
 			}
 		}
 
-		current_tick++;
 		
-		
-		
+
+
+
 
 		for (int i = 0; i < 4; i++)//one iteration per tower, this loop is made to make the enemies act on the tower
 		{
@@ -284,7 +285,7 @@ void Battle::phase2_simulation()
 
 					if (current_enemy != nullptr)
 					{
- 						current_enemy->set_target(BCastle.get_tower(i));
+						current_enemy->set_target(BCastle.get_tower(i));
 						current_enemy->take_heap(current_heap[i]);
 						current_enemy->Act();
 						AddEnemy(current_enemy);
@@ -299,10 +300,10 @@ void Battle::phase2_simulation()
 					tower_4_health = BCastle.get_tower(3)->GetHealth();
 
 
-					string messege = " TH1:(" + to_string(tower_1_health) + ")TH2:(" + to_string(tower_2_health) + ")TH3:(" + to_string(tower_3_health) + ")TH4:(" + to_string(tower_4_health)+")";
+					string messege = " TH1:(" + to_string(tower_1_health) + ")TH2:(" + to_string(tower_2_health) + ")TH3:(" + to_string(tower_3_health) + ")TH4:(" + to_string(tower_4_health) + ")";
 					string messege2 = "TE1:(" + to_string(to_be_filled_heap[0]->getcurrent_number()) + ")TE2:(" + to_string(to_be_filled_heap[1]->getcurrent_number()) + ")TE3:(" + to_string(to_be_filled_heap[2]->getcurrent_number()) + ")TE4:(" + to_string(to_be_filled_heap[3]->getcurrent_number()) + ")";
 					string messege3 = "TK1:(" + to_string(no_killed_enemies[0]) + ")TK2:(" + to_string(no_killed_enemies[1]) + ")TK3:(" + to_string(no_killed_enemies[2]) + ")TK4:(" + to_string(no_killed_enemies[3]) + ")";
-					string messege4 = "----------------------CT " + to_string(current_tick - 1);
+					string messege4 = "----------------------CT " + to_string(current_tick -1);
 					messege = messege + messege2 + messege3 + messege4;
 
 					pGUI->PrintMessage(messege);
@@ -328,7 +329,7 @@ void Battle::phase2_simulation()
 				pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);//we draw in here because an enemy can exist and get killed in the same tick
 				for (int j = 0; j < max_enemies; j++)//this loop kills the enemies
 				{
-					if (to_be_filled_heap[i]->getcurrent_number() > 0 && current_enemy->get_visible()==1)
+					if (to_be_filled_heap[i]->getcurrent_number() > 0 && current_enemy->get_visible() == 1)
 					{
 						to_be_hit_enemies[j] = to_be_filled_heap[i]->Dequeue();
 
@@ -355,11 +356,11 @@ void Battle::phase2_simulation()
 					}
 				}
 			}
-			
+
 		}
-		
+
 		int size_khaled = killed_enemies->getsize();
-	
+
 
 
 
@@ -367,11 +368,11 @@ void Battle::phase2_simulation()
 		BCastle.reconstruct_towers();
 
 		//pGUI->GetPointClicked(p);
-		Sleep(100);
+		Sleep(1000);
 		temp_heap = current_heap;
 		current_heap = to_be_filled_heap;
 		to_be_filled_heap = temp_heap;
-		if (tower_1_health<1 && tower_2_health < 1 && tower_3_health < 1 && tower_4_health < 1)
+		if (tower_1_health < 1 && tower_2_health < 1 && tower_3_health < 1 && tower_4_health < 1)
 		{
 			BCastle.SetTowerHealth(A_REG, 0);
 			BCastle.SetTowerHealth(B_REG, 0);
@@ -379,12 +380,12 @@ void Battle::phase2_simulation()
 			BCastle.SetTowerHealth(D_REG, 0);
 
 		}
-		
+
 		tower_1_health = BCastle.get_tower(0)->GetHealth();
 		tower_2_health = BCastle.get_tower(1)->GetHealth();
 		tower_3_health = BCastle.get_tower(2)->GetHealth();
 		tower_4_health = BCastle.get_tower(3)->GetHealth();
-		
+
 		int output = 0;
 
 		if (tower_1_health + tower_2_health + tower_3_health + tower_4_health == 0)
@@ -414,10 +415,10 @@ void Battle::phase2_simulation()
 
 
 
-		
 
-	}
 
+
+	/*
 	// output file
 	ofstream myfile;
 	myfile.open("output_file.txt");
@@ -429,7 +430,6 @@ void Battle::phase2_simulation()
 	}
 	myfile.close();
 
-
-
+	*/
 }
 

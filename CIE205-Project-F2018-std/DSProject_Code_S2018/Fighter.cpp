@@ -22,12 +22,31 @@ Fighter::~Fighter(void)
 void Fighter::Act()
 {	
 	// defining the constant k of the equation depending on the health of the fighter
-	double k=0;					
-	if (Health > fighter_health / 2)  k = 1;
-	else   k=0.5;
-		
-	double healt_deducted =target->GetHealth()-(k / Distance)*get_power();    // this will be the new health of the tower
-	target->SetHealth(healt_deducted);			// calling set health function of the target tower
+
+
+
+	if (freeze_period == 0)
+	{
+		frozen = false;
+	}
+	if (!frozen && reload_period == 0)
+	{
+		double k = 0;
+		if (Health > fighter_health / 2)  k = 1;
+		else   k = 0.5;
+
+		double healt_deducted = target->GetHealth() - (k / Distance)*get_power();    // this will be the new health of the tower
+		target->SetHealth(healt_deducted);			// calling set health function of the target tower
+		reload_period = 3;
+	}
+	if (reload_period != 0)
+	{
+		reload_period--;
+	}
+
+	
+
+	
 	
 }
 
