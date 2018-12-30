@@ -61,7 +61,7 @@ void Fighter::set_target(Tower* Tower) // defining the target tower
 }
 
 void Fighter::set_visible(bool visible_bool) {
-	visible = visible_bool;
+	
 }
 
 bool Fighter::get_visible() {

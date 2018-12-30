@@ -63,7 +63,7 @@ void Melter::set_target(Tower* tower)
 }
 
 void Melter::set_visible(bool visible_bool) {
-	visible = visible_bool;
+	
 }
 
 bool Melter::get_visible() {

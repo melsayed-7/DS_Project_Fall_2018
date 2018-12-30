@@ -64,7 +64,6 @@ void Tower::increment_ice(double ice_added)
 	if (ice >= ice_to_freeze)
 	{
 		ice = 0;
-		ice = 0;
 		frozen = true;
 	}
 }
