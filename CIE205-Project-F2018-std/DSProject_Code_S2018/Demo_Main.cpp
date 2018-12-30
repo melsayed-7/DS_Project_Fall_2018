@@ -23,8 +23,7 @@ int main()
 
 	Battle* pGameBattle = new Battle;
 	pGameBattle->RunSimulation();
-	
-	delete pGameBattle;
+	//delete pGameBattle;
 	
 	return 0;
 }

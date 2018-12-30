@@ -272,8 +272,8 @@ void Battle::phase2_simulation()
 
 				for (int j = 0; j < current_heap_size; j++)
 				{
-					current_enemy = current_heap[i]->Dequeue();
 
+					current_enemy = current_heap[i]->Dequeue();
 					if (current_enemy != nullptr)
 						to_be_filled_heap[i]->Enqueue(compute_priority(current_enemy), current_enemy);
 
@@ -301,7 +301,6 @@ void Battle::phase2_simulation()
 					messege = messege + messege2 + messege3 + messege4;
 
 					pGUI->PrintMessage(messege);
-
 				}
 
 				pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);			//we draw in here because an enemy can exist and get killed in the same tick
@@ -358,6 +357,31 @@ void Battle::phase2_simulation()
 
 		}
 		
+		tower_1_health = BCastle.get_tower(0)->GetHealth();
+		tower_2_health = BCastle.get_tower(1)->GetHealth();
+		tower_3_health = BCastle.get_tower(2)->GetHealth();
+		tower_4_health = BCastle.get_tower(3)->GetHealth();
+		
+		int output = 0;
+
+		if (tower_1_health + tower_2_health + tower_3_health + tower_4_health == 0)
+		{
+			if (killed_enemies->getsize() == recieved_enemies)
+			{
+				output = 2;
+				break;
+			}
+			else
+			{
+				output = 3;
+				break;
+			}
+		}
+		else if (killed_enemies->getsize() == recieved_enemies)
+		{
+			output = 1;
+			break;
+		}
 
 
 	}
