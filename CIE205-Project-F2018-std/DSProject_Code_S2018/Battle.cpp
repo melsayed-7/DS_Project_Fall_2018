@@ -294,11 +294,11 @@ void Battle::phase2_simulation()
 					tower_4_health = BCastle.get_tower(3)->GetHealth();
 
 
-					string messege = " TH1 " + to_string(tower_1_health) + " TH2 :" + to_string(tower_2_health) + " TH3:" + to_string(tower_3_health) + " TH3:" + to_string(tower_4_health);
-					string messege2 = " TE1 " + to_string(to_be_filled_heap[0]->getcurrent_number()) + "TE2 " + to_string(to_be_filled_heap[1]->getcurrent_number()) + " TE3 " + to_string(to_be_filled_heap[2]->getcurrent_number()) + " TE4 " + to_string(to_be_filled_heap[3]->getcurrent_number());
-					string messege3 = " TK1 " + to_string(no_killed_enemies[0]) + " TK2 " + to_string(no_killed_enemies[1]) + " TK3 " + to_string(no_killed_enemies[2]) + " TK4 " + to_string(no_killed_enemies[3]);
-					string messege4 = " CT " + to_string(current_tick - 1);
-					messege = messege + "	" + messege2 + "		" + messege3 + "	" + messege4;
+					string messege = " TH1:(" + to_string(tower_1_health) + ")TH2:(" + to_string(tower_2_health) + ")TH3:(" + to_string(tower_3_health) + ")TH4:(" + to_string(tower_4_health)+")";
+					string messege2 = "TE1:(" + to_string(to_be_filled_heap[0]->getcurrent_number()) + ")TE2:(" + to_string(to_be_filled_heap[1]->getcurrent_number()) + ")TE3:(" + to_string(to_be_filled_heap[2]->getcurrent_number()) + ")TE4:(" + to_string(to_be_filled_heap[3]->getcurrent_number()) + ")";
+					string messege3 = "TK1:(" + to_string(no_killed_enemies[0]) + ")TK2:(" + to_string(no_killed_enemies[1]) + ")TK3:(" + to_string(no_killed_enemies[2]) + ")TK4:(" + to_string(no_killed_enemies[3]) + ")";
+					string messege4 = "----------------------CT " + to_string(current_tick - 1);
+					messege = messege + messege2 + messege3 + messege4;
 
 					pGUI->PrintMessage(messege);
 
