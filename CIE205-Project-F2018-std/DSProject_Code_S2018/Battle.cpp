@@ -172,7 +172,7 @@ void Battle::phase2_simulation()
 
 	Queue<int*>*Data = new  Queue<int*>;
 
-	Data = get_file_2_queue();//enter the name of the file here(optional);
+	Data = get_file_2_queue("input_file.txt");//enter the name of the file here(optional);
 
 	int *dummyarr = Data->deque();//remove the first line has the tower data
 	double TH = dummyarr[0];//tower health
@@ -264,10 +264,11 @@ void Battle::phase2_simulation()
 			}
 		}
 
-//		<<<<<< < HEAD
+		current_tick++;
 
 			//====== =
 			current_tick++;
+
 
 
 
@@ -286,6 +287,13 @@ void Battle::phase2_simulation()
 
 					for (int j = 0; j < current_heap_size; j++)
 					{
+						to_be_filled_heap[i]->Enqueue(compute_priority(current_enemy), current_enemy);
+						current_enemy->set_target(BCastle.get_tower(i));
+						current_enemy->take_heap(current_heap[i]);
+						current_enemy->Act();
+						AddEnemy(current_enemy);
+						current_enemy->Move();
+					}
 
 						current_enemy = current_heap[i]->Dequeue();
 						if (current_enemy != nullptr)
@@ -399,18 +407,18 @@ void Battle::phase2_simulation()
 
 		if (tower_1_health + tower_2_health + tower_3_health + tower_4_health == 0)
 		{
-			if (killed_enemies->getsize() == recieved_enemies)
+			if (killed_enemies->getsize() == recieved_enemies)//tie
 			{
 				output = 2;
 				break;
 			}
-			else
+			else //enemies win (towers died)
 			{
 				output = 3;
 				break;
 			}
 		}
-		else if (killed_enemies->getsize() == recieved_enemies)
+		else if (killed_enemies->getsize() == recieved_enemies)// all enemies killed
 		{
 			output = 1;
 			break;
@@ -423,17 +431,9 @@ void Battle::phase2_simulation()
 	//delete pGUI;
 
 
-}
-//<<<<<<< HEAD
 
-
-
-	/*
-	// output file
-=======
 
 		// output file
->>>>>>> 934170096bb1e0f9d6a60ac4bd525eb535440725
 	ofstream myfile;
 	myfile.open("output_file.txt");
 	myfile << "KTS S FD KD LT\n";
@@ -444,6 +444,5 @@ void Battle::phase2_simulation()
 	}
 	myfile.close();
 
-<<<<<<< HEAD
-	*/
 
+	}
