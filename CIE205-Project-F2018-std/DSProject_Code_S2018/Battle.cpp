@@ -32,7 +32,7 @@ void Battle::ClearEnemy()
 {
 	for (int i = 0; i < EnemyCount; i++)
 	{
-		BEnemiesForDraw[EnemyCount - 1] = nullptr;
+		BEnemiesForDraw[i] = nullptr;
 	}
 	EnemyCount = 0;
 }
@@ -52,7 +52,7 @@ void Battle::set_initlailized_castle(double health, int no_enemies, double power
 
 void Battle::RunSimulation()
 {
-	phase1_simulation();
+	phase2_simulation();
 }
 
 
@@ -167,7 +167,7 @@ Queue <Enemy*>* Battle::fill_inactivelist(Queue <int*>* Data)
 
 //This is just a demo function for project introductory phase
 //It should be removed in phases 1&2
-void Battle::phase1_simulation()
+void Battle::phase2_simulation()
 {
 	Queue<int*>*Data = new  Queue<int*>;
 
