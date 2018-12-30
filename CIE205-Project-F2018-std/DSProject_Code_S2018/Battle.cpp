@@ -173,6 +173,7 @@ void Battle::phase2_simulation()
 	Queue<int*>*Data = new  Queue<int*>;
 
 	Data = get_file_2_queue();//enter the name of the file here(optional);
+	Data = get_file_2_queue("input_file.txt");//enter the name of the file here(optional);
 
 	int *dummyarr = Data->deque();//remove the first line has the tower data
 	double TH = dummyarr[0];//tower health
@@ -366,7 +367,7 @@ void Battle::phase2_simulation()
 		BCastle.reconstruct_towers();
 
 		//pGUI->GetPointClicked(p);
-		Sleep(100);
+		Sleep(1000);
 		temp_heap = current_heap;
 		current_heap = to_be_filled_heap;
 		to_be_filled_heap = temp_heap;
@@ -388,18 +389,18 @@ void Battle::phase2_simulation()
 
 		if (tower_1_health + tower_2_health + tower_3_health + tower_4_health == 0)
 		{
-			if (killed_enemies->getsize() == recieved_enemies)
+			if (killed_enemies->getsize() == recieved_enemies)//tie
 			{
 				output = 2;
 				break;
 			}
-			else
+			else //enemies win (towers died)
 			{
 				output = 3;
 				break;
 			}
 		}
-		else if (killed_enemies->getsize() == recieved_enemies)
+		else if (killed_enemies->getsize() == recieved_enemies)// all enemies killed 
 		{
 			output = 1;
 			break;
@@ -414,16 +415,16 @@ void Battle::phase2_simulation()
 
 
 
-		// output file
-	ofstream myfile;
-	myfile.open("output_file.txt");
-	myfile << "KTS S FD KD LT\n";
-	for (int i = 0; i < killed_enemies->getsize(); i++)
-	{
-		Enemy* enemy = killed_enemies->deque();
-		myfile << enemy->get_KTS() << " " << i + 1 << enemy->get_FD() << enemy->get_KD() << enemy->get_LT();
-	}
-	myfile.close();
+	//	// output file
+	//ofstream myfile;
+	//myfile.open("output_file.txt");
+	//myfile << "KTS S FD KD LT\n";
+	//for (int i = 0; i < killed_enemies->getsize(); i++)
+	//{
+	//	Enemy* enemy = killed_enemies->deque();
+	//	myfile << enemy->get_KTS() << " " << i + 1 << enemy->get_FD() << enemy->get_KD() << enemy->get_LT();
+	//}
+	//myfile.close();
 
 
 
