@@ -62,3 +62,16 @@ void Freezer::set_visible(bool visible_bool) {
 bool Freezer::get_visible() {
 	return visible;
 }
+
+void Freezer::set_vanishing_time(int vt)
+{
+}
+
+void Freezer::increment_vanishing_time()
+{
+}
+
+int Freezer::get_vanishing_time()
+{
+	return 0;
+}

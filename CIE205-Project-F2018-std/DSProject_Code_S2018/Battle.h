@@ -35,7 +35,7 @@ public:
 	void phase1_simulation();	//just to show a demo and should be removed in phase1 1 & 2
 	int compute_priority(Enemy* ptr);
 	Queue <Enemy*>*fill_inactivelist(Queue <int*>* Data);	//the array that creates the objects based on the readnings of the file
-	Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds pointer to enemies
+	//Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds pointer to enemies
 	//Queue <Enemy*>* get_killed_enemies();
 	//
 	// TODO: Add More Member Functions As Needed

@@ -1,5 +1,6 @@
 #include "Battle.h"
 #include "GUI\GUI.h"
+#include <iostream>
 
 
 int main()
@@ -26,6 +27,8 @@ int main()
 	
 	delete pGameBattle;
 	
+	
+
 	return 0;
 }
 

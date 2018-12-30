@@ -85,3 +85,16 @@ void Healer::set_visible(bool visible_bool) {
 bool Healer::get_visible() {
 	return visible;
 }
+
+void Healer::set_vanishing_time(int vt)
+{
+}
+
+void Healer::increment_vanishing_time()
+{
+}
+
+int Healer::get_vanishing_time()
+{
+	return 0;
+}
