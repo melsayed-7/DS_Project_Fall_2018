@@ -169,6 +169,7 @@ Queue <Enemy*>* Battle::fill_inactivelist(Queue <int*>* Data)
 //It should be removed in phases 1&2
 void Battle::phase2_simulation()
 {
+	
 	Queue<int*>*Data = new  Queue<int*>;
 
 	Data = get_file_2_queue();//enter the name of the file here(optional);
@@ -183,7 +184,7 @@ void Battle::phase2_simulation()
 
 // intialize queues
 	Queue <Enemy*>*inactive_enemies = fill_inactivelist(Data);//a queue that holds a pointer to enemies
-	//Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds pointer to enemies
+	Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds pointer to enemies
 
 	std::cout << "\nWelcome to Castle Battle:\n";
 	std::cout << "\nIn phase2, you will be asked to select game mode\n";
@@ -240,6 +241,7 @@ void Battle::phase2_simulation()
 
 
 		while (!inactive_enemies->isEmpty() && activationflag) // this loop takes out all the enemies that should enter the battle ni the curreent tick
+			// no two enemies enter the the same region at the same time
 		{
 			/*
 			for (int j = 0; j < max_enemies; j++)
@@ -261,6 +263,9 @@ void Battle::phase2_simulation()
 		}
 
 		current_tick++;
+		
+		
+		
 
 		for (int i = 0; i < 4; i++)//one iteration per tower, this loop is made to make the enemies act on the tower
 		{
@@ -279,7 +284,7 @@ void Battle::phase2_simulation()
 
 					if (current_enemy != nullptr)
 					{
-						current_enemy->set_target(BCastle.get_tower(i));
+ 						current_enemy->set_target(BCastle.get_tower(i));
 						current_enemy->take_heap(current_heap[i]);
 						current_enemy->Act();
 						AddEnemy(current_enemy);
@@ -303,11 +308,27 @@ void Battle::phase2_simulation()
 					pGUI->PrintMessage(messege);
 				}
 
-				pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);			//we draw in here because an enemy can exist and get killed in the same tick
-				
-				for (int j = 0; j < max_enemies; j++)					//this loop kills the enemies
+				// vanisher functions
+				int vanishing_time = current_enemy->get_vanishing_time();
+				if (current_enemy->get_type() == 5) {
+					current_enemy->increment_vanishing_time(); // counter
+					// From tick 0:4, vanisher is visible.
+					if (current_enemy->get_vanishing_time() == 5 + vanishing_time) // From tick 5:9, vanisher is visible.
+						current_enemy->set_visible(0);
+					if (current_enemy->get_vanishing_time() == 10 + vanishing_time) // repeat vanishing and appearing for next ticks.
+					{
+						current_enemy->set_visible(1);
+						current_enemy->set_vanishing_time(0);
+					}
+
+				}
+
+				killed_enemies->enque(current_enemy);
+
+				pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);//we draw in here because an enemy can exist and get killed in the same tick
+				for (int j = 0; j < max_enemies; j++)//this loop kills the enemies
 				{
-					if (to_be_filled_heap[i]->getcurrent_number() > 0)
+					if (to_be_filled_heap[i]->getcurrent_number() > 0 && current_enemy->get_visible()==1)
 					{
 						to_be_hit_enemies[j] = to_be_filled_heap[i]->Dequeue();
 
@@ -336,7 +357,9 @@ void Battle::phase2_simulation()
 			}
 			
 		}
-
+		
+		int size_khaled = killed_enemies->getsize();
+	
 
 
 
@@ -389,14 +412,23 @@ void Battle::phase2_simulation()
 
 	//delete pGUI;
 
-	
 
-	// Generating the output file
 
+		
+
+	}
+
+	// output file
 	ofstream myfile;
 	myfile.open("output_file.txt");
-	myfile << "Writing this to a file.\n";
+	myfile << "KTS S FD KD LT\n";
+	for (int i = 0; i < killed_enemies->getsize(); i++)
+	{
+		Enemy* enemy = killed_enemies->deque();
+		myfile << enemy->get_KTS() << " " << i + 1 << enemy->get_FD() << enemy->get_KD() << enemy->get_LT();
+	}
 	myfile.close();
+
 
 
 }

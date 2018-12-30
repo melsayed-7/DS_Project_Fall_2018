@@ -12,6 +12,7 @@ Vanisher::Vanisher(color r_c, int id, int Arraival_Time, double health, double P
 	Health = health;
 	power = Power;
 	type = 5;
+	vanishing_time = arraival_time;
 }
 
 
@@ -28,7 +29,13 @@ void Vanisher::Act()
 
 	double healt_deducted = target->GetHealth() - (k / Distance)*get_power();    // this will be the new health of the tower
 	target->SetHealth(healt_deducted);			// calling set health function of the target tower
+	 
+	// managing visibility graphically
 
+	if (!visible)
+		Clr = DARKGREY;
+	else
+		Clr = PURPLE;
 }
 
 
@@ -66,4 +73,19 @@ void Vanisher::set_visible(bool visible_bool) {
 
 bool Vanisher::get_visible() {
 	return visible;
+}
+
+void Vanisher::set_vanishing_time(int vt)
+{
+	vanishing_time = vt;
+}
+
+void Vanisher::increment_vanishing_time()
+{
+	vanishing_time++;
+}
+
+int Vanisher::get_vanishing_time()
+{
+	return vanishing_time;
 }
