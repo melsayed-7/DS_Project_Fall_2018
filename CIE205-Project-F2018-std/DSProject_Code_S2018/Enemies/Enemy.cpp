@@ -133,7 +133,8 @@ int Enemy::get_FD()
 
 int Enemy::get_KD()
 {
-	return KD;
+	//return KD;
+	return FD + arraival_time;
 }
 
 int Enemy::get_KTS()
@@ -143,7 +144,8 @@ int Enemy::get_KTS()
 
 int Enemy::get_LT()
 {
-	return LT;
+	//return LT;
+	return FD + get_KD();
 }
 
 int Enemy::get_tfirst_shot()

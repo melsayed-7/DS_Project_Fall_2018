@@ -31,6 +31,7 @@ public:
 	void ClearEnemy();
 	Castle * GetCastle();
 	void RunSimulation();
+	double getAverage(int arr[], int size);
 	void set_initlailized_castle(double health,int no_enemies, double power);
 	void phase2_simulation();	//just to show a demo and should be removed in phase1 1 & 2
 	int compute_priority(Enemy* ptr);
