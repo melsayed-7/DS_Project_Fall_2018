@@ -6,8 +6,10 @@
 #include <iostream>
 #include "Melter.h"
 #include "Vanisher.h"
+#include "math.h"
 
 const int MAX_ENEMIES = 300;
+
 
 Battle::Battle()
 {
@@ -55,6 +57,18 @@ void Battle::RunSimulation()
 	phase2_simulation();
 }
 
+
+double Battle::getAverage(int arr[], int size) {
+	int sum = 0;
+	double avg;
+
+	for (int i = 0; i < size; ++i) {
+		sum += arr[i];
+	}
+	avg = double(sum) / size;
+
+	return avg;
+}
 
 
 int Battle::compute_priority(Enemy* ptr)
@@ -182,7 +196,14 @@ void Battle::phase2_simulation()
 
 	set_initlailized_castle(TH, max_enemies, TP); //Intialize castle parameters using first line of input file
 
-// intialize queues
+	int health_deducted;
+
+	int Tot_Damage_Tower_1;
+	int Tot_Damage_Tower_2;
+	int Tot_Damage_Tower_3;
+	int Tot_Damage_Tower_4;
+
+	// intialize queues
 	Queue <Enemy*>*inactive_enemies = fill_inactivelist(Data);//a queue that holds a pointer to enemies
 	Queue <Enemy*>*killed_enemies = new Queue <Enemy*>;//a queue that holds pointer to enemies
 
@@ -392,6 +413,11 @@ void Battle::phase2_simulation()
 		tower_3_health = BCastle.get_tower(2)->GetHealth();
 		tower_4_health = BCastle.get_tower(3)->GetHealth();
 
+		Tot_Damage_Tower_1 = TH - tower_1_health;
+		Tot_Damage_Tower_2 = TH - tower_2_health;
+		Tot_Damage_Tower_3 = TH - tower_3_health;
+		Tot_Damage_Tower_4 = TH - tower_4_health;
+
 
 
 		if (tower_1_health + tower_2_health + tower_3_health + tower_4_health == 0)
@@ -426,16 +452,40 @@ void Battle::phase2_simulation()
 
 
 
-	//	// output file
-	//ofstream myfile;
-	//myfile.open("output_file.txt");
-	//myfile << "KTS S FD KD LT\n";
-	//for (int i = 0; i < killed_enemies->getsize(); i++)
-	//{
-	//	Enemy* enemy = killed_enemies->deque();
-	//	myfile << enemy->get_KTS() << " " << i + 1 << enemy->get_FD() << enemy->get_KD() << enemy->get_LT();
-	//}
-	//myfile.close();
+	int killed_enemies_size = killed_enemies->getsize();
+	int FD_array[300]= { 0 };
+	int KD_array[300] = { 0 };
+
+	/*int sum(int *arr) {
+		for (int i = 0; i < recieved_enemies; i++) {
+			sum_v = 0;
+			sum_v = += arr[i];
+			return sum_v;
+		}
+	}*/
+	int ra[] = { 1,2,3,4,5,6,7,8 };
+
+
+	// output file
+	ofstream myfile;
+	myfile.open("output_file.txt");
+	myfile << "KTS S FD KD LT\n";
+	for (int i = 0; i < killed_enemies_size; i++)
+	{
+		Enemy* enemy = killed_enemies->deque();
+		myfile << enemy->get_KTS() << " " << i + 1 << " " << enemy->get_FD() << " " << enemy->get_KD() << " " << enemy->get_LT() << "\n";
+		FD_array[i] = enemy->get_FD();
+	}
+	myfile << "T1_Total_Damage    T2_Total_Damage    T3_Total_Damage    T4_Total_Damage" << "\n";
+	myfile << Tot_Damage_Tower_1 << "         " << Tot_Damage_Tower_2 << "         " << Tot_Damage_Tower_3 << "         " << Tot_Damage_Tower_4 << "\n";
+	myfile << "Game is ";
+	if (output == 1) myfile << "WIN";
+	else if (output == 2) myfile << "TIE";
+	else if (output == 3) myfile << "LOSE";
+	myfile << "\n" << "Total Enemies     =   " << recieved_enemies;
+	myfile << "\n" << "Average First-Shot Delay     =   " << getAverage(FD_array, killed_enemies_size);
+	myfile << "\n" << "Average kill Delay     =   " << getAverage(KD_array, killed_enemies_size);
+	myfile.close();
 
 
 }
