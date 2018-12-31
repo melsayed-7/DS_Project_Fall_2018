@@ -36,7 +36,7 @@ void Melter::Act()
 	{
 		if (array[i] != nullptr)
 		{
-			if (abs(array[i]->GetDistance() - Distance) <= 2 && array[i] != this)
+			if (abs(array[i]->GetDistance() - Distance) <=10 && array[i] != this)
 			{
 				array[i]->set_frozen(0);
 			}

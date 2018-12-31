@@ -31,6 +31,7 @@ public:
 	void ClearEnemy();
 	Castle * GetCastle();
 	void RunSimulation();
+	double getAverage(int arr[], int size);
 	void set_initlailized_castle(double health,int no_enemies, double power);
 	void phase2_simulation();	
 	void silent_mode();
