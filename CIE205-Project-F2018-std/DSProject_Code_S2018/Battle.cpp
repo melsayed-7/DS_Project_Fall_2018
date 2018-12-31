@@ -212,13 +212,13 @@ void Battle::phase2_simulation()
 	std::cout << "\nplease, select game mode(1:normal - 2:silent mode)\n";
 	int mode = 1;
 	std::cin >> mode;
-// -----------------------------------------------------
+	// -----------------------------------------------------
 
 	double total_tower_health = BCastle.get_total_tower_health();
-	
-		GUI * pGUI = new GUI;
-	
-	
+
+	GUI * pGUI = new GUI;
+
+
 
 	Heap<Enemy*>** Heap1 = new Heap<Enemy*>*[4];//this two heap arrays will contain all the active enemies that will alternate between each one
 	Heap<Enemy*>** Heap2 = new Heap<Enemy*>*[4];
@@ -281,7 +281,7 @@ void Battle::phase2_simulation()
 
 			if (inactive_enemies->front()->get_arraival_time() == current_tick)
 			{
-				inactive_enemies->front()->set_FD(current_tick);
+				inactive_enemies->front()->set_FD(current_tick);//  to be changed
 				region_index = inactive_enemies->front()->GetRegion();
 				enemey_priority = compute_priority(inactive_enemies->front());
 				current_heap[region_index]->Enqueue(enemey_priority, inactive_enemies->deque());
@@ -292,12 +292,14 @@ void Battle::phase2_simulation()
 			}
 		}
 
-		current_tick++;
+
 
 
 		for (int i = 0; i < 4; i++)//one iteration per tower, this loop is made to make the enemies act on the tower
 		{
+
 			current_heap_number = current_heap[i]->getcurrent_number();
+
 			if (current_heap_number != 0)
 			{
 
@@ -305,7 +307,7 @@ void Battle::phase2_simulation()
 				{
 
 					current_enemy = current_heap[i]->Dequeue();
-					if (current_enemy != nullptr)
+					if (current_enemy != nullptr)   // Acting and moving of the Enemies
 					{
 						to_be_filled_heap[i]->Enqueue(compute_priority(current_enemy), current_enemy);
 						current_enemy->set_target(BCastle.get_tower(i));
@@ -318,41 +320,9 @@ void Battle::phase2_simulation()
 
 				}
 
-				// Printing the tower data
-				tower_1_health = BCastle.get_tower(0)->GetHealth();
-				tower_2_health = BCastle.get_tower(1)->GetHealth();
-				tower_3_health = BCastle.get_tower(2)->GetHealth();
-				tower_4_health = BCastle.get_tower(3)->GetHealth();
-				if (mode == 1)
-				{
-					string messege = " TH1:(" + to_string(tower_1_health) + ")TH2:(" + to_string(tower_2_health) + ")TH3:(" + to_string(tower_3_health) + ")TH4:(" + to_string(tower_4_health) + ")";
-					string messege2 = "TE1:(" + to_string(to_be_filled_heap[0]->getcurrent_number()) + ")TE2:(" + to_string(to_be_filled_heap[1]->getcurrent_number()) + ")TE3:(" + to_string(to_be_filled_heap[2]->getcurrent_number()) + ")TE4:(" + to_string(to_be_filled_heap[3]->getcurrent_number()) + ")";
-					string messege3 = "TK1:(" + to_string(no_killed_enemies[0]) + ")TK2:(" + to_string(no_killed_enemies[1]) + ")TK3:(" + to_string(no_killed_enemies[2]) + ")TK4:(" + to_string(no_killed_enemies[3]) + ")";
-					string messege4 = "----------------------CT " + to_string(current_tick - 1);
-					messege = messege + messege2 + messege3 + messege4;
-
-					pGUI->PrintMessage(messege);
-					pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);//we draw in here because an enemy can exist and get killed in the same tick
-				}
-				//// vanisher functions
-				//int vanishing_time = current_enemy->get_vanishing_time();
-				//if (current_enemy->get_type() == 5) 
-				//{
-				//	current_enemy->increment_vanishing_time(); // counter
-				//	// From tick 0:4, vanisher is visible.
-				//	if (current_enemy->get_vanishing_time() == 5 + vanishing_time) // From tick 5:9, vanisher is visible.
-				//		current_enemy->set_visible(0);
-				//	if (current_enemy->get_vanishing_time() == 10 + vanishing_time) // repeat vanishing and appearing for next ticks.
-				//	{
-				//		current_enemy->set_visible(1);
-				//		current_enemy->set_vanishing_time(0);
-				//	}
-
-				//}
 
 
 
-				
 				for (int j = 0; j < max_enemies; j++)//this loop kills the enemies
 				{
 					if (current_enemy != nullptr)
@@ -377,7 +347,7 @@ void Battle::phase2_simulation()
 								}
 								else
 								{
-									current_heap[i]->Enqueue(compute_priority(to_be_hit_enemies[j]), to_be_hit_enemies[j]);
+									to_be_filled_heap[i]->Enqueue(compute_priority(to_be_hit_enemies[j]), to_be_hit_enemies[j]);
 								}
 							}
 						}
@@ -387,13 +357,8 @@ void Battle::phase2_simulation()
 
 		}
 
-
 		BCastle.reconstruct_towers();
-		if (mode == 1)
-		{
-			//pGUI->GetPointClicked(p);
-			Sleep(500);
-		}
+
 
 		temp_heap = current_heap;
 		current_heap = to_be_filled_heap;
@@ -420,6 +385,35 @@ void Battle::phase2_simulation()
 
 
 
+
+
+		//drawing block
+		//-------------------------------------------------------------------------------------------
+		//-------------------------------------------------------------------------------------------
+
+		// Printing the tower data
+		tower_1_health = BCastle.get_tower(0)->GetHealth();
+		tower_2_health = BCastle.get_tower(1)->GetHealth();
+		tower_3_health = BCastle.get_tower(2)->GetHealth();
+		tower_4_health = BCastle.get_tower(3)->GetHealth();
+		if (mode == 1)
+		{
+			string messege = " TH1:(" + to_string(tower_1_health) + ")TH2:(" + to_string(tower_2_health) + ")TH3:(" + to_string(tower_3_health) + ")TH4:(" + to_string(tower_4_health) + ")";
+			string messege2 = "TE1:(" + to_string(to_be_filled_heap[0]->getcurrent_number()) + ")TE2:(" + to_string(to_be_filled_heap[1]->getcurrent_number()) + ")TE3:(" + to_string(to_be_filled_heap[2]->getcurrent_number()) + ")TE4:(" + to_string(to_be_filled_heap[3]->getcurrent_number()) + ")";
+			string messege3 = "TK1:(" + to_string(no_killed_enemies[0]) + ")TK2:(" + to_string(no_killed_enemies[1]) + ")TK3:(" + to_string(no_killed_enemies[2]) + ")TK4:(" + to_string(no_killed_enemies[3]) + ")";
+			string messege4 = "----------------------CT " + to_string(current_tick - 1);
+			messege = messege + messege2 + messege3 + messege4;
+			
+
+			pGUI->PrintMessage(messege);
+			pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);//we draw in here because an enemy can exist and get killed in the same tick
+			//pGUI->GetPointClicked(p);
+			Sleep(300);
+
+		}
+		current_tick++;
+		//-------------------------------------------------------------------------------------------
+		//-------------------------------------------------------------------------------------------
 		if (tower_1_health + tower_2_health + tower_3_health + tower_4_health == 0)
 		{
 			if (killed_enemies->getsize() == recieved_enemies)//tie
@@ -445,10 +439,7 @@ void Battle::phase2_simulation()
 
 	}
 
-	if (mode == 1)
-	{
 		delete pGUI;
-	}
 
 
 
@@ -475,9 +466,10 @@ void Battle::phase2_simulation()
 		Enemy* enemy = killed_enemies->deque();
 		myfile << enemy->get_KTS() << " " << i + 1 << " " << enemy->get_FD() << " " << enemy->get_KD() << " " << enemy->get_LT() << "\n";
 		FD_array[i] = enemy->get_FD();
+		KD_array[i] = enemy->get_KD();
 	}
 	myfile << "T1_Total_Damage    T2_Total_Damage    T3_Total_Damage    T4_Total_Damage" << "\n";
-	myfile << Tot_Damage_Tower_1 << "         " << Tot_Damage_Tower_2 << "         " << Tot_Damage_Tower_3 << "         " << Tot_Damage_Tower_4 << "\n";
+	myfile << Tot_Damage_Tower_1 << "              \t" << Tot_Damage_Tower_2 << "           \t" << Tot_Damage_Tower_3 << "         \t " << Tot_Damage_Tower_4 << "\n";
 	myfile << "Game is ";
 	if (output == 1) myfile << "WIN";
 	else if (output == 2) myfile << "TIE";
