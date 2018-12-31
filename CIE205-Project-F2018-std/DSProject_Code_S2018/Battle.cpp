@@ -371,7 +371,7 @@ void Battle::phase2_simulation()
 		if (mode == 1)
 		{
 			//pGUI->GetPointClicked(p);
-			Sleep(100);
+			Sleep(500);
 		}
 
 		temp_heap = current_heap;
